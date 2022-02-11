@@ -1,6 +1,7 @@
 # Custom
 /assets/icons
 /pages/tests
+.firebase
 
 ### Node template
 # Logs
