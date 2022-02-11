@@ -15,7 +15,7 @@ export default {
   ssr: false,
 
   head: {
-    titleTemplate: '%s - CHISK',
+    titleTemplate: '%s | CHISK',
     title: 'CHISK',
     meta: [
       { charset: 'utf-8' },

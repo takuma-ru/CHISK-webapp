@@ -1,0 +1,5 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target" : { "namespace": "android_app", "package_name": "takumaru.nekoo.taskmgt",
+               "sha256_cert_fingerprints": ["98:D9:24:FC:DD:65:97:27:F2:DA:08:D8:D3:40:10:7A:B4:64:D2:DC:3C:67:14:BC:4D:25:B2:B4:A0:75:38:A5"] }
+}]

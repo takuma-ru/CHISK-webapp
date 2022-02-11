@@ -4,10 +4,11 @@
   </v-row>
 </template>
 
-<script>
+<script lang="ts">
 import {
   defineComponent,
   ref,
+  useMeta,
 } from '@nuxtjs/composition-api'
 
 export default defineComponent({
@@ -18,9 +19,12 @@ export default defineComponent({
     // methods
     // lifeCycle
     // other
+    useMeta({ title: 'Home' })
+
     return {
       a,
     }
   },
+  head: {},
 })
 </script>
