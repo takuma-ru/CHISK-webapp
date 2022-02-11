@@ -1,69 +1,46 @@
-# CHISK-webapp
+# <div style="text-align: center;">CHISK</div>
+<p align="center">
+  <img src="/static/icon.png"  width="256" height="256" alt="nuxt-firebase logo">
+</p>
 
-## Build Setup
-
-```bash
-# install dependencies
-$ yarn install
-
-# serve with hot reload at localhost:3000
-$ yarn dev
-
-# build for production and launch server
-$ yarn build
-$ yarn start
-
-# generate static project
-$ yarn generate
-```
-
-For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
-
-## Special Directories
-
-You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
-
-### `assets`
-
-The assets directory contains your uncompiled assets such as Stylus or Sass files, images, or fonts.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/assets).
-
-### `components`
-
-The components directory contains your Vue.js components. Components make up the different parts of your page and can be reused and imported into your pages, layouts and even other components.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/components).
-
-### `layouts`
-
-Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
+## Description
+**現在開発中**<br>
+**個人向けタスク管理Webアプリ**<br>
+PWA・TWA化をしているので、ネイティブアプリに並ぶ操作性があります。<br>
+タスクをこなすと**地球**にたくさんの生き物が現れます。<br>
 
 
-### `pages`
+## Requirement
+| name | version |
+| ------------- | ------------- |
+| nuxt  | 2.x |
+| @nuxtjs/composition-api  | ^0.31.0 |
+| firebase | ^9.6.6 |
+| vuetify | 2.6.1 |
 
-This directory contains your application views and routes. Nuxt will read all the `*.vue` files inside this directory and setup Vue Router automatically.
+## Getting Started
+0. add `.env` file
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/get-started/routing).
+1. `yarn`<br>
 
-### `plugins`
+2. `yarn dev`<br>
 
-The plugins directory contains JavaScript plugins that you want to run before instantiating the root Vue.js Application. This is the place to add Vue plugins and to inject functions or constants. Every time you need to use `Vue.use()`, you should create a file in `plugins/` and add its path to plugins in `nuxt.config.js`.
+3. Access to [Localhost:3000](http://localhost:3000/)
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/plugins).
+## Deploy Service
+**use firebase Hosting**<br>
+https://taskmgt-fd097.firebaseapp.com/<br>
 
-### `static`
 
-This directory contains your static files. Each file inside this directory is mapped to `/`.
+## PlayStore
+**TWA**の技術を使いWebアプリをネイティブにしました。<br>
+**オープンベータテスト実施中**<br>
+https://play.google.com/store/apps/details?id=takumaru.nekoo.taskmgt
 
-Example: `/static/robots.txt` is mapped as `/robots.txt`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/static).
-
-### `store`
-
-This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
+## ScreenShot
+ホーム画面
+![CHISK 2021_07_12 14_02_13](https://user-images.githubusercontent.com/49429291/125233658-02c43500-e31a-11eb-860e-84093d1bba77.png)
+タスク詳細
+![CHISK 2021_07_12 14_02_24](https://user-images.githubusercontent.com/49429291/125233676-08ba1600-e31a-11eb-8362-5918598bc2db.png)
+タスク追加
+![CHISK 2021_07_12 14_03_23](https://user-images.githubusercontent.com/49429291/125233672-08217f80-e31a-11eb-988a-0e3a4e33e83a.png)
