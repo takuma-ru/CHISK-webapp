@@ -12,6 +12,7 @@ import {
 } from '@nuxtjs/composition-api'
 
 export default defineComponent({
+  components: { },
   setup () {
     // const
     const a = ref('hello')
@@ -20,7 +21,6 @@ export default defineComponent({
     // lifeCycle
     // other
     useMeta({ title: 'Home' })
-
     return {
       a,
     }
