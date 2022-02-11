@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <NavigationBar />
+    <BottomNavigationBar />
     <v-container id="main">
       <Nuxt />
     </v-container>
@@ -12,9 +13,10 @@ import {
   defineComponent,
 } from '@nuxtjs/composition-api'
 import NavigationBar from '~/components/utils/NavigationBar.vue'
+import BottomNavigationBar from '~/components/utils/BottomNavigationBar.vue'
 
 export default defineComponent({
-  components: { NavigationBar },
+  components: { NavigationBar, BottomNavigationBar },
   setup () {
     // const
     // let, computed
