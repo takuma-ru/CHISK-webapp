@@ -51,7 +51,7 @@ export default {
       name: 'CHISK',
       short_name: 'CHISK',
       description: '## Build Setup',
-      start_url: '/?standalone=true',
+      start_url: '/',
       display: 'standalone',
       background_color: '#7786FF',
       theme_color: '#7786FF',
@@ -93,7 +93,11 @@ export default {
         },
       ],
       screenshots: [
-
+        {
+          sizes: '384x854',
+          src: '/screenshots/screenshot_01.png',
+          type: 'image/gif',
+        },
       ],
     },
   },
