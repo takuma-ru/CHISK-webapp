@@ -27,6 +27,8 @@ export default function useFirebase () {
   const firestore = getFirestore(firebaseApp)
 
   return {
+    firebaseConfig,
+    firebaseApp,
     firestore,
   }
 }

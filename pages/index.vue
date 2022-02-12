@@ -1,6 +1,10 @@
 <template>
   <v-row justify="center" align="center">
-    {{ a }}
+    <button
+      @click="trySignIn()"
+    >
+      signin
+    </button>
   </v-row>
 </template>
 
@@ -10,19 +14,22 @@ import {
   ref,
   useMeta,
 } from '@nuxtjs/composition-api'
+import googleAuth from '~/composable/firebase/googleAuth'
 
 export default defineComponent({
   components: { },
   setup () {
     // const
-    const a = ref('hello')
     // let, computed
     // methods
+    const { trySignIn, trySignOut } = googleAuth()
     // lifeCycle
     // other
     useMeta({ title: 'Home' })
+
     return {
-      a,
+      trySignIn,
+      trySignOut,
     }
   },
   head: {},
