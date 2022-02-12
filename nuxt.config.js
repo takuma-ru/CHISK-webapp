@@ -24,7 +24,7 @@ export default {
       { name: 'format-detection', content: 'telephone=no' },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/chisk.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: '/icon_512x512.svg' },
     ],
   },
 
