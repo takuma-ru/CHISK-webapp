@@ -1,29 +1,42 @@
 <template>
   <div id="app">
-    <NavigationBar />
-    <BottomNavigationBar />
+    <NavigationBar v-if="!isPhone" />
+    <BottomNavigationBar v-if="isPhone" />
     <v-container id="main">
       <Nuxt />
     </v-container>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import {
   defineComponent,
+  ref,
+  onMounted,
 } from '@nuxtjs/composition-api'
 import NavigationBar from '~/components/utils/NavigationBar.vue'
 import BottomNavigationBar from '~/components/utils/BottomNavigationBar.vue'
+import getIsPhone from '~/composable/utils/isPhone'
 
 export default defineComponent({
   components: { NavigationBar, BottomNavigationBar },
   setup () {
     // const
+    const isPhone = ref<boolean>(false)
     // let, computed
     // methods
+    const resizeEvent = () => {
+      isPhone.value = getIsPhone().isPhone
+    }
     // lifeCycle
+    onMounted(() => {
+      window.addEventListener('resize', resizeEvent)
+      resizeEvent()
+    })
     // other
-    return {}
+    return {
+      isPhone,
+    }
   },
 })
 </script>

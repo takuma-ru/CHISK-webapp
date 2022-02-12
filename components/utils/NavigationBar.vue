@@ -2,10 +2,8 @@
 TODO: マウスホバー時にtitleを表示させたい
 -->
 <template>
-  <v-navigation-drawer
-    v-if="!isPhone"
+  <div
     id="navigation-drawer"
-    :mini-variant="mini"
     @mouseover="mini = false"
     @mouseout="mini = true"
   >
@@ -23,13 +21,13 @@ TODO: マウスホバー時にtitleを表示させたい
           {{ nowPath === item.link ? item.icon : item.icon_outline }}
         </v-icon>
         <span
-          v-if="!mini"
+          v-if="false /*!mini*/"
           class="title"
           v-text="item.title"
         />
       </button>
     </div>
-  </v-navigation-drawer>
+  </div>
 </template>
 
 <script lang="ts">
@@ -41,7 +39,6 @@ import {
   useRouter,
   onBeforeMount,
 } from '@nuxtjs/composition-api'
-import getIsPhone from '~/composable/utils/isPhone'
 
 export default defineComponent({
   setup () {
@@ -61,11 +58,6 @@ export default defineComponent({
       return route.value.fullPath
     })
 
-    const isPhone = computed(() => {
-      const { isPhone } = getIsPhone()
-      return isPhone
-    })
-
     // watch
 
     // methods
@@ -78,7 +70,6 @@ export default defineComponent({
     // other
 
     return {
-      isPhone,
       mini,
       items,
       nowPath,

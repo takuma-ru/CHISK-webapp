@@ -1,6 +1,5 @@
 <template>
   <div
-    v-if="isPhone"
     id="bottom-navigation-drawer"
   >
     <div
@@ -35,7 +34,6 @@ import {
   useRouter,
   onBeforeMount,
 } from '@nuxtjs/composition-api'
-import getIsPhone from '~/composable/utils/isPhone'
 
 export default defineComponent({
   setup () {
@@ -54,11 +52,6 @@ export default defineComponent({
       return route.value.fullPath
     })
 
-    const isPhone = computed(() => {
-      const { isPhone } = getIsPhone()
-      return isPhone
-    })
-
     // watch
 
     // methods
@@ -71,7 +64,6 @@ export default defineComponent({
     // other
 
     return {
-      isPhone,
       mini,
       items,
       nowPath,
