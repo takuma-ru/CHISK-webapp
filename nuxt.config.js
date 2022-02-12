@@ -46,6 +46,7 @@ export default {
   ],
 
   pwa: {
+    icon: false,
     manifest: {
       lang: 'ja',
       name: 'CHISK',
@@ -59,43 +60,43 @@ export default {
         {
           src: '/icons/icon_64.svg',
           sizes: '64x64',
-          type: 'image/svg',
+          purpose: 'any',
         },
         {
           src: '/icons/icon_120.svg',
           sizes: '120x120',
-          type: 'image/svg',
+          purpose: 'any',
         },
         {
           src: '/icons/icon_144.svg',
           sizes: '144x144',
-          type: 'image/svg',
+          purpose: 'any',
         },
         {
           src: '/icons/icon_152.svg',
           sizes: '152x152',
-          type: 'image/svg',
+          purpose: 'any',
         },
         {
           src: '/icons/icon_192.svg',
           sizes: '192x192',
-          type: 'image/svg',
+          purpose: 'any',
         },
         {
           src: '/icons/icon_384.svg',
           sizes: '384x384',
-          type: 'image/svg',
+          purpose: 'any',
         },
         {
           src: '/icons/icon_512.svg',
           sizes: '512x512',
-          type: 'image/svg',
+          purpose: 'any',
         },
       ],
       screenshots: [
         {
+          src: '/screenshots/screenshots_01.png',
           sizes: '384x854',
-          src: '/screenshots/screenshot_01.png',
           type: 'image/gif',
         },
       ],
