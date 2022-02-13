@@ -2,6 +2,7 @@
 import {
   reactive,
   InjectionKey,
+  readonly,
 } from '@nuxtjs/composition-api'
 import {
   getAuth,
@@ -23,6 +24,9 @@ interface userProfileDataType {
 export default function auth () {
   useFirebase()
 
+  /*
+    store
+  */
   const state = {
     userProfile: reactive<userProfileDataType>({
       name: null,
@@ -30,17 +34,32 @@ export default function auth () {
       uid: null,
     }),
   }
+
+  const updateUserProfile = (name: string | null, email: string | null, uid: string | null) => {
+    state.userProfile.name = name
+    state.userProfile.email = email
+    state.userProfile.uid = uid
+  }
+
+  const initUserProfile = () => {
+    state.userProfile.name = null
+    state.userProfile.email = null
+    state.userProfile.uid = null
+  }
+
+  /*
+    firebase auth
+  */
   const provider = new GoogleAuthProvider()
   const auth = getAuth()
 
-  onAuthStateChanged(auth, (user) => {
+  onAuthStateChanged(auth, async (user) => {
     if (user) {
-      state.userProfile.name = user.displayName
-      state.userProfile.email = user.email
-      state.userProfile.uid = user.uid
+      state.userProfile.name = await user.displayName
+      state.userProfile.email = await user.email
+      state.userProfile.uid = await user.uid
     } else {
-      // User is signed out
-      // ...
+      initUserProfile()
     }
   })
 
@@ -52,9 +71,7 @@ export default function auth () {
           const credential = GoogleAuthProvider.credentialFromResult(result)
           const token = credential?.accessToken
           const user = result.user
-          state.userProfile.name = user.displayName
-          state.userProfile.email = user.email
-          state.userProfile.uid = user.uid
+          updateUserProfile(user.displayName, user.email, user.uid)
           console.log(token, state.userProfile)
         }).catch((error) => {
           const errorCode = error.code
@@ -76,14 +93,14 @@ export default function auth () {
 
   const trySignOut = () => {
     signOut(auth).then(() => {
-      console.log('success')
+      initUserProfile()
     }).catch((error) => {
       console.log(error)
     })
   }
 
   return {
-    userProfile: state.userProfile,
+    userProfile: readonly(state.userProfile),
 
     trySignIn,
     trySignOut,

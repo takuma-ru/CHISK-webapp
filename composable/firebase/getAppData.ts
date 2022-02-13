@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { doc, getDoc } from 'firebase/firestore'
 import useFirebase from '~/plugins/firebase'
 
