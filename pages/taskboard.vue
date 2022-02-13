@@ -1,28 +1,47 @@
 <template>
   <v-row justify="center" align="center">
-    {{ a }}
+    <button
+      @click="trySignIn()"
+    >
+      signin
+    </button>
+    {{ userProfile }}
   </v-row>
 </template>
 
 <script lang="ts">
 import {
   defineComponent,
-  ref,
+  inject,
+  provide,
   useMeta,
 } from '@nuxtjs/composition-api'
+// import googleAuth from '~/composable/firebase/auth'
+// import useUserProfile, { userProfileType, userProfileKey } from '~/composition/userProfile'
+import auth, { authType, authKey } from '~/composable/firebase/auth'
 
 export default defineComponent({
   components: { },
   setup () {
+    // store
+    provide(authKey, auth())
+    // const { userProfile } = googleAuth()
+
     // const
-    const a = ref('hello')
-    // let, computed
+    const { userProfile, trySignIn, trySignOut } = inject(authKey) as authType
+
     // methods
+
     // lifeCycle
+
     // other
     useMeta({ title: 'TaskBoard' })
+
     return {
-      a,
+      userProfile,
+
+      trySignIn,
+      trySignOut,
     }
   },
   head: {},

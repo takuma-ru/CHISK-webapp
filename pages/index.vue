@@ -5,29 +5,41 @@
     >
       signin
     </button>
+    {{ userProfile }}
   </v-row>
 </template>
 
 <script lang="ts">
 import {
   defineComponent,
-  ref,
+  inject,
+  provide,
   useMeta,
 } from '@nuxtjs/composition-api'
-import googleAuth from '~/composable/firebase/googleAuth'
+// import googleAuth from '~/composable/firebase/auth'
+// import useUserProfile, { userProfileType, userProfileKey } from '~/composition/userProfile'
+import auth, { authType, authKey } from '~/composable/firebase/auth'
 
 export default defineComponent({
   components: { },
   setup () {
+    // store
+    provide(authKey, auth())
+    // const { userProfile } = googleAuth()
+
     // const
-    // let, computed
+    const { userProfile, trySignIn, trySignOut } = inject(authKey) as authType
+
     // methods
-    const { trySignIn, trySignOut } = googleAuth()
+
     // lifeCycle
+
     // other
     useMeta({ title: 'Home' })
 
     return {
+      userProfile,
+
       trySignIn,
       trySignOut,
     }
