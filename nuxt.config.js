@@ -53,9 +53,24 @@ export default {
       short_name: 'CHISK',
       description: '## Build Setup',
       start_url: '/',
+      display_override: ['window-controls-overlay'],
       display: 'standalone',
       background_color: '#7786FF',
       theme_color: '#7786FF',
+      shortcuts: [
+        {
+          name: 'Open DashBoard',
+          short_name: 'DashBoard',
+          description: 'Open DashBoard',
+          url: '/dashboard',
+        },
+        {
+          name: 'Open Setting',
+          short_name: 'Setting',
+          description: 'Open Setting',
+          url: '/setting',
+        },
+      ],
       icons: [
         {
           src: '/icons/icon_64.svg',
