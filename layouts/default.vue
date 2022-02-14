@@ -2,7 +2,13 @@
   <div id="app">
     <NavigationBar v-if="!isPhone" />
     <BottomNavigationBar v-if="isPhone" />
-    <v-container id="main">
+    <v-container
+      id="main"
+      :style="{
+        marginLeft: isPhone ? '0px' : '64px',
+        marginBottom: isPhone ? '64px' : '0px'
+      }"
+    >
       <Nuxt />
     </v-container>
   </div>

@@ -1,11 +1,10 @@
 <template>
   <v-row justify="center" align="center">
-    <button
-      @click="trySignIn()"
-    >
+    <button @click="trySignIn()">
       signin
     </button>
     {{ userProfile }}
+    {{ userTaskData }}
   </v-row>
 </template>
 
@@ -17,25 +16,38 @@ import {
   provide,
   useMeta,
 } from '@nuxtjs/composition-api'
-import auth, { authType, authKey } from '~/composable/firebase/auth'
-import { getTaskData } from '~/composable/firebase/getTaskData'
+import auth, {
+  authType,
+  authKey,
+} from '~/composable/firebase/auth'
+import useUserTaskData, {
+  userTaskDataType,
+  userTaskDataKey,
+} from '~/composition/userTaskData'
 
 export default defineComponent({
-  components: { },
+  components: {},
   setup () {
     // store
     provide(authKey, auth())
+    provide(userTaskDataKey, useUserTaskData())
 
     // const
-    const { userProfile, trySignIn, trySignOut } = inject(authKey) as authType
+    const {
+      userProfile,
+      trySignIn,
+      trySignOut,
+    } = inject(authKey) as authType
+    const {
+      userTaskData,
+      getUserTaskData,
+    } = inject(userTaskDataKey, useUserTaskData()) as userTaskDataType
 
     // watch
-    watch(
-      userProfile,
-      async (newUserProfile) => {
-        await getTaskData(newUserProfile.uid)
-      },
-    )
+    watch(userProfile, async (newUserProfile) => {
+      console.log('changed userProfile')
+      await getUserTaskData(newUserProfile.uid)
+    })
     // methods
 
     // lifeCycle
@@ -45,6 +57,7 @@ export default defineComponent({
 
     return {
       userProfile,
+      userTaskData,
 
       trySignIn,
       trySignOut,

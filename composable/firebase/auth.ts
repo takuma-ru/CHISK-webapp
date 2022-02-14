@@ -1,4 +1,6 @@
-/* eslint-disable no-console */
+/**
+  Firebase Authentication管理
+**/
 import {
   reactive,
   InjectionKey,
@@ -25,7 +27,7 @@ export default function auth () {
   useFirebase()
 
   /*
-    store
+    ログイン中ユーザーのプロファイル情報
   */
   const state = {
     userProfile: reactive<userProfileDataType>({
@@ -35,12 +37,14 @@ export default function auth () {
     }),
   }
 
+  // プロファイルを更新
   const updateUserProfile = (name: string | null, email: string | null, uid: string | null) => {
     state.userProfile.name = name
     state.userProfile.email = email
     state.userProfile.uid = uid
   }
 
+  // プロファイルを初期化
   const initUserProfile = () => {
     state.userProfile.name = null
     state.userProfile.email = null
@@ -48,22 +52,21 @@ export default function auth () {
   }
 
   /*
-    firebase auth
+    firebase
   */
   const provider = new GoogleAuthProvider()
   const auth = getAuth()
 
+  // ログイン状態を識別
   onAuthStateChanged(auth, async (user) => {
     if (user) {
-      state.userProfile.name = await user.displayName
-      state.userProfile.email = await user.email
-      state.userProfile.uid = await user.uid
+      await updateUserProfile(user.displayName, user.email, user.uid)
     } else {
       initUserProfile()
     }
   })
 
-  // google
+  // Googleアカウントログイン
   const trySignIn = () => {
     setPersistence(auth, browserLocalPersistence)
       .then(() => {
@@ -91,6 +94,7 @@ export default function auth () {
       })
   }
 
+  // ログアウト
   const trySignOut = () => {
     signOut(auth).then(() => {
       initUserProfile()

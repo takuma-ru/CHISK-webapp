@@ -1,4 +1,6 @@
-/* eslint-disable no-console */
+/**
+  Firestoreに保存しているリリースノートデータを取得する
+**/
 import { doc, getDoc } from 'firebase/firestore'
 import useFirebase from '~/plugins/firebase'
 
