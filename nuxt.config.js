@@ -59,16 +59,18 @@ export default {
       theme_color: '#7786FF',
       shortcuts: [
         {
-          name: 'Open DashBoard',
-          short_name: 'DashBoard',
-          description: 'Open DashBoard',
-          url: '/dashboard',
+          name: 'Open Taskboard',
+          short_name: 'Taskboard',
+          description: 'Open Taskboard',
+          url: '/taskboard',
+          icons: [{ src: '/icons/icon_192.svg', sizes: '192x192' }],
         },
         {
           name: 'Open Setting',
           short_name: 'Setting',
           description: 'Open Setting',
           url: '/setting',
+          icons: [{ src: '/icons/icon_192.svg', sizes: '192x192' }],
         },
       ],
       icons: [
