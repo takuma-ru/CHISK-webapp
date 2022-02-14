@@ -29,7 +29,7 @@ export default function useUserTaskData () {
   const getUserTaskData = async (uid: string | null) => {
     await getTaskData(uid).then((res) => {
       res.value.forEach((doc) => {
-        updateUserTaskData(doc)
+        updateUserTaskData(doc as userTaskDataAllType)
       })
     })
   }
