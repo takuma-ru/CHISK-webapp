@@ -1,9 +1,9 @@
 /**
-  Firebase Authentication管理
+  Firebase Authentication周り
 **/
+
 import {
   reactive,
-  InjectionKey,
   readonly,
 } from '@nuxtjs/composition-api'
 import {
@@ -16,66 +16,43 @@ import {
   onAuthStateChanged,
 } from 'firebase/auth'
 import useFirebase from '~/plugins/firebase'
-
-interface userProfileDataType {
-  name: string | null,
-  email: string | null,
-  uid: string | null,
-}
+import { userProfileDataInterface } from '~/composition/userProfile'
 
 export default function auth () {
   useFirebase()
 
-  /*
-    ログイン中ユーザーのプロファイル情報
-  */
-  const state = {
-    userProfile: reactive<userProfileDataType>({
-      name: null,
-      email: null,
-      uid: null,
-    }),
-  }
-
-  // プロファイルを更新
-  const updateUserProfile = (name: string | null, email: string | null, uid: string | null) => {
-    state.userProfile.name = name
-    state.userProfile.email = email
-    state.userProfile.uid = uid
-  }
-
-  // プロファイルを初期化
-  const initUserProfile = () => {
-    state.userProfile.name = null
-    state.userProfile.email = null
-    state.userProfile.uid = null
-  }
-
-  /*
-    firebase
-  */
   const provider = new GoogleAuthProvider()
   const auth = getAuth()
+  const nowUser = reactive<userProfileDataInterface>({
+    name: null,
+    email: null,
+    uid: null,
+  })
 
   // ログイン状態を識別
-  onAuthStateChanged(auth, async (user) => {
+  onAuthStateChanged(auth, (user) => {
     if (user) {
-      await updateUserProfile(user.displayName, user.email, user.uid)
+      nowUser.name = user.displayName
+      nowUser.email = user.email
+      nowUser.uid = user.uid
     } else {
-      initUserProfile()
+      nowUser.name = null
+      nowUser.email = null
+      nowUser.uid = null
     }
   })
 
-  // Googleアカウントログイン
+  // Googleアカウントログイン処理
   const trySignIn = () => {
     setPersistence(auth, browserLocalPersistence)
       .then(() => {
         return signInWithPopup(auth, provider).then((result) => {
-          const credential = GoogleAuthProvider.credentialFromResult(result)
-          const token = credential?.accessToken
+          // const credential = GoogleAuthProvider.credentialFromResult(result)
+          // const token = credential?.accessToken
           const user = result.user
-          updateUserProfile(user.displayName, user.email, user.uid)
-          console.log(token, state.userProfile)
+          nowUser.name = user.displayName
+          nowUser.email = user.email
+          nowUser.uid = user.uid
         }).catch((error) => {
           const errorCode = error.code
           const errorMessage = error.message
@@ -94,22 +71,21 @@ export default function auth () {
       })
   }
 
-  // ログアウト
+  // ログアウト処理
   const trySignOut = () => {
     signOut(auth).then(() => {
-      initUserProfile()
+      nowUser.name = null
+      nowUser.email = null
+      nowUser.uid = null
     }).catch((error) => {
       console.log(error)
     })
   }
 
   return {
-    userProfile: readonly(state.userProfile),
+    nowUser: readonly(nowUser),
 
     trySignIn,
     trySignOut,
   }
 }
-
-export type authType = ReturnType<typeof auth>
-export const authKey: InjectionKey<authType> = Symbol('authKey')

@@ -16,10 +16,11 @@ import {
   provide,
   useMeta,
 } from '@nuxtjs/composition-api'
-import auth, {
-  authType,
-  authKey,
-} from '~/composable/firebase/auth'
+import auth from '~/composable/firebase/auth'
+import useUserProfile, {
+  userProfileType,
+  userProfileKey,
+} from '~/composition/userProfile'
 import useUserTaskData, {
   userTaskDataType,
   userTaskDataKey,
@@ -29,15 +30,17 @@ export default defineComponent({
   components: {},
   setup () {
     // store
-    provide(authKey, auth())
+    provide(userProfileKey, useUserProfile())
     provide(userTaskDataKey, useUserTaskData())
 
     // const
     const {
-      userProfile,
       trySignIn,
       trySignOut,
-    } = inject(authKey) as authType
+    } = auth()
+    const {
+      userProfile,
+    } = inject(userProfileKey, useUserProfile()) as userProfileType
     const {
       userTaskData,
       getUserTaskData,
@@ -45,7 +48,6 @@ export default defineComponent({
 
     // watch
     watch(userProfile, async (newUserProfile) => {
-      console.log('changed userProfile')
       await getUserTaskData(newUserProfile.uid)
     })
     // methods

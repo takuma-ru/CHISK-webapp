@@ -1,6 +1,7 @@
 /**
-  Firestoreから指定したユーザーのタスクデータを取得する
+  Firestoreから指定したユーザーのタスクデータを取得
 **/
+
 import {
   collection,
   getDocs,
@@ -8,11 +9,11 @@ import {
 } from 'firebase/firestore'
 import { ref } from '@nuxtjs/composition-api'
 import useFirebase from '~/plugins/firebase'
-import { userTaskDataAllType } from '~/composition/userTaskData'
+import { userTaskDataInterface } from '~/composition/userTaskData'
 
 export default async function getTaskData (uid: string | null) {
   const { firestore } = useFirebase()
-  const taskDatas = ref<userTaskDataAllType[]>([])
+  const taskDatas = ref<userTaskDataInterface[]>([])
 
   if (uid != null) {
     const q = query(collection(firestore, 'tasks', uid, 'Task'))
@@ -28,7 +29,7 @@ export default async function getTaskData (uid: string | null) {
         group: doc.data().group,
         completed: doc.data().completed,
         tag: doc.data().tag,
-      } as userTaskDataAllType
+      } as userTaskDataInterface
 
       taskDatas.value.push(taskData)
     })

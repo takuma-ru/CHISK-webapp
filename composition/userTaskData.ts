@@ -1,6 +1,7 @@
 /**
-  Webアプリ内で使うタスクデータの管理
+  Webアプリ内で使うタスクデータ管理
 **/
+
 import {
   ref,
   reactive,
@@ -9,7 +10,7 @@ import {
 } from '@nuxtjs/composition-api'
 import getTaskData from '~/composable/firebase/getTaskData'
 
-export interface userTaskDataAllType {
+export interface userTaskDataInterface {
   id: string,
   title: string,
   text: string,
@@ -19,23 +20,21 @@ export interface userTaskDataAllType {
   completed: Date,
   tag: Array<[]>,
 }
+
 export default function useUserTaskData () {
-  // ユーザーのタスク情報
+  /*
+    state
+  */
   const state = reactive({
-    userTaskData: ref<userTaskDataAllType[]>([]),
+    // ユーザーのタスクデータ
+    userTaskData: ref<userTaskDataInterface[]>([]),
   })
 
-  // Firestoreからデータを取得し、userTaskDataに挿入
-  const getUserTaskData = async (uid: string | null) => {
-    await getTaskData(uid).then((res) => {
-      res.value.forEach((doc) => {
-        updateUserTaskData(doc as userTaskDataAllType)
-      })
-    })
-  }
-
+  /*
+    mutation
+  */
   // 引数のデータをuserTaskDataに挿入
-  const updateUserTaskData = (taskData: userTaskDataAllType) => {
+  const updateUserTaskData = (taskData: userTaskDataInterface) => {
     state.userTaskData.push(taskData)
     // console.log(state.userTaskData)
   }
@@ -47,6 +46,18 @@ export default function useUserTaskData () {
   // userTaskDataを初期化
   const initUserTaskData = () => {
     state.userTaskData = []
+  }
+
+  /*
+    action
+  */
+  // Firestoreからデータを取得し、userTaskDataに挿入
+  const getUserTaskData = async (uid: string | null) => {
+    await getTaskData(uid).then((res) => {
+      res.value.forEach((doc) => {
+        updateUserTaskData(doc as userTaskDataInterface)
+      })
+    })
   }
 
   return {

@@ -16,7 +16,6 @@ PWA・TWA化をしているので、ネイティブアプリに並ぶ操作性�
 | nuxt  | 2.x |
 | @nuxtjs/composition-api  | ^0.31.0 |
 | firebase | ^9.6.6 |
-| vuetify | 2.6.1 |
 
 ## Getting Started
 0. add `.env` file
