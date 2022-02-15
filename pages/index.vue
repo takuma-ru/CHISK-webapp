@@ -1,11 +1,14 @@
 <template>
-  <v-row justify="center" align="center">
+  <div>
+    <Button>
+      button
+    </Button>
     <button @click="trySignIn()">
       signin
     </button>
     {{ userProfile }}
     {{ userTaskData }}
-  </v-row>
+  </div>
 </template>
 
 <script lang="ts">
@@ -50,6 +53,7 @@ export default defineComponent({
     watch(userProfile, async (newUserProfile) => {
       await getUserTaskData(newUserProfile.uid)
     })
+
     // methods
 
     // lifeCycle

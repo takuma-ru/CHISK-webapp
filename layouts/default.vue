@@ -2,15 +2,17 @@
   <div id="app">
     <NavigationBar v-if="!isPhone" />
     <BottomNavigationBar v-if="isPhone" />
-    <v-container
+    <div
       id="main"
       :style="{
         marginLeft: isPhone ? '0px' : '64px',
         marginBottom: isPhone ? '64px' : '0px'
       }"
     >
-      <Nuxt />
-    </v-container>
+      <div id="main-contents">
+        <Nuxt />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -57,8 +59,11 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-
 body::-webkit-scrollbar {
   display:none;
+}
+
+#main-contents {
+  margin: 24px;
 }
 </style>
