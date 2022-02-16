@@ -80,7 +80,7 @@ export default defineComponent({
     & {
       position: fixed;
       width: 100vw;
-      height: 64px;
+      min-height: 64px;
 
       bottom: 0%;
       left: 0%;
@@ -89,6 +89,7 @@ export default defineComponent({
       box-shadow: $primary-shadow;
       background-color: $primary-light-1;
 
+      padding-bottom: constant(safe-area-inset-bottom);
       padding-bottom: env(safe-area-inset-bottom);
     }
 

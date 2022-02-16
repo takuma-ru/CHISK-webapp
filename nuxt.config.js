@@ -1,5 +1,3 @@
-import colors from 'vuetify/es5/util/colors'
-
 export default {
   publicRuntimeConfig: {
     API_KEY: process.env.API_KEY,
@@ -20,11 +18,21 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover' },
-      { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
+      { hid: 'description', name: 'description', content: '楽しくタスクがこなせるWebアプリ' },
+      { hid: 'og:site_name', property: 'og:site_name', content: 'CHISK(楽しくタスクをこなそう！)' },
+      { hid: 'og:type', property: 'og:type', content: 'website' },
+      { hid: 'og:url', property: 'og:url', content: 'https://next-taskmgt.web.app/' },
+      { hid: 'og:title', property: 'og:title', content: 'CHISK' },
+      { hid: 'og:description', property: 'og:description', content: '楽しくタスクがこなせるWebアプリ' },
+      { hid: 'og:image', property: 'og:image', content: 'https://firebasestorage.googleapis.com/v0/b/taskmgt-fd097.appspot.com/o/feature.png?alt=media&token=35f7a7b5-b011-4f3d-a461-3e2e42ff2bd5' },
+      { hid: 'twitter:image', name: 'twitter:image', content: 'https://firebasestorage.googleapis.com/v0/b/taskmgt-fd097.appspot.com/o/feature.png?alt=media&token=35f7a7b5-b011-4f3d-a461-3e2e42ff2bd5' },
+      { name: 'twitter:card', content: 'summary' },
+      { hid: 'twitter:site', name: 'twitter:site', content: '@takumaru_2222' },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/icon_512x512.svg' },
+      { rel: 'canonical', href: '/' },
     ],
   },
 
@@ -121,24 +129,10 @@ export default {
   },
 
   vuetify: {
-    customVariables: ['~/assets/variables.scss'],
+    customVariables: ['~/assets/scss/_variables.scss'],
     defaultAssets: {
       font: false,
       icons: 'mdi' || 'fa',
-    },
-    theme: {
-      dark: false,
-      themes: {
-        dark: {
-          primary: colors.blue.darken2,
-          accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
-          info: colors.teal.lighten1,
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
-          success: colors.green.accent3,
-        },
-      },
     },
   },
 

@@ -3,9 +3,12 @@
     <Button>
       button
     </Button>
-    <button @click="trySignIn()">
+    <Button
+      class="primary-light-1"
+      @click="trySignIn()"
+    >
       signin
-    </button>
+    </Button>
     {{ userProfile }}
     {{ userTaskData }}
   </div>
@@ -33,7 +36,6 @@ export default defineComponent({
   components: {},
   setup () {
     // store
-    provide(userProfileKey, useUserProfile())
     provide(userTaskDataKey, useUserTaskData())
 
     // const

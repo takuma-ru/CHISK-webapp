@@ -21,14 +21,18 @@ import {
   defineComponent,
   ref,
   onMounted,
+  provide,
 } from '@nuxtjs/composition-api'
 import NavigationBar from '~/components/utils/NavigationBar.vue'
 import BottomNavigationBar from '~/components/utils/BottomNavigationBar.vue'
 import getIsPhone from '~/composable/utils/isPhone'
+import useUserProfile, { userProfileKey } from '~/composition/userProfile'
 
 export default defineComponent({
   components: { NavigationBar, BottomNavigationBar },
   setup () {
+    provide(userProfileKey, useUserProfile())
+
     // const
     const isPhone = ref<boolean>(false)
     // let, computed

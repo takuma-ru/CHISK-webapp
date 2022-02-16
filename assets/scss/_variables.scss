@@ -1,0 +1,9 @@
+$primary: #7786FF;
+$primary-light-1: #C6CCFF;
+$primary-dark-1: #4D5AC2;
+
+$primary-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+
+:export {
+  primaryColor: $primary
+}
