@@ -1,7 +1,7 @@
 <template>
-  <v-row justify="center" align="center">
+  <div>
     {{ a }}
-  </v-row>
+  </div>
 </template>
 
 <script lang="ts">

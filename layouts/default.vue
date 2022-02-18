@@ -11,6 +11,7 @@
     >
       <div id="main-contents">
         <Nuxt />
+        <TaskModal />
       </div>
     </div>
   </div>
@@ -27,9 +28,10 @@ import NavigationBar from '~/components/utils/NavigationBar.vue'
 import BottomNavigationBar from '~/components/utils/BottomNavigationBar.vue'
 import getIsPhone from '~/composable/utils/isPhone'
 import useUserProfile, { userProfileKey } from '~/composition/userProfile'
+import TaskModal from '~/components/task/TaskModal.vue'
 
 export default defineComponent({
-  components: { NavigationBar, BottomNavigationBar },
+  components: { NavigationBar, BottomNavigationBar, TaskModal },
   setup () {
     provide(userProfileKey, useUserProfile())
 

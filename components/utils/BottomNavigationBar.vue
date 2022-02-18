@@ -49,7 +49,7 @@ export default defineComponent({
     ])
     // let, computed
     const nowPath = computed(() => {
-      return route.value.fullPath
+      return route.value.path
     })
 
     // watch

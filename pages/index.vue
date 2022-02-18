@@ -9,8 +9,15 @@
     >
       signin
     </Button>
-    {{ userProfile }}
-    {{ userTaskData }}
+    <div
+      v-for="task in userTaskData"
+      id="task-group"
+      :key="task.id"
+    >
+      <TaskCard
+        :task-data="task"
+      />
+    </div>
   </div>
 </template>
 
@@ -21,7 +28,9 @@ import {
   inject,
   provide,
   useMeta,
+onMounted,
 } from '@nuxtjs/composition-api'
+import TaskCard from '~/components/task/TaskCard.vue'
 import auth from '~/composable/firebase/auth'
 import useUserProfile, {
   userProfileType,
@@ -33,7 +42,7 @@ import useUserTaskData, {
 } from '~/composition/userTaskData'
 
 export default defineComponent({
-  components: {},
+  components: { TaskCard },
   setup () {
     // store
     provide(userTaskDataKey, useUserTaskData())
@@ -57,6 +66,9 @@ export default defineComponent({
     })
 
     // methods
+    onMounted(() =>{
+      getUserTaskData(userProfile.uid)
+    })
 
     // lifeCycle
 

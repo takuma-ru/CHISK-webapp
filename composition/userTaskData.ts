@@ -18,7 +18,7 @@ export interface userTaskDataInterface {
   dateEnd: Date,
   group: string,
   completed: Date,
-  tag: Array<[]>,
+  tag: Array<any>,
 }
 
 export default function useUserTaskData () {
