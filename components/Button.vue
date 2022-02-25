@@ -45,7 +45,7 @@ export default defineComponent({
   width: auto;
   height: auto;
   border-radius: 8px;
-  background-color: $primary-light-1;
+  background-color: $primary-lighten-1;
 
   .text {
     padding: 0.4rem 1rem;

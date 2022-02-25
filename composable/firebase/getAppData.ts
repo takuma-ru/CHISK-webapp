@@ -2,11 +2,10 @@
   Firestoreに保存しているリリースノートデータを取得
 **/
 
-import { doc, getDoc } from 'firebase/firestore'
-import useFirebase from '~/plugins/firebase'
+import { doc, getDoc, getFirestore } from 'firebase/firestore'
 
 export default async function getAppData () {
-  const { firestore } = useFirebase()
+  const firestore = getFirestore()
 
   const ref = doc(firestore, 'appdata', 'app_data', 'jp', 'data')
   try {

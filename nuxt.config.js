@@ -39,7 +39,9 @@ export default {
   css: [
   ],
 
-  plugins: [],
+  plugins: [
+    { src: '~/plugins/firebase.ts' },
+  ],
 
   components: true,
 
@@ -63,8 +65,8 @@ export default {
       start_url: '/',
       display_override: ['window-controls-overlay'],
       display: 'standalone',
-      background_color: '#7786FF',
-      theme_color: '#7786FF',
+      background_color: '#002550',
+      theme_color: '#002550',
       shortcuts: [
         {
           name: 'Open Taskboard',

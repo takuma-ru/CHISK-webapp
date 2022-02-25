@@ -58,7 +58,7 @@ export default defineComponent({
 <style lang="scss">
 html {
   overscroll-behavior-y: none;
-  background-color: $primary;
+  background-color: $background;
 }
 body {
   font-family: 'Noto Sans JP', sans-serif;

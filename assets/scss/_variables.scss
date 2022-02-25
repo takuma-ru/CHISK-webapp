@@ -1,9 +1,41 @@
-$primary: #7786FF;
-$primary-light-1: #C6CCFF;
-$primary-dark-1: #4D5AC2;
+$yellow-darken-1: #9F9915;
+$yellow: #D4CD3E;
+$yellow-lighten-1: #E9E362;
+$yellow-lighten-2: #FFFA89;
+
+$green-dark-1: #217B52;
+$green: #47AF7F;
+$green-lighten-1: #83D2AE;
+$green-lighten-2: #CFFFE6;
+
+$red-darken-1: #88174A;
+$red: #CB4B85;
+$red-lighten-1: #E093B6;
+$red-lighten-2: #FFC3DE;
+
+$lightblue-darken-1: #09829B;
+$lightblue: #5FCDE5;
+$lightblue-lighten-1: #87EAFF;
+$lightblue-lighten-2: #C3F5FF;
+
+$blue-darken-1: #002550;
+$blue: #174A88;
+$blue-lighten-1: #4F81BC;
+$blue-lighten-2: #9EBDE1;
+
+$primary-darken-1: #002550;
+$primary: #174A88;
+$primary-lighten-1: #4F81BC;
+$primary-lighten-2: #9EBDE1;
+
+$background: #002550;
+
+$black: #000A13;
+$white: #F7FBFF;
+$gray: #4E4E4E;
 
 $primary-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
 
 :export {
-  primaryColor: $primary
+  primaryColor: $blue
 }

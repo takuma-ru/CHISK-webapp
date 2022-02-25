@@ -75,7 +75,7 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   #bottom-navigation-drawer {
     & {
       position: fixed;
@@ -87,7 +87,7 @@ export default defineComponent({
 
       border-radius: 24px 24px 0px 0px;
       box-shadow: $primary-shadow;
-      background-color: $primary-light-1;
+      background-color: $primary-lighten-1;
 
       padding-bottom: constant(safe-area-inset-bottom);
       padding-bottom: env(safe-area-inset-bottom);
@@ -109,7 +109,7 @@ export default defineComponent({
     margin: 12px;
 
     border-radius: 16px;
-    background-color: $primary-light-1;
+    background-color: $primary-lighten-1;
   }
   $element: #{&};
 
@@ -131,7 +131,7 @@ export default defineComponent({
     width: 40px;
     height: 40px;
 
-    color: $primary-dark-1;
+    color: $white;
   }
 
   .title {
@@ -141,20 +141,20 @@ export default defineComponent({
 
   &[active] {
     @extend #{$element};
-    background-color: $primary-dark-1;
+    background-color: $white;
 
     .icon {
       width: 40px;
       height: 40px;
 
-      color: $primary-light-1;
+      color: $primary-lighten-1;
     }
 
     .title {
       line-height: 40px;
       padding: 0px 16px 0px 16px;
 
-      color: $primary-light-1;
+      color: $primary-lighten-1;
     }
   }
 }

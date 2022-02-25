@@ -3,12 +3,17 @@
 **/
 
 import {
+  collection,
+  getFirestore,
+  onSnapshot,
+  query,
+} from 'firebase/firestore'
+import {
   ref,
   reactive,
   InjectionKey,
   readonly,
 } from '@nuxtjs/composition-api'
-import getTaskData from '~/composable/firebase/getTaskData'
 
 export interface userTaskDataInterface {
   id: string,
@@ -52,12 +57,33 @@ export default function useUserTaskData () {
     action
   */
   // Firestoreからデータを取得し、userTaskDataに挿入
-  const getUserTaskData = async (uid: string | null) => {
-    await getTaskData(uid).then((res) => {
-      res.value.forEach((doc) => {
-        updateUserTaskData(doc as userTaskDataInterface)
+  const getUserTaskData = (uid: string | null) => {
+    const firestore = getFirestore()
+
+    if (uid != null) {
+      const q = query(collection(firestore, 'tasks', uid, 'Task'))
+
+      onSnapshot(q, { includeMetadataChanges: true }, (snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+          if (change.type === 'added') {
+            console.log('data: ', change.doc.data().id)
+            const taskData = {
+              id: change.doc.data().id,
+              title: change.doc.data().title,
+              text: change.doc.data().text,
+              dateStart: change.doc.data().date_start?.toDate(),
+              dateEnd: change.doc.data().date_end?.toDate(),
+              group: change.doc.data().group,
+              completed: change.doc.data().completed?.toDate(),
+              tag: change.doc.data().tag,
+            } as userTaskDataInterface
+            updateUserTaskData(taskData)
+          }
+        })
       })
-    })
+    } else {
+      console.error('uid not found')
+    }
   }
 
   return {

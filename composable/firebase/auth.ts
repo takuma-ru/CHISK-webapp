@@ -15,12 +15,9 @@ import {
   browserLocalPersistence,
   onAuthStateChanged,
 } from 'firebase/auth'
-import useFirebase from '~/plugins/firebase'
 import { userProfileDataInterface } from '~/composition/userProfile'
 
 export default function auth () {
-  useFirebase()
-
   const provider = new GoogleAuthProvider()
   const auth = getAuth()
   const nowUser = reactive<userProfileDataInterface>({

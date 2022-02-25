@@ -28,7 +28,7 @@ import {
   inject,
   provide,
   useMeta,
-onMounted,
+  onMounted,
 } from '@nuxtjs/composition-api'
 import TaskCard from '~/components/task/TaskCard.vue'
 import auth from '~/composable/firebase/auth'
@@ -66,7 +66,7 @@ export default defineComponent({
     })
 
     // methods
-    onMounted(() =>{
+    onMounted(() => {
       getUserTaskData(userProfile.uid)
     })
 
