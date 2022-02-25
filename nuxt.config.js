@@ -47,9 +47,13 @@ export default {
 
   buildModules: [
     '@nuxt/typescript-build',
-    '@nuxtjs/vuetify',
     '@nuxtjs/composition-api/module',
+    '@nuxtjs/style-resources',
   ],
+
+  styleResources: {
+    scss: ['./assets/scss/_variables.scss'],
+  },
 
   modules: [
     '@nuxtjs/pwa',
@@ -127,14 +131,6 @@ export default {
           type: 'image/gif',
         },
       ],
-    },
-  },
-
-  vuetify: {
-    customVariables: ['~/assets/scss/_variables.scss'],
-    defaultAssets: {
-      font: false,
-      icons: 'mdi' || 'fa',
     },
   },
 

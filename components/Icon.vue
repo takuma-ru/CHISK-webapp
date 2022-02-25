@@ -33,5 +33,6 @@ export default defineComponent({
 #icon {
   width: 24px;
   height: 24px;
+  margin: auto;
 }
 </style>

@@ -46,9 +46,12 @@ export default defineComponent({
   height: auto;
   border-radius: 8px;
   background-color: $primary-lighten-1;
+  border: none;
+  cursor: pointer;
 
   .text {
-    padding: 0.4rem 1rem;
+    padding: 0.5rem 1em;
+    margin: 0px;
   }
 
   &:hover::before {

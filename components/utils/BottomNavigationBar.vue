@@ -12,9 +12,11 @@
         class="navi-btn"
         @click="pushRoute(item.link)"
       >
-        <v-icon class="icon">
-          {{ nowPath === item.link ? item.icon : item.icon_outline }}
-        </v-icon>
+        <Icon
+          :icon="nowPath === item.link ? item.icon : item.icon_outline"
+          color="#FFFFFF"
+          class="icon"
+        />
         <span
           v-if="!mini"
           class="title"
@@ -34,6 +36,14 @@ import {
   useRouter,
   onBeforeMount,
 } from '@nuxtjs/composition-api'
+import {
+  mdiCog,
+  mdiCogOutline,
+  mdiHomeVariant,
+  mdiHomeVariantOutline,
+  mdiViewDashboard,
+  mdiViewDashboardOutline,
+} from '@mdi/js'
 
 export default defineComponent({
   setup () {
@@ -42,9 +52,9 @@ export default defineComponent({
     const router = useRouter()
     const mini = ref(true)
     const items = ref([
-      { title: 'ボード', icon: 'mdi-view-dashboard', icon_outline: 'mdi-view-dashboard-outline', link: '/taskboard' },
-      { title: 'ホーム', icon: 'mdi-home-variant', icon_outline: 'mdi-home-variant-outline', link: '/' },
-      { title: '設定', icon: 'mdi-cog', icon_outline: 'mdi-cog-outline', link: '/setting' },
+      { title: 'ボード', icon: mdiViewDashboard, icon_outline: mdiViewDashboardOutline, link: '/taskboard' },
+      { title: 'ホーム', icon: mdiHomeVariant, icon_outline: mdiHomeVariantOutline, link: '/' },
+      { title: '設定', icon: mdiCog, icon_outline: mdiCogOutline, link: '/setting' },
       // { title: 'Team', icon: 'mdi-account-multiple-outline', link: '/team' },
     ])
     // let, computed
@@ -108,6 +118,7 @@ export default defineComponent({
 
     margin: 12px;
 
+    border: none;
     border-radius: 16px;
     background-color: $primary-lighten-1;
   }
@@ -141,7 +152,7 @@ export default defineComponent({
 
   &[active] {
     @extend #{$element};
-    background-color: $white;
+    background-color: $primary;
 
     .icon {
       width: 40px;

@@ -17,9 +17,11 @@ TODO: マウスホバー時にtitleを表示させたい
         class="navi-btn"
         @click="pushRoute(item.link)"
       >
-        <v-icon class="icon">
-          {{ nowPath === item.link ? item.icon : item.icon_outline }}
-        </v-icon>
+        <Icon
+          :icon="nowPath === item.link ? item.icon : item.icon_outline"
+          color="#FFFFFF"
+          class="icon"
+        />
         <span
           v-if="false /*!mini*/"
           class="title"
@@ -39,6 +41,16 @@ import {
   useRouter,
   onBeforeMount,
 } from '@nuxtjs/composition-api'
+import {
+  mdiCog,
+  mdiCogOutline,
+  mdiHomeVariant,
+  mdiHomeVariantOutline,
+  mdiInformation,
+  mdiInformationOutline,
+  mdiViewDashboard,
+  mdiViewDashboardOutline,
+} from '@mdi/js'
 
 export default defineComponent({
   setup () {
@@ -47,10 +59,10 @@ export default defineComponent({
     const router = useRouter()
     const mini = ref(true)
     const items = ref([
-      { title: 'ホーム', icon: 'mdi-home-variant', icon_outline: 'mdi-home-variant-outline', link: '/' },
-      { title: 'ボード', icon: 'mdi-view-dashboard', icon_outline: 'mdi-view-dashboard-outline', link: '/taskboard' },
-      { title: '設定', icon: 'mdi-cog', icon_outline: 'mdi-cog-outline', link: '/setting' },
-      { title: 'このアプリは？', icon: 'mdi-information', icon_outline: 'mdi-information-outline', link: '/about' },
+      { title: 'ボード', icon: mdiViewDashboard, icon_outline: mdiViewDashboardOutline, link: '/taskboard' },
+      { title: 'ホーム', icon: mdiHomeVariant, icon_outline: mdiHomeVariantOutline, link: '/' },
+      { title: '設定', icon: mdiCog, icon_outline: mdiCogOutline, link: '/setting' },
+      { title: 'このアプリは？', icon: mdiInformation, icon_outline: mdiInformationOutline, link: '/about' },
       // { title: 'Team', icon: 'mdi-account-multiple-outline', link: '/team' },
     ])
     // let, computed
@@ -113,6 +125,7 @@ export default defineComponent({
 
     margin: 12px;
 
+    border: none;
     border-radius: 16px;
     background-color: $primary-lighten-1;
   }
