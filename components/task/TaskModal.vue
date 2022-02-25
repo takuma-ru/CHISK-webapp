@@ -13,7 +13,6 @@ import {
   computed,
   defineComponent,
   onBeforeMount,
-  useMeta,
   useRoute,
 } from '@nuxtjs/composition-api'
 
@@ -32,7 +31,6 @@ export default defineComponent({
     })
 
     // other
-    useMeta({ title: 'test one' })
 
     return {
       taskID,
