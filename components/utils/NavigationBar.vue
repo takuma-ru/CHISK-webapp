@@ -59,8 +59,8 @@ export default defineComponent({
     const router = useRouter()
     const mini = ref(true)
     const items = ref([
-      { title: 'ボード', icon: mdiViewDashboard, icon_outline: mdiViewDashboardOutline, link: '/taskboard' },
       { title: 'ホーム', icon: mdiHomeVariant, icon_outline: mdiHomeVariantOutline, link: '/' },
+      { title: 'ボード', icon: mdiViewDashboard, icon_outline: mdiViewDashboardOutline, link: '/taskboard' },
       { title: '設定', icon: mdiCog, icon_outline: mdiCogOutline, link: '/setting' },
       { title: 'このアプリは？', icon: mdiInformation, icon_outline: mdiInformationOutline, link: '/about' },
       // { title: 'Team', icon: 'mdi-account-multiple-outline', link: '/team' },

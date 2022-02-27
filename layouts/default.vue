@@ -26,14 +26,16 @@ import {
 } from '@nuxtjs/composition-api'
 import NavigationBar from '~/components/utils/NavigationBar.vue'
 import BottomNavigationBar from '~/components/utils/BottomNavigationBar.vue'
+import TaskModal from '~/components/task/TaskModal.vue'
 import getIsPhone from '~/composable/utils/isPhone'
 import useUserProfile, { userProfileKey } from '~/composition/userProfile'
-import TaskModal from '~/components/task/TaskModal.vue'
+import useUserTaskData, { userTaskDataKey } from '~/composition/userTaskData'
 
 export default defineComponent({
   components: { NavigationBar, BottomNavigationBar, TaskModal },
   setup () {
     provide(userProfileKey, useUserProfile())
+    provide(userTaskDataKey, useUserTaskData())
 
     // const
     const isPhone = ref<boolean>(false)

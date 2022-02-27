@@ -1,11 +1,13 @@
 <template>
-  <div
-    v-if="taskID"
-    id="task-modal"
-  >
-    task-modal
-    {{ taskID }}
-  </div>
+  <swipe-modal>
+    <div
+      v-if="taskId"
+      id="task-modal"
+    >
+      task-modal
+      {{ taskId }}
+    </div>
+  </swipe-modal>
 </template>
 
 <script lang="ts">
@@ -22,7 +24,7 @@ export default defineComponent({
     const route = useRoute()
 
     // let, computed
-    const taskID = computed(() => route.value.query.taskID)
+    const taskId = computed(() => route.value.query.taskId)
 
     // methods
 
@@ -33,7 +35,7 @@ export default defineComponent({
     // other
 
     return {
-      taskID,
+      taskId,
     }
   },
   head: {},

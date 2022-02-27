@@ -9,6 +9,12 @@
     >
       signin
     </Button>
+    <!-- <Button
+      class="primary-light-1"
+      @click="deleteTaskData(userProfile.uid, 'bqaI2nU6XCvIdTitkFIu')"
+    >
+      delete
+    </Button> -->
     <div
       v-for="task in userTaskData"
       id="task-group"
@@ -40,13 +46,12 @@ import useUserTaskData, {
   userTaskDataType,
   userTaskDataKey,
 } from '~/composition/userTaskData'
+import deleteTaskData from '~/composable/firebase/deleteTaskData'
 
 export default defineComponent({
   components: { TaskCard },
   setup () {
     // store
-    provide(userTaskDataKey, useUserTaskData())
-
     // const
     const {
       trySignIn,
@@ -58,6 +63,7 @@ export default defineComponent({
     const {
       userTaskData,
       getUserTaskData,
+      deleteUserTaskData,
     } = inject(userTaskDataKey, useUserTaskData()) as userTaskDataType
 
     // watch
@@ -81,6 +87,8 @@ export default defineComponent({
 
       trySignIn,
       trySignOut,
+      deleteUserTaskData,
+      deleteTaskData,
     }
   },
   head: {},

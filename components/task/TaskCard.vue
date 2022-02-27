@@ -3,10 +3,16 @@
     :id="taskData.id"
     class="task-card"
   >
-    <div class="task-contents-left">
+    <div
+      @click="router.push('?taskId=' + taskData.id)"
+      class="task-contents-left"
+    >
       <span class="task-title">
         {{ taskData.title }}
       </span>
+    </div>
+    <div class="task-contents-right">
+      <span class="text">完了</span>
     </div>
   </div>
 </template>
@@ -16,6 +22,7 @@ import {
   defineComponent,
   onBeforeMount,
   PropType,
+  useRouter,
 } from '@nuxtjs/composition-api'
 import { userTaskDataInterface } from '~/composition/userTaskData'
 
@@ -36,6 +43,8 @@ export default defineComponent({
     },
   },
   setup () {
+    const router = useRouter()
+
     // const
     // let, computed
     // methods
@@ -45,6 +54,7 @@ export default defineComponent({
     // other
 
     return {
+      router,
     }
   },
   head: {},
@@ -53,17 +63,38 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .task-card {
+  display: flex;
   height: 96px;
   max-width: 342px;
 
   margin: 8px;
 
-  border-radius: 16px;
   /* box-shadow: $primary-shadow; */
-  background-color: $white;
 
   .task-contents-left {
+    width: 256px;
+
     padding: 16px;
+
+    border-radius: 16px;
+    background-color: $white;
+
+    cursor: pointer;
+  }
+
+  .task-contents-right {
+    width: 80px;
+
+    border-radius: 16px;
+    text-align: center;
+    background-color: $lightblue-darken-1;
+
+    cursor: pointer;
+
+    .text {
+      line-height: 96px;
+      color: $white;
+    }
   }
 
   .task-title {

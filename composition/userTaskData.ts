@@ -45,7 +45,13 @@ export default function useUserTaskData () {
   }
 
   // 引数のidをuserTaskDataから削除
-  const deleteUserTaskData = () => {
+  const deleteUserTaskData = (deleteId: string) => {
+    const index = state.userTaskData.findIndex(({ id }) => id === deleteId)
+    if (index === -1) {
+      console.log('見つかりませんでした。')
+    } else {
+      state.userTaskData.splice(index, 1)
+    }
   }
 
   // userTaskDataを初期化
@@ -66,7 +72,7 @@ export default function useUserTaskData () {
       onSnapshot(q, { includeMetadataChanges: true }, (snapshot) => {
         snapshot.docChanges().forEach((change) => {
           if (change.type === 'added') {
-            console.log('data: ', change.doc.data().id)
+            // console.log('data: ', change.doc.data().id)
             const taskData = {
               id: change.doc.data().id,
               title: change.doc.data().title,
@@ -79,6 +85,18 @@ export default function useUserTaskData () {
             } as userTaskDataInterface
             updateUserTaskData(taskData)
           }
+
+          if (change.type === 'modified') {
+            // console.log(change.doc.data().id)
+          }
+
+          if (change.type === 'removed') {
+            console.log(change.doc.data().id)
+            deleteUserTaskData(change.doc.data().id)
+          }
+
+          const source = snapshot.metadata.fromCache ? 'local cache' : 'server'
+          console.log('Data came from ' + source)
         })
       })
     } else {
