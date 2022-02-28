@@ -20,10 +20,10 @@ export interface userTaskDataInterface {
   id: string,
   title: string,
   text: string,
-  dateStart: Timestamp,
-  dateEnd: Timestamp,
+  dateStart?: Timestamp,
+  dateEnd?: Timestamp,
   group: string,
-  completed: Timestamp,
+  completed?: Timestamp,
   tag: Array<any>,
 }
 
