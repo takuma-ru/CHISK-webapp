@@ -4,14 +4,21 @@
     class="task-card"
   >
     <div
-      @click="router.push('?taskId=' + taskData.id)"
       class="task-contents-left"
+      @click="router.push('?taskId=' + taskData.id)"
     >
       <span class="task-title">
         {{ taskData.title }}
       </span>
+      <span
+        class="task-date"
+        v-text="dateEnd"
+      />
     </div>
-    <div class="task-contents-right">
+    <div
+      v-if="taskData.completed"
+      class="task-contents-right"
+    >
       <span class="text">完了</span>
     </div>
   </div>
@@ -23,8 +30,10 @@ import {
   onBeforeMount,
   PropType,
   useRouter,
+  computed,
 } from '@nuxtjs/composition-api'
 import { userTaskDataInterface } from '~/composition/userTaskData'
+import returnUnixToJp from '~/composable/utils/returnUnixToJp'
 
 export default defineComponent({
   props: {
@@ -42,11 +51,14 @@ export default defineComponent({
       }),
     },
   },
-  setup () {
+  setup (props) {
     const router = useRouter()
 
     // const
     // let, computed
+    const dateEnd = computed(() => {
+      return returnUnixToJp(props.taskData.dateEnd)
+    })
     // methods
     // lifeCycle
     onBeforeMount(async () => {
@@ -55,6 +67,9 @@ export default defineComponent({
 
     return {
       router,
+      dateEnd,
+
+      returnUnixToJp,
     }
   },
   head: {},
@@ -63,6 +78,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .task-card {
+  position: relative;
   display: flex;
   height: 96px;
   max-width: 342px;
@@ -72,7 +88,7 @@ export default defineComponent({
   /* box-shadow: $primary-shadow; */
 
   .task-contents-left {
-    width: 256px;
+    width: 342px;
 
     padding: 16px;
 
@@ -83,7 +99,10 @@ export default defineComponent({
   }
 
   .task-contents-right {
-    width: 80px;
+    position: relative;
+    min-width: 80px;
+    max-width: 80px;
+    height: 100%;
 
     border-radius: 16px;
     text-align: center;
@@ -92,7 +111,11 @@ export default defineComponent({
     cursor: pointer;
 
     .text {
-      line-height: 96px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
       color: $white;
     }
   }
@@ -101,6 +124,13 @@ export default defineComponent({
     font-size: 16px;
     font-weight: bold;
     line-height: 24px;
+  }
+
+  .task-date {
+    position: absolute;
+
+    bottom: 16px;
+    left: 16px;
   }
 }
 </style>

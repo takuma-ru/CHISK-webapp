@@ -1,13 +1,13 @@
 <template>
-  <swipe-modal>
-    <div
-      v-if="taskId"
-      id="task-modal"
-    >
-      task-modal
-      {{ taskId }}
-    </div>
-  </swipe-modal>
+  <!-- <swipe-modal> -->
+  <div
+    v-if="taskId"
+    id="task-modal"
+  >
+    task-modal
+    {{ taskId }}
+  </div>
+  <!-- </swipe-modal> -->
 </template>
 
 <script lang="ts">

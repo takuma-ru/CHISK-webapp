@@ -16,11 +16,11 @@
       delete
     </Button> -->
     <div
-      v-for="task in userTaskData"
       id="task-group"
-      :key="task.id"
     >
       <TaskCard
+        v-for="task in userTaskData"
+        :key="task.id"
         :task-data="task"
       />
     </div>

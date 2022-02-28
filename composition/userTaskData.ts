@@ -7,6 +7,7 @@ import {
   getFirestore,
   onSnapshot,
   query,
+  Timestamp,
 } from 'firebase/firestore'
 import {
   ref,
@@ -19,10 +20,10 @@ export interface userTaskDataInterface {
   id: string,
   title: string,
   text: string,
-  dateStart: Date,
-  dateEnd: Date,
+  dateStart: Timestamp,
+  dateEnd: Timestamp,
   group: string,
-  completed: Date,
+  completed: Timestamp,
   tag: Array<any>,
 }
 
@@ -77,13 +78,17 @@ export default function useUserTaskData () {
               id: change.doc.data().id,
               title: change.doc.data().title,
               text: change.doc.data().text,
-              dateStart: change.doc.data().date_start?.toDate(),
-              dateEnd: change.doc.data().date_end?.toDate(),
+              dateStart: change.doc.data().date_start,
+              dateEnd: change.doc.data().date_end,
               group: change.doc.data().group,
-              completed: change.doc.data().completed?.toDate(),
+              completed: change.doc.data().completed,
               tag: change.doc.data().tag,
             } as userTaskDataInterface
-            updateUserTaskData(taskData)
+
+            const index = state.userTaskData.findIndex(({ id }) => id === taskData.id)
+            if (index === -1) {
+              updateUserTaskData(taskData)
+            }
           }
 
           if (change.type === 'modified') {
