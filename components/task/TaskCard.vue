@@ -57,7 +57,7 @@ export default defineComponent({
     // const
     // let, computed
     const dateEnd = computed(() => {
-      return returnUnixToJp(props.taskData.dateEnd)
+      return props.taskData.dateEnd ? returnUnixToJp(props.taskData.dateEnd) : null
     })
     // methods
     // lifeCycle
