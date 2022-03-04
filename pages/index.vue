@@ -32,7 +32,6 @@ import {
   defineComponent,
   watch,
   inject,
-  provide,
   useMeta,
   onMounted,
 } from '@nuxtjs/composition-api'
