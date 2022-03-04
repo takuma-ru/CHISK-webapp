@@ -53,7 +53,6 @@
           @mousedown="mouseDown"
         />
         <slot />
-        {{ modal }}
       </div>
     </transition>
   </div>
@@ -159,7 +158,7 @@ export default defineComponent({
       isMouseDown.value = false
       isTouch.value = false
       document.documentElement.style.overflowY = 'auto'
-      router.go(-1)
+      router.push('?')
       ctx.emit('update-modal', false)
     }
 

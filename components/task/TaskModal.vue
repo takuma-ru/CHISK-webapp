@@ -1,6 +1,10 @@
 <template>
   <swipe-modal
     v-model="modal"
+    border-top-radius="16px"
+    contents-height="100vh"
+    contents-color="#F7FBFF"
+    background-color="#002550"
   >
     <div
       v-if="taskId"
