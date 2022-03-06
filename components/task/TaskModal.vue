@@ -4,14 +4,13 @@
     border-top-radius="16px"
     contents-height="100vh"
     contents-color="#F7FBFF"
-    background-color="#002550"
+    background-color="#00255077"
   >
     <div
       v-if="taskId"
       id="task-modal"
     >
-      task-modal
-      {{ taskData }}
+      <h2>{{ taskData.title }}</h2>
     </div>
   </swipe-modal>
 </template>
@@ -21,7 +20,7 @@ import {
   computed,
   defineComponent,
   inject,
-  onBeforeMount,
+  onMounted,
   ref,
   useRoute,
   watch,
@@ -38,11 +37,18 @@ export default defineComponent({
     const taskData = ref<any>({})
     const { userTaskData } = inject(userTaskDataKey, useUserTaskData()) as userTaskDataType
     const modal = ref(false)
+
     // let, computed
     const taskId = computed(() => route.value.query.taskId)
+
     // watch
     watch(taskId, (newTaskId) => {
-      if (taskId) {
+      checkTaskId(newTaskId)
+    })
+
+    // methods
+    const checkTaskId = (newTaskId: string | (string | null)[]) => {
+      if (taskId.value) {
         const index = userTaskData.findIndex(({ id }) => id === newTaskId)
         if (index !== -1) {
           taskData.value = userTaskData[index]
@@ -51,12 +57,15 @@ export default defineComponent({
       } else {
         modal.value = false
       }
-    })
-    // methods
+    }
+
     // lifeCycle
-    onBeforeMount(async () => {
+    onMounted(() => {
+      checkTaskId(taskId.value)
     })
+
     // other
+
     return {
       modal,
       taskId,
@@ -69,5 +78,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 #task-modal {
+  padding: 0px 16px 0px 16px;
 }
 </style>

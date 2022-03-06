@@ -48,7 +48,7 @@
           v-if="!noTip"
           class="modal-contents-chip"
           :style="`
-            --tip-color: ${tipColor},
+            --tip-color: ${tipColor};
           `"
           @mousedown="mouseDown"
         />
@@ -73,16 +73,28 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
-    dark: Boolean,
+    dark: {
+      type: Boolean,
+      default: false,
+    },
     // modal_background
-    persistent: Boolean,
+    persistent: {
+      type: Boolean,
+      default: false,
+    },
     backgroundColor: {
       type: String,
       default: '#80808080',
     },
     // modal_contents
-    fullscreen: Boolean,
-    noTip: Boolean,
+    fullscreen: {
+      type: Boolean,
+      default: false,
+    },
+    noTip: {
+      type: Boolean,
+      default: false,
+    },
     contentsWidth: {
       type: String,
       default: '100%',
@@ -162,14 +174,29 @@ export default defineComponent({
       ctx.emit('update-modal', false)
     }
 
-    const mouseDown = () => {
-      console.log('open')
+    const mouseDown = (payload: MouseEvent) => {
+      modalQuery.value = document.querySelector('.modal-contents')
+      modalHeight.value = modalQuery.value.getBoundingClientRect().height
+      moveStartPosition.value = payload.pageY
+      isMouseDown.value = true
     }
-    const mouseMove = () => {
-      console.log('open')
+    const mouseMove = (payload: MouseEvent) => {
+      if (isMouseDown.value) {
+        nowMovePosition.value = payload.pageY
+        contentsBottomPosition.value = (
+          moveStartPosition.value - nowMovePosition.value <= 0
+            ? moveStartPosition.value - nowMovePosition.value
+            : 0
+        ) + 'px'
+      }
     }
     const mouseUp = () => {
-      console.log('open')
+      isMouseDown.value = false
+      if (-1 * (moveStartPosition.value - nowMovePosition.value) > modalHeight.value * (1 / 8)) {
+        close()
+      } else {
+        contentsBottomPosition.value = 0 + 'px'
+      }
     }
 
     const touchStart = (payload: TouchEvent) => {
@@ -255,7 +282,7 @@ export default defineComponent({
   &-chip {
     --tip-color: #c8c8c8;
     z-index: 2;
-    position: sticky;
+    position: relative;
     top: 0px;
     height: 4px;
     width: 100%;

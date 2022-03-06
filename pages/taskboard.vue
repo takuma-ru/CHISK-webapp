@@ -1,5 +1,7 @@
 <template>
-  <v-row justify="center" align="center" />
+  <div>
+    TaskBoard
+  </div>
 </template>
 
 <script lang="ts">
