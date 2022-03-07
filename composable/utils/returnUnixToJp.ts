@@ -4,8 +4,11 @@
 import { Timestamp } from 'firebase/firestore'
 
 export default function returnUnixToJp (unix: Timestamp | null) {
-  const date = new Date(unix!.seconds * 1000)
-  const dateJp = date.getFullYear() + '年' + (date.getMonth() + 1) + '月' + date.getDate() + '日'
+  let dateJp = null
+  if (unix instanceof Timestamp) {
+    const date = new Date(unix.seconds * 1000)
+    dateJp = date.getFullYear() + '年' + (date.getMonth() + 1) + '月' + date.getDate() + '日'
+  }
 
   return dateJp
 }

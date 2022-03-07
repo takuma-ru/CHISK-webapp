@@ -16,7 +16,7 @@
       />
     </div>
     <div
-      v-if="taskData.completed"
+      v-if="taskData.completed === (undefined || null)"
       class="task-contents-right"
     >
       <span class="text">
