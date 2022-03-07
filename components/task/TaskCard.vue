@@ -19,7 +19,13 @@
       v-if="taskData.completed"
       class="task-contents-right"
     >
-      <span class="text">完了</span>
+      <span class="text">
+        完了
+        <Icon
+          :icon="mdiCheck"
+          color="#000A13"
+        />
+      </span>
     </div>
   </div>
 </template>
@@ -32,6 +38,9 @@ import {
   useRouter,
   computed,
 } from '@nuxtjs/composition-api'
+import {
+  mdiCheck,
+} from '@mdi/js'
 import { userTaskDataInterface } from '~/composition/userTaskData'
 import returnUnixToJp from '~/composable/utils/returnUnixToJp'
 
@@ -70,9 +79,10 @@ export default defineComponent({
       dateEnd,
 
       returnUnixToJp,
+
+      mdiCheck,
     }
   },
-  head: {},
 })
 </script>
 
@@ -85,9 +95,10 @@ export default defineComponent({
 
   margin: 8px;
 
-  /* box-shadow: $primary-shadow; */
+  filter: drop-shadow(4px 4px 0px rgba(255, 255, 255, 0.2));
 
   .task-contents-left {
+    position: relative;
     width: 342px;
 
     padding: 16px;
@@ -95,7 +106,24 @@ export default defineComponent({
     border-radius: 16px;
     background-color: $white;
 
+    border: 1px solid #E6EBF0;
     cursor: pointer;
+    outline: none;
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+
+    &:hover::after {
+      position: absolute;
+      z-index: 1;
+      content: '';
+      width: 100%;
+      height: 100%;
+
+      top: 0%;
+      left: 0%;
+
+      border-radius: 16px;
+      background-color: #CCCCCC3A;
+    }
   }
 
   .task-contents-right {
@@ -106,9 +134,26 @@ export default defineComponent({
 
     border-radius: 16px;
     text-align: center;
-    background-color: $lightblue-darken-1;
+    background-color: $lightblue;
 
+    border: 1px solid $lightblue-darken-1;
     cursor: pointer;
+    outline: none;
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+
+    &::before {
+      position: absolute;
+      content: '';
+
+      width: -1px;
+      height: calc(100% - 32px);
+      top: 50%;
+      left: 0px;
+
+      transform: translate(-50%, -50%);
+
+      border: 1px dashed;
+    }
 
     .text {
       position: absolute;
@@ -116,7 +161,7 @@ export default defineComponent({
       left: 50%;
       transform: translate(-50%, -50%);
 
-      color: $white;
+      color: $black;
     }
   }
 
@@ -131,6 +176,8 @@ export default defineComponent({
 
     bottom: 16px;
     left: 16px;
+
+    color: $gray;
   }
 }
 </style>

@@ -11,6 +11,14 @@
       id="task-modal"
     >
       <h2>{{ taskData.title }}</h2>
+      <h4>
+        {{ returnUnixToJp(taskData.dateStart) }} から
+        {{ returnUnixToJp(taskData.dateEnd) }} まで
+      </h4>
+      <Divider />
+      <div>
+        {{ taskData.text }}
+      </div>
     </div>
   </swipe-modal>
 </template>
@@ -26,11 +34,10 @@ import {
   watch,
 } from '@nuxtjs/composition-api'
 /* import { component as swipeModal } from '@takuma-ru/vue-swipe-modal' */
-import swipeModal from '../swipeModal.vue'
 import useUserTaskData, { userTaskDataKey, userTaskDataType } from '~/composition/userTaskData'
+import returnUnixToJp from '~/composable/utils/returnUnixToJp'
 
 export default defineComponent({
-  components: { swipeModal },
   setup () {
     // const
     const route = useRoute()
@@ -70,6 +77,8 @@ export default defineComponent({
       modal,
       taskId,
       taskData,
+
+      returnUnixToJp,
     }
   },
   head: {},

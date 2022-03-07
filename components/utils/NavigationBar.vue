@@ -103,7 +103,7 @@ export default defineComponent({
       top: 0%;
       left: 0%;
 
-      border-radius: 0px 24px 24px 0px;
+      border-radius: 0px 16px 16px 0px;
       box-shadow: $primary-shadow;
       background-color: $primary-lighten-1;
     }

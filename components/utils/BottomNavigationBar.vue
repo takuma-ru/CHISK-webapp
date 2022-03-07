@@ -95,7 +95,7 @@ export default defineComponent({
       bottom: 0%;
       left: 0%;
 
-      border-radius: 24px 24px 0px 0px;
+      border-radius: 16px 16px 0px 0px;
       box-shadow: $primary-shadow;
       background-color: $primary-lighten-1;
 
@@ -119,7 +119,7 @@ export default defineComponent({
     margin: 12px;
 
     border: none;
-    border-radius: 16px;
+    border-radius: 14px;
     background-color: $primary-lighten-1;
   }
   $element: #{&};
