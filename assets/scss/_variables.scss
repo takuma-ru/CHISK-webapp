@@ -38,5 +38,42 @@ $gray-lighten-1: #c8c8c8;
 $primary-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
 
 :export {
-  primaryColor: $blue
+  yellowDarkenOne: $yellow-darken-1;
+  yellow: $yellow;
+  yellowLightenOne: $yellow-lighten-1;
+  yellowLightenTwo: $yellow-lighten-2;
+
+  greenDarkOne: $green-dark-1;
+  green: $green;
+  greenLightenOne: $green-lighten-1;
+  greenLightenTwo: $green-lighten-2;
+
+  redDarkenOne: $red-darken-1;
+  red: $red;
+  redLightenOne: $red-lighten-1;
+  redLightenTwo: $red-lighten-2;
+
+  lightblueDarkenOne: $lightblue-darken-1;
+  lightblue: $lightblue;
+  lightblueLightenOne: $lightblue-lighten-1;
+  lightblueLightenTwo: $lightblue-lighten-2;
+
+  blueDarkenOne: $blue-darken-1;
+  blue: $blue;
+  blueLightenOne: $blue-lighten-1;
+  blueLightenTwo: $blue-lighten-2;
+
+  primaryDarkenOne: $primary-darken-1;
+  primary: $primary;
+  primaryLightenOne: $primary-lighten-1;
+  primaryLightenTwo: $primary-lighten-2;
+
+  background: $background;
+
+  black: $black;
+
+  white: $white;
+
+  gray: $gray;
+  grayLightenOne: $gray-lighten-1;
 }

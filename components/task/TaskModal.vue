@@ -16,8 +16,13 @@
         {{ returnUnixToJp(taskData.dateEnd) }} まで
       </h4>
       <Divider />
-      <div>
+      <div class="task-modal-text">
         {{ taskData.text }}
+      </div>
+      <div>
+        <Button color="lightblue">
+          完了<Icon :icon="mdiCheck" :color="returnVariables('black')" />
+        </Button>
       </div>
     </div>
   </swipe-modal>
@@ -33,11 +38,18 @@ import {
   useRoute,
   watch,
 } from '@nuxtjs/composition-api'
-/* import { component as swipeModal } from '@takuma-ru/vue-swipe-modal' */
+import {
+  mdiCheck,
+} from '@mdi/js'
+import swipeModal from '../swipeModal.vue'
 import useUserTaskData, { userTaskDataKey, userTaskDataType } from '~/composition/userTaskData'
 import returnUnixToJp from '~/composable/utils/returnUnixToJp'
+import returnVariables from '~/composable/scss/returnVariables'
 
 export default defineComponent({
+  components: {
+    swipeModal,
+  },
   setup () {
     // const
     const route = useRoute()
@@ -79,6 +91,9 @@ export default defineComponent({
       taskData,
 
       returnUnixToJp,
+      returnVariables,
+
+      mdiCheck,
     }
   },
   head: {},
@@ -88,5 +103,12 @@ export default defineComponent({
 <style lang="scss" scoped>
 #task-modal {
   padding: 0px 16px 0px 16px;
+}
+
+.task-modal {
+
+  &-text {
+    padding: 16px 0px 16px 0px;
+  }
 }
 </style>
