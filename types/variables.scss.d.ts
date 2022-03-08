@@ -1,5 +1,6 @@
 declare module '*.scss' {
-  const _variables: {
+  const content: {
+    [key: string]: string;
     yellowDarkenOne: string;
     yellow: string;
     yellowLightenOne: string;
@@ -30,5 +31,6 @@ declare module '*.scss' {
     gray: string;
     grayLightenOne: string;
   }
-  export default _variables
+
+  export default content
 }

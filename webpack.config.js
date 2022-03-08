@@ -5,7 +5,7 @@ module.exports = {
         test: /\.s(c|a)ss$/,
         use: [
           'vue-style-loader',
-          'css-loader',
+          'css-loader?modules',
           {
             loader: 'sass-loader',
             // Requires >= sass-loader@^8.0.0
