@@ -20,10 +20,23 @@
       <div class="task-modal-text">
         {{ taskData.text }}
       </div>
+      <Divider />
       <div>
-        <Button color="lightblue">
+        <Button
+          v-if="taskData.completed"
+          color="red-lighten-1"
+          @click="inCompleted(userProfile.uid, taskData.id)"
+        >
           <Icon :icon="mdiCheck" :color="scssVar('black')" />
-          &nbsp;完了にする！
+          &nbsp;やっぱり完了じゃない
+        </Button>
+        <Button
+          v-else
+          color="lightblue"
+          @click="completed(userProfile.uid, taskData.id)"
+        >
+          <Icon :icon="mdiCheck" :color="scssVar('black')" />
+          &nbsp;完了とする！
         </Button>
       </div>
     </div>
@@ -45,8 +58,10 @@ import {
 } from '@mdi/js'
 import swipeModal from '../swipeModal.vue'
 import useUserTaskData, { userTaskDataKey, userTaskDataType } from '~/composition/userTaskData'
+import useUserProfile, { userProfileKey, userProfileType } from '~/composition/userProfile'
 import returnUnixToJp from '~/composable/utils/returnUnixToJp'
 import scssVar from '~/composable/scss/returnVariables'
+import completedTaskData from '~/composable/firebase/completedTaskData'
 
 export default defineComponent({
   components: {
@@ -55,6 +70,9 @@ export default defineComponent({
   setup () {
     // const
     const route = useRoute()
+    const {
+      userProfile,
+    } = inject(userProfileKey, useUserProfile()) as userProfileType
     const taskData = ref<any>({})
     const { userTaskData } = inject(userTaskDataKey, useUserTaskData()) as userTaskDataType
     const modal = ref(false)
@@ -79,6 +97,10 @@ export default defineComponent({
         modal.value = false
       }
     }
+    const {
+      completed,
+      inCompleted,
+    } = completedTaskData()
 
     // lifeCycle
     onMounted(() => {
@@ -91,9 +113,12 @@ export default defineComponent({
       modal,
       taskId,
       taskData,
+      userProfile,
 
       returnUnixToJp,
       scssVar,
+      completed,
+      inCompleted,
 
       mdiCheck,
     }

@@ -52,7 +52,7 @@ export default defineComponent({
 #Button {
   position: relative;
   width: auto;
-  min-height: 34px;
+  height: auto;
   border-radius: 8px;
   background-color: $primary-lighten-1;
   border: none;
@@ -64,7 +64,8 @@ export default defineComponent({
     margin: 0px;
 
     text-align: center;
-    font-size: 16px;
+    font-size: 14px;
+    line-height: 24px;
     font-weight: normal;
 
     justify-content: center;

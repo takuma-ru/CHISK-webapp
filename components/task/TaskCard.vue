@@ -44,9 +44,9 @@ import {
   mdiCheck,
 } from '@mdi/js'
 import { userTaskDataInterface } from '~/composition/userTaskData'
+import useUserProfile, { userProfileKey, userProfileType } from '~/composition/userProfile'
 import returnUnixToJp from '~/composable/utils/returnUnixToJp'
 import completedTaskData from '~/composable/firebase/completedTaskData'
-import useUserProfile, { userProfileKey, userProfileType } from '~/composition/userProfile'
 
 export default defineComponent({
   props: {
