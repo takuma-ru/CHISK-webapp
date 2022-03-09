@@ -31,6 +31,8 @@ export default defineComponent({
 
 <style lang="scss">
 #icon {
+  display: inline-block;
+  _display: inline;
   width: 24px;
   height: 24px;
   margin: auto;

@@ -3,6 +3,6 @@
 **/
 import _variables from '~/assets/scss/variables.scss'
 
-export default function returnVariables (variables: string) {
+export default function scssVar (variables: string) {
   return _variables[variables]
 }

@@ -3,13 +3,13 @@
     id="Button"
     :disabled="disabled"
     :style="{
-      backgroundColor: returnVariables(color)
+      backgroundColor: scssVar(color)
     }"
     @click="$emit('click')"
   >
-    <p class="text">
+    <div class="text">
       <slot />
-    </p>
+    </div>
   </button>
 </template>
 
@@ -17,7 +17,7 @@
 import {
   defineComponent,
 } from '@nuxtjs/composition-api'
-import returnVariables from '~/composable/scss/returnVariables'
+import scssVar from '~/composable/scss/returnVariables'
 
 export default defineComponent({
   props: {
@@ -42,7 +42,7 @@ export default defineComponent({
     // other
 
     return {
-      returnVariables,
+      scssVar,
     }
   },
 })
@@ -52,18 +52,22 @@ export default defineComponent({
 #Button {
   position: relative;
   width: auto;
-  height: auto;
+  min-height: 34px;
   border-radius: 8px;
   background-color: $primary-lighten-1;
   border: none;
   cursor: pointer;
 
   .text {
+    display: flex;
     padding: 0.5rem 1em;
     margin: 0px;
 
+    text-align: center;
     font-size: 16px;
     font-weight: normal;
+
+    justify-content: center;
   }
 
   &:hover::before {

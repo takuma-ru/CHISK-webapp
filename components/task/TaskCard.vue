@@ -18,6 +18,7 @@
     <div
       v-if="taskData.completed === (undefined || null)"
       class="task-contents-right"
+      @click="completed(userProfile.uid, taskData.id)"
     >
       <span class="text">
         完了
@@ -37,12 +38,15 @@ import {
   PropType,
   useRouter,
   computed,
+  inject,
 } from '@nuxtjs/composition-api'
 import {
   mdiCheck,
 } from '@mdi/js'
 import { userTaskDataInterface } from '~/composition/userTaskData'
 import returnUnixToJp from '~/composable/utils/returnUnixToJp'
+import completedTaskData from '~/composable/firebase/completedTaskData'
+import useUserProfile, { userProfileKey, userProfileType } from '~/composition/userProfile'
 
 export default defineComponent({
   props: {
@@ -64,11 +68,17 @@ export default defineComponent({
     const router = useRouter()
 
     // const
+    const {
+      userProfile,
+    } = inject(userProfileKey, useUserProfile()) as userProfileType
+
     // let, computed
     const dateEnd = computed(() => {
       return props.taskData.dateEnd ? returnUnixToJp(props.taskData.dateEnd) : null
     })
     // methods
+    const { completed } = completedTaskData()
+
     // lifeCycle
     onBeforeMount(async () => {
     })
@@ -77,8 +87,10 @@ export default defineComponent({
     return {
       router,
       dateEnd,
+      userProfile,
 
       returnUnixToJp,
+      completed,
 
       mdiCheck,
     }

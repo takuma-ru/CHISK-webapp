@@ -3,7 +3,8 @@
     v-model="modal"
     border-top-radius="16px"
     contents-height="100vh"
-    contents-color="#F7FBFF"
+    contents-width="min(100vw, 960px)"
+    :contents-color="scssVar('white')"
     background-color="#00255077"
   >
     <div
@@ -21,7 +22,8 @@
       </div>
       <div>
         <Button color="lightblue">
-          完了<Icon :icon="mdiCheck" :color="returnVariables('black')" />
+          <Icon :icon="mdiCheck" :color="scssVar('black')" />
+          &nbsp;完了にする！
         </Button>
       </div>
     </div>
@@ -44,7 +46,7 @@ import {
 import swipeModal from '../swipeModal.vue'
 import useUserTaskData, { userTaskDataKey, userTaskDataType } from '~/composition/userTaskData'
 import returnUnixToJp from '~/composable/utils/returnUnixToJp'
-import returnVariables from '~/composable/scss/returnVariables'
+import scssVar from '~/composable/scss/returnVariables'
 
 export default defineComponent({
   components: {
@@ -91,7 +93,7 @@ export default defineComponent({
       taskData,
 
       returnUnixToJp,
-      returnVariables,
+      scssVar,
 
       mdiCheck,
     }
@@ -103,12 +105,11 @@ export default defineComponent({
 <style lang="scss" scoped>
 #task-modal {
   padding: 0px 16px 0px 16px;
-}
-
-.task-modal {
-
-  &-text {
-    padding: 16px 0px 16px 0px;
+  .task-modal {
+    &-text {
+      padding: 16px 0px 16px 0px;
+    }
   }
 }
+
 </style>
