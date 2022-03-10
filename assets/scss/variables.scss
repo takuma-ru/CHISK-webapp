@@ -32,8 +32,9 @@ $background: #002550;
 
 $black: #000A13;
 $white: #F7FBFF;
-$gray: #4E4E4E;
-$gray-lighten-1: #c8c8c8;
+$gray: #424F60;
+$gray-lighten-1: #6F7B8A;
+$gray-lighten-2: #BEC6CF;
 
 $primary-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
 
@@ -76,4 +77,5 @@ $primary-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 1px 3px 1px rgba(0, 0, 0, 
 
   gray: $gray;
   gray-lighten-1: $gray-lighten-1;
+  gray-lighten-2: $gray-lighten-2;
 }

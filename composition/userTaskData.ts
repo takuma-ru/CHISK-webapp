@@ -92,7 +92,23 @@ export default function useUserTaskData () {
           }
 
           if (change.type === 'modified') {
-            // console.log(change.doc.data().id)
+            const taskData = {
+              id: change.doc.data().id,
+              title: change.doc.data().title,
+              text: change.doc.data().text,
+              dateStart: change.doc.data().date_start,
+              dateEnd: change.doc.data().date_end,
+              group: change.doc.data().group,
+              completed: change.doc.data().completed,
+              tag: change.doc.data().tag,
+            } as userTaskDataInterface
+
+            deleteUserTaskData(change.doc.data().id)
+
+            const index = state.userTaskData.findIndex(({ id }) => id === taskData.id)
+            if (index === -1) {
+              updateUserTaskData(taskData)
+            }
           }
 
           if (change.type === 'removed') {

@@ -22,10 +22,10 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .divider {
-  border-top: 1px solid $gray-lighten-1;
+  border-top: 1px solid $gray-lighten-2;
 
   &[dashed] {
-    border-top: 1px dashed $gray-lighten-1;
+    border-top: 1px dashed $gray-lighten-2;
   }
 }
 </style>

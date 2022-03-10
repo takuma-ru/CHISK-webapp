@@ -4,5 +4,6 @@
 import _variables from '~/assets/scss/variables.scss'
 
 export default function scssVar (variables: string) {
-  return _variables[variables]
+  const color = _variables[variables] ? _variables[variables] : variables
+  return color
 }

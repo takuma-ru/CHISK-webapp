@@ -1,16 +1,17 @@
 <template>
-  <div id="icon">
+  <span id="icon">
     <svg viewBox="0 0 24 24">
       <path
         :d="icon"
-        :fill="color"
+        :fill="scssVar(color)"
       />
     </svg>
-  </div>
+  </span>
 </template>
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
+import scssVar from '~/composable/scss/returnVariables'
 
 export default defineComponent({
   props: {
@@ -24,15 +25,15 @@ export default defineComponent({
     },
   },
   setup () {
-
+    return {
+      scssVar,
+    }
   },
 })
 </script>
 
 <style lang="scss">
 #icon {
-  display: inline-block;
-  _display: inline;
   width: 24px;
   height: 24px;
   margin: auto;

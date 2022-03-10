@@ -105,7 +105,7 @@ export default defineComponent({
   height: 96px;
   max-width: 342px;
 
-  margin: 8px;
+  margin: 8px 0px;
 
   filter: drop-shadow(4px 4px 0px rgba(255, 255, 255, 0.2));
 
@@ -173,6 +173,7 @@ export default defineComponent({
       left: 50%;
       transform: translate(-50%, -50%);
 
+      text-align: center;
       color: $black;
     }
   }

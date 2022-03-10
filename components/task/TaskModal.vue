@@ -13,6 +13,11 @@
     >
       <h2>{{ taskData.title }}</h2>
       <h4>
+        <Icon
+          :icon="mdiCalendar"
+          color="gray-lighten-1"
+        />
+        &nbsp;
         {{ returnUnixToJp(taskData.dateStart) }} から
         {{ returnUnixToJp(taskData.dateEnd) }} まで
       </h4>
@@ -55,6 +60,7 @@ import {
 } from '@nuxtjs/composition-api'
 import {
   mdiCheck,
+  mdiCalendar,
 } from '@mdi/js'
 import swipeModal from '../swipeModal.vue'
 import useUserTaskData, { userTaskDataKey, userTaskDataType } from '~/composition/userTaskData'
@@ -121,6 +127,7 @@ export default defineComponent({
       inCompleted,
 
       mdiCheck,
+      mdiCalendar,
     }
   },
   head: {},
@@ -130,6 +137,11 @@ export default defineComponent({
 <style lang="scss" scoped>
 #task-modal {
   padding: 0px 16px 0px 16px;
+
+  h4 {
+    display: inline-flex;
+  }
+
   .task-modal {
     &-text {
       padding: 16px 0px 16px 0px;
