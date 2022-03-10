@@ -1,5 +1,12 @@
 <template>
-  <div id="icon" :text="text">
+  <div
+    id="icon"
+    :text="text"
+    :style="{
+      width: size,
+      height: `calc(${size} + 4px)`,
+    }"
+  >
     <svg viewBox="0 0 24 24">
       <path
         :d="icon"
@@ -23,6 +30,10 @@ export default defineComponent({
       type: String,
       default: '#489384',
     },
+    size: {
+      type: String,
+      default: '24px',
+    },
     text: {
       type: Boolean,
       default: false,
@@ -38,9 +49,7 @@ export default defineComponent({
 
 <style lang="scss">
 #icon {
-  width: 24px;
-  height: 24px;
-
+  display: inline-flex;
   margin: auto;
 
   &[text] {

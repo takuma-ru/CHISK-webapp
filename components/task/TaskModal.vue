@@ -32,8 +32,9 @@
         <div class="title">
           <Icon
             :icon="mdiFormatListBulleted"
-            text
             color="gray-lighten-1"
+            size="1rem"
+            text
           />
           &nbsp;詳細
         </div>
@@ -173,7 +174,7 @@ export default defineComponent({
       display: inline-flex;
       margin-bottom: 4px;
 
-      font-size: 0.8rem;
+      font-size: 14px;
       color: $gray-lighten-1;
     }
   }
