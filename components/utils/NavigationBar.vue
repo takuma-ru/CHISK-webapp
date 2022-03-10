@@ -126,7 +126,7 @@ export default defineComponent({
     margin: 12px;
 
     border: none;
-    border-radius: 16px;
+    border-radius: 14px;
     background-color: $primary-lighten-1;
   }
   $element: #{&};

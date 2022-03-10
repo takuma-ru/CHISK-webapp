@@ -23,6 +23,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .divider {
   border-top: 1px solid $gray-lighten-2;
+  margin: 16px 0px;
 
   &[dashed] {
     border-top: 1px dashed $gray-lighten-2;

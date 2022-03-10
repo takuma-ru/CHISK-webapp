@@ -9,20 +9,34 @@
   >
     <div
       v-if="taskId"
-      id="task-modal"
+      class="task-modal"
     >
-      <h2>{{ taskData.title }}</h2>
-      <h4>
+      <div class="task-modal-title">
+        <h2>{{ taskData.title }}</h2>
+      </div>
+      <div class="task-modal-date">
         <Icon
           :icon="mdiCalendar"
           color="gray-lighten-1"
         />
-        &nbsp;
-        {{ returnUnixToJp(taskData.dateStart) }} から
-        {{ returnUnixToJp(taskData.dateEnd) }} まで
-      </h4>
+        <h4 style="margin: 0px">
+          &nbsp;
+          {{ returnUnixToJp(taskData.dateStart) }} から
+          {{ returnUnixToJp(taskData.dateEnd) }} まで
+        </h4>
+      </div>
       <Divider />
-      <div class="task-modal-text">
+      <div
+        class="task-modal-text"
+      >
+        <div class="title">
+          <Icon
+            :icon="mdiFormatListBulleted"
+            text
+            color="gray-lighten-1"
+          />
+          &nbsp;詳細
+        </div>
         {{ taskData.text }}
       </div>
       <Divider />
@@ -32,7 +46,7 @@
           color="red-lighten-1"
           @click="inCompleted(userProfile.uid, taskData.id)"
         >
-          <Icon :icon="mdiCheck" :color="scssVar('black')" />
+          <Icon :icon="mdiCheck" color="black" />
           &nbsp;やっぱり完了じゃない
         </Button>
         <Button
@@ -40,7 +54,7 @@
           color="lightblue"
           @click="completed(userProfile.uid, taskData.id)"
         >
-          <Icon :icon="mdiCheck" :color="scssVar('black')" />
+          <Icon :icon="mdiCheck" color="black" />
           &nbsp;完了とする！
         </Button>
       </div>
@@ -61,6 +75,7 @@ import {
 import {
   mdiCheck,
   mdiCalendar,
+  mdiFormatListBulleted,
 } from '@mdi/js'
 import swipeModal from '../swipeModal.vue'
 import useUserTaskData, { userTaskDataKey, userTaskDataType } from '~/composition/userTaskData'
@@ -128,6 +143,7 @@ export default defineComponent({
 
       mdiCheck,
       mdiCalendar,
+      mdiFormatListBulleted,
     }
   },
   head: {},
@@ -135,18 +151,33 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-#task-modal {
+.task-modal {
   padding: 0px 16px 0px 16px;
 
-  h4 {
+  &-title {
+    display: inline-flex;
+    width: 100%;
+  }
+
+  &-date {
     display: inline-flex;
   }
 
-  .task-modal {
-    &-text {
-      padding: 16px 0px 16px 0px;
+  &-text {
+    display: flex;
+    padding: 0px 0px 16px 0px;
+
+    flex-direction: column;
+
+    .title {
+      display: inline-flex;
+      margin-bottom: 4px;
+
+      font-size: 0.8rem;
+      color: $gray-lighten-1;
     }
   }
+
 }
 
 </style>

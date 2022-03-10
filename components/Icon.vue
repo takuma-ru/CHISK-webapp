@@ -1,12 +1,12 @@
 <template>
-  <span id="icon">
+  <div id="icon" :text="text">
     <svg viewBox="0 0 24 24">
       <path
         :d="icon"
         :fill="scssVar(color)"
       />
     </svg>
-  </span>
+  </div>
 </template>
 
 <script lang="ts">
@@ -23,6 +23,10 @@ export default defineComponent({
       type: String,
       default: '#489384',
     },
+    text: {
+      type: Boolean,
+      default: false,
+    },
   },
   setup () {
     return {
@@ -36,6 +40,12 @@ export default defineComponent({
 #icon {
   width: 24px;
   height: 24px;
+
   margin: auto;
+
+  &[text] {
+    height: 0.8rem;
+    margin: 0px;
+  }
 }
 </style>
