@@ -53,19 +53,20 @@ export default defineComponent({
   position: relative;
   width: auto;
   height: auto;
+
+  line-height: 28px;
+  border: none;
   border-radius: 8px;
   background-color: $primary-lighten-1;
-  border: none;
   cursor: pointer;
 
   .text {
     display: flex;
-    padding: 0.5rem 1em;
+    padding: 0.25rem 1em;
     margin: 0px;
 
     text-align: center;
     font-size: 14px;
-    line-height: 24px;
     font-weight: normal;
 
     justify-content: center;

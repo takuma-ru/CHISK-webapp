@@ -16,6 +16,7 @@
       </div>
       <div class="task-modal-date">
         <Icon
+          text
           :icon="mdiCalendar"
           color="gray-lighten-1"
         />
@@ -29,16 +30,18 @@
       <div
         class="task-modal-text"
       >
-        <div class="title">
+        <span class="title">
           <Icon
+            text
             :icon="mdiFormatListBulleted"
             color="gray-lighten-1"
             size="1rem"
-            text
           />
           &nbsp;詳細
-        </div>
-        {{ taskData.text }}
+        </span>
+        <span class="text">
+          {{ taskData.text }}
+        </span>
       </div>
       <Divider />
       <div>
@@ -47,11 +50,16 @@
           color="red-lighten-1"
           @click="inCompleted(userProfile.uid, taskData.id)"
         >
-          <Icon :icon="mdiCheck" color="black" />
+          <Icon
+            text
+            :icon="mdiCheck"
+            color="black"
+          />
           &nbsp;やっぱり完了じゃない
         </Button>
         <Button
           v-else
+          text
           color="lightblue"
           @click="completed(userProfile.uid, taskData.id)"
         >
@@ -176,6 +184,10 @@ export default defineComponent({
 
       font-size: 14px;
       color: $gray-lighten-1;
+    }
+
+    .text {
+      white-space: pre-line;
     }
   }
 
