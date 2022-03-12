@@ -188,6 +188,7 @@ export default defineComponent({
 
     .text {
       white-space: pre-line;
+      word-wrap: break-word;
     }
   }
 
