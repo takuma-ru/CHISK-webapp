@@ -11,61 +11,88 @@
       v-if="taskId"
       class="task-modal"
     >
-      <div class="task-modal-title">
-        <h2>{{ taskData.title }}</h2>
-      </div>
-      <div class="task-modal-date">
-        <Icon
-          text
-          :icon="mdiCalendar"
-          color="gray-lighten-1"
-        />
-        <h4 style="margin: 0px">
-          &nbsp;
-          {{ returnUnixToJp(taskData.dateStart) }} から
-          {{ returnUnixToJp(taskData.dateEnd) }} まで
-        </h4>
-      </div>
-      <Divider />
-      <div
-        class="task-modal-text"
-      >
-        <span class="title">
+      <div class="task-modal-contents">
+        <div class="task-modal-contents-title">
+          <h2>{{ taskData.title }}</h2>
+        </div>
+        <div class="task-modal-contents-date">
           <Icon
             text
-            :icon="mdiFormatListBulleted"
+            :icon="mdiCalendar"
             color="gray-lighten-1"
-            size="1rem"
           />
-          &nbsp;詳細
-        </span>
-        <span class="text">
-          {{ taskData.text }}
-        </span>
+          <h4 style="margin: 0px">
+            &nbsp;
+            {{ returnUnixToJp(taskData.dateStart) }} から
+            {{ returnUnixToJp(taskData.dateEnd) }} まで
+          </h4>
+        </div>
+        <Divider />
+        <div
+          class="task-modal-contents-text"
+        >
+          <span class="title">
+            <Icon
+              text
+              :icon="mdiFormatListBulleted"
+              color="gray-lighten-1"
+              size="1rem"
+            />
+            &nbsp;詳細
+          </span>
+          <span class="text">
+            {{ taskData.text }}
+          </span>
+        </div>
       </div>
-      <Divider />
-      <div>
-        <Button
-          v-if="taskData.completed"
-          color="red-lighten-1"
-          @click="inCompleted(userProfile.uid, taskData.id)"
-        >
-          <Icon
+
+      <div class="task-modal-action">
+        <Divider />
+        <div class="button-group">
+          <Button
+            v-if="taskData.completed"
+            color="red-lighten-1"
+            @click="inCompleted(userProfile.uid, taskData.id)"
+          >
+            <Icon
+              text
+              :icon="mdiCheck"
+              color="black"
+            />
+            &nbsp;やっぱり完了じゃない
+          </Button>
+          <Button
+            v-else
             text
-            :icon="mdiCheck"
-            color="black"
-          />
-          &nbsp;やっぱり完了じゃない
-        </Button>
-        <Button
-          v-else
-          text
-          color="lightblue"
-          @click="completed(userProfile.uid, taskData.id)"
-        >
-          <Icon :icon="mdiCheck" color="black" />
-          &nbsp;完了とする！
-        </Button>
+            color="lightblue"
+            @click="completed(userProfile.uid, taskData.id)"
+          >
+            <Icon :icon="mdiCheck" color="black" />
+            &nbsp;完了とする！
+          </Button>
+          <div class="icon-group">
+            <Button
+              color="transparent"
+            >
+              <Icon
+                text
+                :icon="mdiPencil"
+                color="black"
+                size="1.5rem"
+              />
+            </Button>
+            <Button
+              color="transparent"
+            >
+              <Icon
+                text
+                :icon="mdiDelete"
+                color="black"
+                size="1.5rem"
+              />
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
   </swipe-modal>
@@ -85,6 +112,8 @@ import {
   mdiCheck,
   mdiCalendar,
   mdiFormatListBulleted,
+  mdiPencil,
+  mdiDelete,
 } from '@mdi/js'
 import swipeModal from '../swipeModal.vue'
 import useUserTaskData, { userTaskDataKey, userTaskDataType } from '~/composition/userTaskData'
@@ -153,6 +182,8 @@ export default defineComponent({
       mdiCheck,
       mdiCalendar,
       mdiFormatListBulleted,
+      mdiPencil,
+      mdiDelete,
     }
   },
   head: {},
@@ -161,37 +192,60 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .task-modal {
-  padding: 0px 16px 0px 16px;
+  display: flex;
+  height: calc(100vh - 20px - 16px);
 
-  &-title {
-    display: inline-flex;
-    width: 100%;
-  }
+  padding: 0px 16px 16px 16px;
+  flex-direction: column;
+  justify-content: space-between;
 
-  &-date {
-    display: inline-flex;
-  }
-
-  &-text {
-    display: flex;
-    padding: 0px 0px 16px 0px;
-
-    flex-direction: column;
-
-    .title {
+  &-contents {
+    &-title {
       display: inline-flex;
-      margin-bottom: 4px;
+      width: 100%;
 
-      font-size: 14px;
-      color: $gray-lighten-1;
+      justify-content: space-between;
+      align-self: center;
     }
 
-    .text {
-      white-space: pre-line;
-      word-wrap: break-word;
+    &-date {
+      display: inline-flex;
+    }
+
+    &-text {
+      display: flex;
+      padding: 0px 0px 16px 0px;
+
+      flex-direction: column;
+
+      .title {
+        display: inline-flex;
+        margin-bottom: 4px;
+
+        font-size: 14px;
+        color: $gray-lighten-1;
+      }
+
+      .text {
+        white-space: pre-line;
+        word-wrap: break-word;
+      }
     }
   }
 
+  &-action {
+    .button-group {
+      display: inline-flex;
+      width: 100%;
+
+      justify-content: space-between;
+      align-self: center;
+
+      .icon-group {
+        display: inline-flex;
+      }
+    }
+  }
 }
 
 </style>

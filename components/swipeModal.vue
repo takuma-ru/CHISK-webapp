@@ -286,8 +286,8 @@ export default defineComponent({
     top: 0px;
     height: 4px;
     width: 100%;
-    padding-top: 1vh;
-    padding-bottom: 1vh;
+    padding-top: 8px;
+    padding-bottom: 8px;
     cursor: s-resize;
     &::after {
       position: absolute;
@@ -344,7 +344,7 @@ export default defineComponent({
       bottom: var(--contents-bottom-position) !important;
     }
     &-active {
-      transition: all 0.15s ease-out;
+      transition: all 0.2s ease-in;
     }
     &-to {
       bottom: calc(-1 * var(--contents-height)) !important;

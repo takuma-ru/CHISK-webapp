@@ -128,6 +128,8 @@ export default defineComponent({
     border: none;
     border-radius: 14px;
     background-color: $primary-lighten-1;
+
+    cursor: pointer;
   }
   $element: #{&};
 
