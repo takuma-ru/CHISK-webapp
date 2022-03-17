@@ -1,101 +1,111 @@
 <template>
-  <swipe-modal
-    v-model="modal"
-    border-top-radius="16px"
-    contents-height="100vh"
-    contents-width="min(100vw, 960px)"
-    :contents-color="scssVar('white')"
-    background-color="#00255077"
-  >
-    <div
-      v-if="taskId"
-      class="task-modal"
+  <div>
+    <swipe-modal
+      v-model="modal"
+      border-top-radius="16px"
+      contents-height="100vh"
+      contents-width="min(100vw, 960px)"
+      :contents-color="scssVar('white')"
+      background-color="#00255077"
     >
-      <div class="task-modal-contents">
-        <div class="task-modal-contents-title">
-          <h2>{{ taskData.title }}</h2>
-        </div>
-        <div class="task-modal-contents-date">
-          <Icon
-            text
-            :icon="mdiCalendar"
-            color="gray-lighten-1"
-          />
-          <h4 style="margin: 0px">
-            &nbsp;
-            {{ returnUnixToJp(taskData.dateStart) }} から
-            {{ returnUnixToJp(taskData.dateEnd) }} まで
-          </h4>
-        </div>
-        <Divider />
-        <div
-          class="task-modal-contents-text"
-        >
-          <span class="title">
+      <div
+        v-if="taskId"
+        class="task-modal"
+      >
+        <div class="task-modal-contents">
+          <div class="task-modal-contents-title">
+            <h2>{{ taskData.title }}</h2>
+          </div>
+          <div class="task-modal-contents-date">
             <Icon
               text
-              :icon="mdiFormatListBulleted"
+              :icon="mdiCalendar"
               color="gray-lighten-1"
-              size="1rem"
             />
-            &nbsp;詳細
-          </span>
-          <span class="text">
-            {{ taskData.text }}
-          </span>
+            <h4 style="margin: 0px">
+              &nbsp;
+              {{ returnUnixToJp(taskData.dateStart) }} から
+              {{ returnUnixToJp(taskData.dateEnd) }} まで
+            </h4>
+          </div>
+          <Divider />
+          <div
+            class="task-modal-contents-text"
+          >
+            <span class="title">
+              <Icon
+                text
+                :icon="mdiFormatListBulleted"
+                color="gray-lighten-1"
+                size="1rem"
+              />
+              &nbsp;詳細
+            </span>
+            <span class="text">
+              {{ taskData.text }}
+            </span>
+          </div>
         </div>
-      </div>
 
-      <div class="task-modal-action">
-        <Divider />
-        <div class="button-group">
-          <Button
-            v-if="taskData.completed"
-            color="red-lighten-1"
-            @click="inCompleted(userProfile.uid, taskData.id)"
-          >
-            <Icon
+        <div class="task-modal-action">
+          <Divider />
+          <div class="button-group">
+            <Button
+              v-if="taskData.completed"
+              color="red-lighten-1"
+              @click="inCompleted(userProfile.uid, taskData.id)"
+            >
+              <Icon
+                text
+                :icon="mdiCloseOutline"
+                color="gray-darken-1"
+              />
+              &nbsp;&nbsp;やっぱり完了じゃない
+            </Button>
+            <Button
+              v-else
               text
-              :icon="mdiCheck"
-              color="black"
-            />
-            &nbsp;やっぱり完了じゃない
-          </Button>
-          <Button
-            v-else
-            text
-            color="lightblue"
-            @click="completed(userProfile.uid, taskData.id)"
-          >
-            <Icon :icon="mdiCheck" color="black" />
-            &nbsp;完了とする！
-          </Button>
-          <div class="icon-group">
-            <Button
-              color="transparent"
+              color="lightblue"
+              @click="completed(userProfile.uid, taskData.id)"
             >
               <Icon
                 text
-                :icon="mdiPencil"
-                color="black"
-                size="1.5rem"
+                :icon="mdiCheckOutline"
+                color="gray-darken-1"
               />
+              &nbsp;&nbsp;完了とする！
             </Button>
-            <Button
-              color="transparent"
-            >
-              <Icon
-                text
-                :icon="mdiDelete"
-                color="black"
-                size="1.5rem"
-              />
-            </Button>
+            <div class="icon-group">
+              <Button
+                color="transparent"
+              >
+                <Icon
+                  text
+                  :icon="mdiPencilOutline"
+                  color="black"
+                  size="1.5rem"
+                />
+              </Button>
+              <Button
+                color="transparent"
+                @click="dialog = true"
+              >
+                <Icon
+                  text
+                  :icon="mdiTrashCanOutline"
+                  color="black"
+                  size="1.5rem"
+                />
+              </Button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </swipe-modal>
+    </swipe-modal>
+    <Dialog v-model="dialog">
+      dialog
+    </Dialog>
+  </div>
 </template>
 
 <script lang="ts">
@@ -109,11 +119,12 @@ import {
   watch,
 } from '@nuxtjs/composition-api'
 import {
-  mdiCheck,
+  mdiCheckOutline,
   mdiCalendar,
   mdiFormatListBulleted,
-  mdiPencil,
-  mdiDelete,
+  mdiPencilOutline,
+  mdiTrashCanOutline,
+  mdiCloseOutline,
 } from '@mdi/js'
 import swipeModal from '../swipeModal.vue'
 import useUserTaskData, { userTaskDataKey, userTaskDataType } from '~/composition/userTaskData'
@@ -135,6 +146,7 @@ export default defineComponent({
     const taskData = ref<any>({})
     const { userTaskData } = inject(userTaskDataKey, useUserTaskData()) as userTaskDataType
     const modal = ref(false)
+    const dialog = ref(false)
 
     // let, computed
     const taskId = computed(() => route.value.query.taskId)
@@ -173,17 +185,19 @@ export default defineComponent({
       taskId,
       taskData,
       userProfile,
+      dialog,
 
       returnUnixToJp,
       scssVar,
       completed,
       inCompleted,
 
-      mdiCheck,
+      mdiCheckOutline,
       mdiCalendar,
       mdiFormatListBulleted,
-      mdiPencil,
-      mdiDelete,
+      mdiPencilOutline,
+      mdiTrashCanOutline,
+      mdiCloseOutline,
     }
   },
   head: {},

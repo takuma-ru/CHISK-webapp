@@ -23,7 +23,7 @@
       <span class="text">
         完了
         <Icon
-          :icon="mdiCheck"
+          :icon="mdiCheckOutline"
           color="#000A13"
         />
       </span>
@@ -41,7 +41,7 @@ import {
   inject,
 } from '@nuxtjs/composition-api'
 import {
-  mdiCheck,
+  mdiCheckOutline,
 } from '@mdi/js'
 import { userTaskDataInterface } from '~/composition/userTaskData'
 import useUserProfile, { userProfileKey, userProfileType } from '~/composition/userProfile'
@@ -92,7 +92,7 @@ export default defineComponent({
       returnUnixToJp,
       completed,
 
-      mdiCheck,
+      mdiCheckOutline,
     }
   },
 })

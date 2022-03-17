@@ -344,7 +344,7 @@ export default defineComponent({
       bottom: var(--contents-bottom-position) !important;
     }
     &-active {
-      transition: all 0.2s ease-in;
+      transition: all 0.15s linear;
     }
     &-to {
       bottom: calc(-1 * var(--contents-height)) !important;

@@ -59,6 +59,8 @@ export default defineComponent({
   border-radius: 8px;
   background-color: $primary-lighten-1;
   cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color:rgba(0,0,0,0);
 
   .text {
     display: flex;
