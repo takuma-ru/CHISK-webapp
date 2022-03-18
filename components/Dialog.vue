@@ -1,16 +1,23 @@
 <template>
   <div class="dialog">
-    <div
-      v-if="model"
-      class="dialog-contents"
-    >
-      <slot />
-    </div>
-    <div
-      v-if="model"
-      class="dialog-background"
-      @click="close()"
-    />
+    <transition name="dialog-contents-transition">
+      <div
+        v-if="model"
+        class="dialog-contents"
+        :style="{
+          width: width,
+        }"
+      >
+        <slot />
+      </div>
+    </transition>
+    <transition name="dialog-background-transition">
+      <div
+        v-if="model"
+        class="dialog-background"
+        @click="close()"
+      />
+    </transition>
   </div>
 </template>
 
@@ -32,6 +39,10 @@ export default defineComponent({
     modelValue: {
       type: Boolean,
       default: false,
+    },
+    width: {
+      type: String,
+      default: 'auto',
     },
   },
 
@@ -65,8 +76,8 @@ export default defineComponent({
   &-contents {
     z-index: 2;
     position: fixed;
-    width: auto;
-    height: auto;
+    max-width: calc(100vw - 32px);
+    max-height: calc(100vh - 32px);
 
     top: 50%;
     left: 50%;
@@ -76,6 +87,33 @@ export default defineComponent({
 
     border-radius: 16px;
     background-color: $white;
+
+    filter: drop-shadow(4px 4px 0px rgba(255, 255, 255, 0.2));
+
+    &-transition {
+      &-enter {
+        & {
+          opacity: 0;
+        }
+        &-active {
+          transition: all 0.2s ease-out;
+        }
+        &-to {
+          opacity: 1;
+        }
+      }
+      &-leave {
+        & {
+          opacity: 1;
+        }
+        &-active {
+          transition: all 0.05s ease-out;
+        }
+        &-to {
+          opacity: 0;
+        }
+      }
+    }
   }
 
   &-background {
@@ -89,6 +127,31 @@ export default defineComponent({
     transform: translate(-50%, -50%);
 
     background-color: #80808080;
+
+    &-transition {
+      &-enter {
+        & {
+          opacity: 0;
+        }
+        &-active {
+          transition: all 0s ease-out;
+        }
+        &-to {
+          opacity: 1;
+        }
+      }
+      &-leave {
+        & {
+          opacity: 1;
+        }
+        &-active {
+          transition: all 0.05s ease-out;
+        }
+        &-to {
+          opacity: 0;
+        }
+      }
+    }
   }
 }
 </style>

@@ -17,7 +17,7 @@ export default {
     title: 'CHISK',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=n' },
       { name: 'format-detection', content: 'telephone=no' },
       { hid: 'description', name: 'description', content: '楽しくタスクがこなせるWebアプリ' },
       { hid: 'og:site_name', property: 'og:site_name', content: 'CHISK(楽しくタスクをこなそう！)' },

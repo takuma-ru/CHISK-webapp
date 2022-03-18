@@ -102,8 +102,37 @@
         </div>
       </div>
     </swipe-modal>
-    <Dialog v-model="dialog">
-      dialog
+    <Dialog
+      v-model="dialog"
+      width="320px"
+    >
+      <h4 style="margin: 0px;">
+        このタスクを削除してもよろしいですか？
+      </h4>
+      <p style="margin-top: 8px">
+        &#x203B;一度消したら復元することはできません
+      </p>
+      <Divider />
+      <div class="dialog-button-group">
+        <Button
+          color="lightblue"
+          @click="dialog = false"
+        >
+          とじる
+        </Button>
+        <Button
+          color="red-lighten-1"
+          @click="dialog = true"
+        >
+          <Icon
+            text
+            :icon="mdiTrashCanOutline"
+            color="black"
+            size="1.5rem"
+          />
+          &nbsp;&nbsp;削除
+        </Button>
+      </div>
     </Dialog>
   </div>
 </template>
@@ -260,6 +289,12 @@ export default defineComponent({
       }
     }
   }
+
 }
 
+.dialog-button-group {
+  display: flex;
+
+  justify-content: space-between;
+}
 </style>
