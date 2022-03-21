@@ -122,7 +122,7 @@
         </Button>
         <Button
           color="red-lighten-1"
-          @click="dialog = true"
+          @click="deleteTaskData( userProfile.uid, taskData.id)"
         >
           <Icon
             text
@@ -161,6 +161,7 @@ import useUserProfile, { userProfileKey, userProfileType } from '~/composition/u
 import returnUnixToJp from '~/composable/utils/returnUnixToJp'
 import scssVar from '~/composable/scss/returnVariables'
 import completedTaskData from '~/composable/firebase/completedTaskData'
+import deleteTaskData from '~/composable/firebase/deleteTaskData'
 
 export default defineComponent({
   components: {
@@ -220,6 +221,7 @@ export default defineComponent({
       scssVar,
       completed,
       inCompleted,
+      deleteTaskData,
 
       mdiCheckOutline,
       mdiCalendar,

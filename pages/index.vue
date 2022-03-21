@@ -24,6 +24,7 @@
         :task-data="task"
       />
     </div>
+    <AddTaskModal />
   </div>
 </template>
 
@@ -46,9 +47,10 @@ import useUserTaskData, {
   userTaskDataKey,
 } from '~/composition/userTaskData'
 import deleteTaskData from '~/composable/firebase/deleteTaskData'
+import AddTaskModal from '~/components/task/AddTaskModal.vue'
 
 export default defineComponent({
-  components: { TaskCard },
+  components: { TaskCard, AddTaskModal },
   setup () {
     // store
     // const

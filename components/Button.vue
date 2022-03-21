@@ -5,6 +5,8 @@
     :style="{
       backgroundColor: scssVar(color)
     }"
+    :size="size"
+    :fab="fab"
     @click="$emit('click')"
   >
     <div class="text">
@@ -28,6 +30,17 @@ export default defineComponent({
     color: {
       type: String,
       default: 'primary',
+    },
+    size: {
+      type: String,
+      default: 'normal',
+      validator: (value: string) => {
+        return ['small', 'normal', 'large'].includes(value)
+      },
+    },
+    fab: {
+      type: Boolean,
+      default: false,
     },
   },
   setup () {
@@ -64,6 +77,7 @@ export default defineComponent({
 
   .text {
     display: flex;
+    height: calc(100% - 0.5rem);
     padding: 0.25rem 1em;
     margin: 0px;
 
@@ -72,6 +86,7 @@ export default defineComponent({
     font-weight: normal;
 
     justify-content: center;
+    align-items: center;
   }
 
   &:hover::before {
@@ -90,6 +105,33 @@ export default defineComponent({
 
   &[disabled] {
 
+  }
+
+  &[fab] {
+    .text {
+      height: calc(100% - 16px);
+      padding: 8px;
+    }
+  }
+
+  &[size = "small"] {
+    width: auto;
+    height: 24px;
+  }
+
+  &[size = "normal"] {
+    width: auto;
+    height: 36px;
+  }
+
+  &[size = "large"] {
+    width: auto;
+    height: 64px;
+    border-radius: 16px;
+
+    &:hover::before {
+      border-radius: 16px;
+    }
   }
 }
 </style>

@@ -72,6 +72,7 @@ body::-webkit-scrollbar {
 }
 
 #main-contents {
+  position: relative;
   margin: 24px;
 }
 </style>
