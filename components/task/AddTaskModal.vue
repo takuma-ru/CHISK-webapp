@@ -13,7 +13,6 @@
           color="white"
           size="2rem"
         />
-        <!-- &nbsp;&nbsp;追加 -->
       </Button>
     </div>
     <swipe-modal
@@ -34,7 +33,6 @@ import {
   defineComponent,
   onBeforeMount,
   ref,
-  useMeta,
 } from '@nuxtjs/composition-api'
 import {
   mdiPlus,
@@ -52,7 +50,6 @@ export default defineComponent({
     onBeforeMount(async () => {
     })
     // other
-    useMeta({ title: 'test one' })
 
     return {
       modal,

@@ -63,7 +63,6 @@ export default defineComponent({
       { title: 'ボード', icon: mdiViewDashboard, icon_outline: mdiViewDashboardOutline, link: '/taskboard' },
       { title: '設定', icon: mdiCog, icon_outline: mdiCogOutline, link: '/setting' },
       { title: 'このアプリは？', icon: mdiInformation, icon_outline: mdiInformationOutline, link: '/about' },
-      // { title: 'Team', icon: 'mdi-account-multiple-outline', link: '/team' },
     ])
     // let, computed
     const nowPath = computed(() => {
@@ -94,26 +93,26 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-  #navigation-drawer {
-    & {
-      position: fixed;
-      min-width: 64px;
-      height: 100vh;
+#navigation-drawer {
+  & {
+    position: fixed;
+    min-width: 64px;
+    height: 100vh;
 
-      top: 0%;
-      left: 0%;
+    top: 0%;
+    left: 0%;
 
-      border-radius: 0px 16px 16px 0px;
-      box-shadow: $primary-shadow;
-      background-color: $primary-lighten-1;
-    }
-
-    .link-btn-list {
-      display: flex;
-      flex-flow: column;
-      padding: 12px 0px 0px 0px;
-    }
+    border-radius: 0px 16px 16px 0px;
+    box-shadow: $primary-shadow;
+    background-color: $primary-lighten-1;
   }
+
+  .link-btn-list {
+    display: flex;
+    flex-flow: column;
+    padding: 12px 0px 0px 0px;
+  }
+}
 
 .navi-btn {
   & {
@@ -128,6 +127,12 @@ export default defineComponent({
     border: none;
     border-radius: 14px;
     background-color: $primary-lighten-1;
+
+    -webkit-transition: background-color 0.05s linear;
+    -moz-transition: background-color 0.05s linear;
+    -o-transition: background-color 0.05s linear;
+    -ms-transition: background-color 0.05s linear;
+    transition: background-color 0.05s linear;
 
     cursor: pointer;
   }

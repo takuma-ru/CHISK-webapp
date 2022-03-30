@@ -84,6 +84,7 @@ export default defineComponent({
     text-align: center;
     font-size: 14px;
     font-weight: normal;
+    /* color: $white; */
 
     justify-content: center;
     align-items: center;

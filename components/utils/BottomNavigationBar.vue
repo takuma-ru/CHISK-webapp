@@ -55,7 +55,6 @@ export default defineComponent({
       { title: 'ボード', icon: mdiViewDashboard, icon_outline: mdiViewDashboardOutline, link: '/taskboard' },
       { title: 'ホーム', icon: mdiHomeVariant, icon_outline: mdiHomeVariantOutline, link: '/' },
       { title: '設定', icon: mdiCog, icon_outline: mdiCogOutline, link: '/setting' },
-      // { title: 'Team', icon: 'mdi-account-multiple-outline', link: '/team' },
     ])
     // let, computed
     const nowPath = computed(() => {
@@ -120,7 +119,12 @@ export default defineComponent({
 
     border: none;
     border-radius: 14px;
-    background-color: $primary-lighten-1;
+    background-color: transparent;
+    -webkit-transition: background-color 0.1s linear;
+    -moz-transition: background-color 0.1s linear;
+    -o-transition: background-color 0.1s linear;
+    -ms-transition: background-color 0.1s linear;
+    transition: background-color 0.1s linear;
   }
   $element: #{&};
 
