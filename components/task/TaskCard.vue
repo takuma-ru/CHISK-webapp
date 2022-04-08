@@ -107,7 +107,7 @@ export default defineComponent({
 
   margin: 8px 0px;
 
-  filter: drop-shadow(4px 4px 0px rgba(255, 255, 255, 0.2));
+  filter: drop-shadow(0px 16px 40px rgba(0, 37, 80, 0.2));
 
   .task-contents-left {
     position: relative;

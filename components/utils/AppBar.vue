@@ -1,9 +1,16 @@
 <template>
   <div
-    v-if="nowPage != items[1]"
     id="app-bar"
   >
-    {{ nowPage.title }}
+    <span>
+      {{ nowPage.title }}
+    </span>
+
+    <img
+      :src="userProfile.photoURL"
+      alt="Avatar"
+      style="border-radius: 50%;"
+    >
   </div>
 </template>
 
@@ -11,6 +18,7 @@
 import {
   computed,
   defineComponent,
+  inject,
   ref,
   useRoute,
 } from '@nuxtjs/composition-api'
@@ -24,14 +32,23 @@ import {
   mdiViewDashboard,
   mdiViewDashboardOutline,
 } from '@mdi/js'
+import auth from '~/composable/firebase/auth'
+import useUserProfile, { userProfileKey, userProfileType } from '~/composition/userProfile'
 
 export default defineComponent({
   setup () {
     // const
+    const {
+      trySignIn,
+      trySignOut,
+    } = auth()
+    const {
+      userProfile,
+    } = inject(userProfileKey, useUserProfile()) as userProfileType
     const route = useRoute()
     const items = ref([
-      { title: 'ボード', icon: mdiViewDashboard, icon_outline: mdiViewDashboardOutline, link: '/taskboard' },
-      { title: 'ホーム', icon: mdiHomeVariant, icon_outline: mdiHomeVariantOutline, link: '/' },
+      { title: 'タスクボード', icon: mdiViewDashboard, icon_outline: mdiViewDashboardOutline, link: '/taskboard' },
+      { title: '', icon: mdiHomeVariant, icon_outline: mdiHomeVariantOutline, link: '/' },
       { title: '設定', icon: mdiCog, icon_outline: mdiCogOutline, link: '/setting' },
       { title: 'このアプリは？', icon: mdiInformation, icon_outline: mdiInformationOutline, link: '/about' },
     ])
@@ -47,6 +64,10 @@ export default defineComponent({
     return {
       nowPage,
       items,
+      userProfile,
+
+      trySignIn,
+      trySignOut,
     }
   },
 })
@@ -54,8 +75,20 @@ export default defineComponent({
 
 <style lang="scss" scoped>
   #app-bar {
+    display: flex;
     position: relative;
-    width: 100%;
-    height: 56px;
+    width: auto;
+    height: 36px;
+
+    margin: 16px 24px 0px 24px;
+
+    justify-content: space-between;
+
+    span {
+      color: $white;
+      font-size: large;
+      font-weight: 600;
+      line-height: 36px;
+    }
   }
 </style>

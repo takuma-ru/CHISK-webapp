@@ -24,6 +24,7 @@ export default function auth () {
     name: null,
     email: null,
     uid: null,
+    photoURL: null,
   })
 
   // ログイン状態を識別
@@ -32,10 +33,12 @@ export default function auth () {
       nowUser.name = user.displayName
       nowUser.email = user.email
       nowUser.uid = user.uid
+      nowUser.photoURL = user.photoURL
     } else {
       nowUser.name = null
       nowUser.email = null
       nowUser.uid = null
+      nowUser.photoURL = null
     }
   })
 
@@ -50,6 +53,7 @@ export default function auth () {
           nowUser.name = user.displayName
           nowUser.email = user.email
           nowUser.uid = user.uid
+          nowUser.photoURL = user.photoURL
         }).catch((error) => {
           const errorCode = error.code
           const errorMessage = error.message
@@ -74,6 +78,7 @@ export default function auth () {
       nowUser.name = null
       nowUser.email = null
       nowUser.uid = null
+      nowUser.photoURL = null
     }).catch((error) => {
       console.log(error)
     })

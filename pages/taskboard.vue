@@ -1,25 +1,66 @@
 <template>
   <div>
-    TaskBoard
+    <div
+      id="task-group"
+    >
+      <TaskCard
+        v-for="task in userTaskData"
+        :key="task.id"
+        :task-data="task"
+      />
+    </div>
+    <AddTaskModal />
   </div>
 </template>
 
 <script lang="ts">
 import {
   defineComponent,
+  watch,
+  inject,
   useMeta,
+  onMounted,
 } from '@nuxtjs/composition-api'
-// import googleAuth from '~/composable/firebase/auth'
-// import useUserProfile, { userProfileType, userProfileKey } from '~/composition/userProfile'
+import TaskCard from '~/components/task/TaskCard.vue'
+import auth from '~/composable/firebase/auth'
+import useUserProfile, {
+  userProfileType,
+  userProfileKey,
+} from '~/composition/userProfile'
+import useUserTaskData, {
+  userTaskDataType,
+  userTaskDataKey,
+} from '~/composition/userTaskData'
+import deleteTaskData from '~/composable/firebase/deleteTaskData'
+import AddTaskModal from '~/components/task/AddTaskModal.vue'
 
 export default defineComponent({
-  components: { },
+  components: { TaskCard, AddTaskModal },
   setup () {
     // store
-
     // const
+    const {
+      trySignIn,
+      trySignOut,
+    } = auth()
+    const {
+      userProfile,
+    } = inject(userProfileKey, useUserProfile()) as userProfileType
+    const {
+      userTaskData,
+      getUserTaskData,
+      deleteUserTaskData,
+    } = inject(userTaskDataKey, useUserTaskData()) as userTaskDataType
+
+    // watch
+    watch(userProfile, async (newUserProfile) => {
+      await getUserTaskData(newUserProfile.uid)
+    })
 
     // methods
+    onMounted(() => {
+      getUserTaskData(userProfile.uid)
+    })
 
     // lifeCycle
 
@@ -27,6 +68,13 @@ export default defineComponent({
     useMeta({ title: 'TaskBoard' })
 
     return {
+      userProfile,
+      userTaskData,
+
+      trySignIn,
+      trySignOut,
+      deleteUserTaskData,
+      deleteTaskData,
     }
   },
   head: {},

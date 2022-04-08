@@ -85,28 +85,29 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-  #bottom-navigation-drawer {
-    & {
-      position: fixed;
-      width: 100vw;
-      min-height: 64px;
+#bottom-navigation-drawer {
+  & {
+    position: fixed;
+    width: 100vw;
+    min-height: 64px;
 
-      bottom: 0%;
-      left: 0%;
+    bottom: 0%;
+    left: 0%;
 
-      border-radius: 16px 16px 0px 0px;
-      box-shadow: $primary-shadow;
-      background-color: $primary-lighten-1;
+    border-radius: 16px 16px 0px 0px;
+        filter: drop-shadow(0px 16px 40px rgba(0, 37, 80, 0.2));
 
-      padding-bottom: constant(safe-area-inset-bottom);
-      padding-bottom: env(safe-area-inset-bottom);
-    }
+    background-color: $primary-lighten-1;
 
-    .link-btn-list {
-      display: flex;
-      justify-content: space-around;
-    }
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
   }
+
+  .link-btn-list {
+    display: flex;
+    justify-content: space-around;
+  }
+}
 
 .navi-btn {
   & {
@@ -120,6 +121,7 @@ export default defineComponent({
     border: none;
     border-radius: 14px;
     background-color: transparent;
+
     -webkit-transition: background-color 0.1s linear;
     -moz-transition: background-color 0.1s linear;
     -o-transition: background-color 0.1s linear;

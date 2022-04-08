@@ -14,6 +14,7 @@ export interface userProfileDataInterface {
   name: string | null,
   email: string | null,
   uid: string | null,
+  photoURL: string | null,
 }
 
 export default function useUserProfile () {
@@ -26,6 +27,7 @@ export default function useUserProfile () {
       name: null,
       email: null,
       uid: null,
+      photoURL: null,
     }),
   }
 
@@ -33,10 +35,11 @@ export default function useUserProfile () {
     mutation
   */
   // userProfileを引数のデータで置き換える
-  const updateUserProfile = (name: string | null, email: string | null, uid: string | null) => {
+  const updateUserProfile = (name: string | null, email: string | null, uid: string | null, photoURL: string | null) => {
     state.userProfile.name = name
     state.userProfile.email = email
     state.userProfile.uid = uid
+    state.userProfile.photoURL = photoURL
   }
 
   // userProfileを初期化
@@ -44,6 +47,7 @@ export default function useUserProfile () {
     state.userProfile.name = null
     state.userProfile.email = null
     state.userProfile.uid = null
+    state.userProfile.photoURL = null
   }
 
   /*
@@ -52,7 +56,7 @@ export default function useUserProfile () {
   // auth.tsからログイン状態を取得し、userProfileに代入
   const { nowUser } = auth()
   watch(nowUser, (newNowUser) => {
-    updateUserProfile(newNowUser.name, newNowUser.email, newNowUser.uid)
+    updateUserProfile(newNowUser.name, newNowUser.email, newNowUser.uid, newNowUser.photoURL)
   })
 
   return {
