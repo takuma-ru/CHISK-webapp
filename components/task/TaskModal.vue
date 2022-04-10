@@ -3,7 +3,7 @@
     <swipe-modal
       v-model="modal"
       border-top-radius="16px"
-      contents-height="100vh"
+      contents-height="100%"
       contents-width="min(100vw, 960px)"
       :contents-color="scssVar('white')"
       background-color="#00255077"
@@ -57,7 +57,7 @@
             >
               <Icon
                 text
-                :icon="mdiCloseOutline"
+                :icon="mdiClose"
                 color="gray-darken-1"
               />
               &nbsp;&nbsp;やっぱり完了じゃない
@@ -70,7 +70,7 @@
             >
               <Icon
                 text
-                :icon="mdiCheckOutline"
+                :icon="mdiCheck"
                 color="gray-darken-1"
               />
               &nbsp;&nbsp;完了とする！
@@ -148,12 +148,12 @@ import {
   watch,
 } from '@nuxtjs/composition-api'
 import {
-  mdiCheckOutline,
+  mdiCheck,
   mdiCalendar,
   mdiFormatListBulleted,
   mdiPencilOutline,
   mdiTrashCanOutline,
-  mdiCloseOutline,
+  mdiClose,
 } from '@mdi/js'
 import swipeModal from '../swipeModal.vue'
 import useUserTaskData, { userTaskDataKey, userTaskDataType } from '~/composition/userTaskData'
@@ -223,12 +223,12 @@ export default defineComponent({
       inCompleted,
       deleteTaskData,
 
-      mdiCheckOutline,
+      mdiCheck,
       mdiCalendar,
       mdiFormatListBulleted,
       mdiPencilOutline,
       mdiTrashCanOutline,
-      mdiCloseOutline,
+      mdiClose,
     }
   },
   head: {},

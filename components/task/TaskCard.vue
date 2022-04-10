@@ -21,11 +21,11 @@
       @click="completed(userProfile.uid, taskData.id)"
     >
       <span class="text">
-        完了
         <Icon
-          :icon="mdiCheckOutline"
-          color="#000A13"
+          :icon="mdiCheck"
+          color="black"
         />
+        完了
       </span>
     </div>
   </div>
@@ -41,7 +41,7 @@ import {
   inject,
 } from '@nuxtjs/composition-api'
 import {
-  mdiCheckOutline,
+  mdiCheck,
 } from '@mdi/js'
 import { userTaskDataInterface } from '~/composition/userTaskData'
 import useUserProfile, { userProfileKey, userProfileType } from '~/composition/userProfile'
@@ -92,7 +92,7 @@ export default defineComponent({
       returnUnixToJp,
       completed,
 
-      mdiCheckOutline,
+      mdiCheck,
     }
   },
 })
@@ -146,7 +146,7 @@ export default defineComponent({
 
     border-radius: 16px;
     text-align: center;
-    background-color: $lightblue;
+    background-color: $lightblue-lighten-1;
 
     border: 1px solid $lightblue-darken-1;
     cursor: pointer;

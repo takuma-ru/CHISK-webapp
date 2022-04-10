@@ -3,18 +3,6 @@
     <Button>
       button
     </Button>
-    <Button
-      class="primary-light-1"
-      @click="trySignIn()"
-    >
-      signin
-    </Button>
-    <!-- <Button
-      class="primary-light-1"
-      @click="deleteTaskData(userProfile.uid, 'bqaI2nU6XCvIdTitkFIu')"
-    >
-      delete
-    </Button> -->
     <div
       id="task-group"
     >
@@ -37,7 +25,6 @@ import {
   onMounted,
 } from '@nuxtjs/composition-api'
 import TaskCard from '~/components/task/TaskCard.vue'
-import auth from '~/composable/firebase/auth'
 import useUserProfile, {
   userProfileType,
   userProfileKey,
@@ -54,10 +41,6 @@ export default defineComponent({
   setup () {
     // store
     // const
-    const {
-      trySignIn,
-      trySignOut,
-    } = auth()
     const {
       userProfile,
     } = inject(userProfileKey, useUserProfile()) as userProfileType
@@ -86,8 +69,6 @@ export default defineComponent({
       userProfile,
       userTaskData,
 
-      trySignIn,
-      trySignOut,
       deleteUserTaskData,
       deleteTaskData,
     }
