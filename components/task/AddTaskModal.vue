@@ -26,16 +26,76 @@
       :contents-color="scssVar('white')"
       background-color="#00255077"
     >
-      <div class="contents">
-        <TextField
-          v-model="inputData.title"
-          label="タイトル"
-        />
-        <Textarea
-          v-model="inputData.title"
-          label="詳細説明"
-        />
-        {{ inputData.title }}
+      <div class="task-modal">
+        <div class="task-modal-contents">
+          <TextField
+            v-model="inputData.title"
+            label="タイトル"
+          />
+          <Textarea
+            v-model="inputData.title"
+            label="詳細説明"
+          />
+        </div>
+
+        <div class="task-modal-action">
+          <Divider />
+          <Button
+            @click="modal = false"
+          >
+            閉じる
+          </Button>
+          <!-- <div class="button-group">
+            <Button
+              v-if="taskData.completed"
+              color="red-lighten-1"
+              @click="inCompleted(userProfile.uid, taskData.id)"
+            >
+              <Icon
+                text
+                :icon="mdiClose"
+                color="gray-darken-1"
+              />
+              &nbsp;&nbsp;やっぱり完了じゃない
+            </Button>
+            <Button
+              v-else
+              text
+              color="lightblue"
+              @click="completed(userProfile.uid, taskData.id)"
+            >
+              <Icon
+                text
+                :icon="mdiCheck"
+                color="gray-darken-1"
+              />
+              &nbsp;&nbsp;完了とする！
+            </Button>
+            <div class="icon-group">
+              <Button
+                color="transparent"
+              >
+                <Icon
+                  text
+                  :icon="mdiPencilOutline"
+                  color="black"
+                  size="1.5rem"
+                />
+              </Button>
+              <Button
+                color="transparent"
+                @click="dialog = true"
+              >
+                <Icon
+                  text
+                  :icon="mdiTrashCanOutline"
+                  color="black"
+                  size="1.5rem"
+                />
+              </Button>
+            </div>
+          </div> -->
+        </div>
       </div>
     </swipe-modal>
   </div>
@@ -98,12 +158,24 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .add-task-modal {
-  position: fixed;
-  bottom: 64px + 16px;
-  right: 16px;
+  .add-button {
+    position: fixed;
+    bottom: 64px + 16px;
+    right: 16px;
+  }
 
-  .contents {
+  .task-modal {
     padding: 0px 16px 16px;
+    display: flex;
+    height: calc(100vh - 20px - 16px);
+
+    padding: 0px 16px 16px 16px;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &-contents {
+
+    }
   }
 }
 </style>
