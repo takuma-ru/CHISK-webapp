@@ -27,7 +27,8 @@
       "@nuxt/types",
       "@types/node",
       "unplugin-vue2-script-setup/types"
-    ]
+    ],
+    "jsx": "preserve"
   },
   "exclude": [
     "node_modules",

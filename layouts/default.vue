@@ -64,19 +64,19 @@ export default defineComponent({
 
 <style lang="scss">
 html {
+  width: 100%;
   overscroll-behavior-y: none;
   background-color: $background;
 }
 
 body {
   font-family: 'Noto Sans JP', sans-serif;
-  -ms-overflow-style: none;
   scrollbar-width: none;
   margin: 0px;
 }
 
-body::-webkit-scrollbar {
-  display: none;
+#main {
+  height: 100%;
 }
 
 #main-contents {

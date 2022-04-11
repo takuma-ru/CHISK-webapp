@@ -26,14 +26,10 @@
             : modalHeight > 0
             ? modalHeight + 'px'
         : contentsHeight};
-          border-top-left-radius: ${fullscreen
-            ? '0px'
-            : borderTopRadius
+          border-top-left-radius: ${borderTopRadius
             ? borderTopRadius
         : borderTopLeftRadius};
-          border-top-right-radius: ${fullscreen
-            ? '0px'
-            : borderTopRadius
+          border-top-right-radius: ${borderTopRadius
             ? borderTopRadius
         : borderTopRightRadius};
           background-color: ${dark ? darkContentsColor : contentsColor};

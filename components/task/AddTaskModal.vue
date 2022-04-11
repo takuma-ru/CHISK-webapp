@@ -21,7 +21,7 @@
     <swipe-modal
       v-model="modal"
       border-top-radius="16px"
-      contents-height="100%"
+      fullscreen
       contents-width="min(100vw, 960px)"
       :contents-color="scssVar('white')"
       background-color="#00255077"
