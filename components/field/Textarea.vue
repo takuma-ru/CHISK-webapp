@@ -1,10 +1,19 @@
 <template>
   <div class="input">
-    <textarea
-      v-model="model"
-      required
-    />
-    <label>{{ label }}</label>
+    <div class="input-icon">
+      <Icon
+        :icon="icon"
+        color="gray"
+        size="1.5rem"
+      />
+    </div>
+    <div class="input-textarea">
+      <textarea
+        v-model="model"
+        required
+      />
+      <label>{{ label }}</label>
+    </div>
   </div>
 </template>
 
@@ -27,6 +36,10 @@ export default defineComponent({
     modelValue: {
       type: String,
       default: null,
+    },
+    icon: {
+      type: String,
+      require: true,
     },
     label: {
       type: String,
@@ -57,12 +70,25 @@ export default defineComponent({
 <style lang="scss" scoped>
 .input {
   position: relative;
+  display: flex;
+  width: 100%;
+  padding: 24px 0px 8px;
+
+  align-items: center;
+
+  &-icon {
+    margin: 0px 8px;
+  }
+
+  &-textarea {
+    position: relative;
+    flex-grow: 1;
+  }
 
   textarea {
-    width: 100%;
     min-height: 56*2px;
-    margin: 24px 0px 8px;
     padding: 0.75rem 1rem;
+    width: 100%;
 
     transition: 0.2s;
 
@@ -79,7 +105,7 @@ export default defineComponent({
 
       & ~ label {
         font-size: 14px;
-        top: -16px;
+        top: calc(-0.75rem - 12px);
         left: 1rem;
         transition: 0.2s;
         color: $gray-lighten-1;
@@ -88,7 +114,7 @@ export default defineComponent({
 
     &:valid ~ label {
       font-size: 14px;
-      top: -16px;
+      top: calc(-0.75rem - 12px);
       left: 1rem;
       transition: 0.2s;
       color: $gray-lighten-1;
@@ -97,15 +123,13 @@ export default defineComponent({
     & ~ label {
       position: absolute;
       z-index: -1;
-      top: 24px;
+      top: 0.75rem;
       left: 1rem;
-      width: 100%;
-      line-height: 50px;
+      width: auto;
       transition: 0.2s;
       letter-spacing: 0.5px;
       color: $gray;
     }
-
   }
 }
 </style>

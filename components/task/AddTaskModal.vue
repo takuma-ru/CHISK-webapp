@@ -31,10 +31,12 @@
           <TextField
             v-model="inputData.title"
             label="タイトル"
+            :icon="mdiPlus"
           />
           <Textarea
-            v-model="inputData.title"
+            v-model="inputData.text"
             label="詳細説明"
+            :icon="mdiPlus"
           />
         </div>
 
@@ -140,12 +142,17 @@ export default defineComponent({
       completed: new Date(),
       tag: [],
     })
+
     // let, computed
+
     // methods
+
     // lifeCycle
     onBeforeMount(async () => {
     })
+
     // other
+
     return {
       modal,
       inputData,
