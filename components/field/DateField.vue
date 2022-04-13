@@ -8,12 +8,26 @@
       />
     </div>
     <div class="input-datefield">
-      <input
+      <DatePicker
         v-model="model"
-        type="date"
-        required
-      >
-      <label>{{ label }}</label>
+        input-class="date-picker"
+        style="width: 100%"
+      />
+      <label
+        style="
+          position: absolute;
+          z-index: -1;
+          width: auto;
+          top: calc(-0.75rem - 28px);
+          left: 1rem;
+
+          font-size: 14px;
+          line-height: 56px;
+          letter-spacing: 0.5px;
+          transition: 0.2s;
+          color: #424F60;
+        "
+      >{{ label }}</label>
     </div>
   </div>
 </template>
@@ -24,9 +38,15 @@ import {
   defineComponent,
   ref,
 } from '@nuxtjs/composition-api'
+import DatePicker from 'vue2-datepicker'
+import 'vue2-datepicker/index.css'
 
 export default defineComponent({
   name: 'InputField',
+
+  components: {
+    DatePicker,
+  },
 
   model: {
     prop: 'modelValue',
@@ -68,7 +88,7 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .input {
   position: relative;
   display: flex;
@@ -86,7 +106,7 @@ export default defineComponent({
     flex-grow: 1;
   }
 
-  input {
+  .date-picker {
     min-height: 56px;
     padding: 0.75rem 1rem;
     width: 100%;
@@ -101,7 +121,7 @@ export default defineComponent({
 
     resize: none;
 
-    & ~ label {
+    label {
       position: absolute;
       z-index: -1;
       width: auto;
