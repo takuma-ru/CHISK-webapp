@@ -7,10 +7,10 @@
         size="1.5rem"
       />
     </div>
-    <div class="input-textfield">
+    <div class="input-datefield">
       <input
         v-model="model"
-        type="text"
+        type="date"
         required
       >
       <label>{{ label }}</label>
@@ -35,7 +35,7 @@ export default defineComponent({
 
   props: {
     modelValue: {
-      type: String,
+      type: Date,
       default: null,
     },
     icon: {
@@ -81,7 +81,7 @@ export default defineComponent({
     margin: 0px 8px;
   }
 
-  &-textfield {
+  &-datefield {
     position: relative;
     flex-grow: 1;
   }
@@ -99,38 +99,20 @@ export default defineComponent({
     border-radius: 16px;
     background-color: #bec6cf50;
 
-    resize: vertical;
-
-    &:focus {
-      outline: none;
-
-      & ~ label {
-        font-size: 14px;
-        top: calc(-0.75rem - 28px);
-        left: 1rem;
-        transition: 0.2s;
-        color: $gray-lighten-1;
-      }
-    }
-
-    &:valid ~ label {
-      font-size: 14px;
-      top: calc(-0.75rem - 28px);
-      left: 1rem;
-      transition: 0.2s;
-      color: $gray-lighten-1;
-    }
+    resize: none;
 
     & ~ label {
       position: absolute;
       z-index: -1;
       width: auto;
-      line-height: 56px;
-      top: 0px;
+      top: calc(-0.75rem - 28px);
       left: 1rem;
-      transition: 0.2s;
+
+      font-size: 14px;
+      line-height: 56px;
       letter-spacing: 0.5px;
-      color: $gray;
+      transition: 0.2s;
+      color: $gray-lighten-1;
     }
   }
 }

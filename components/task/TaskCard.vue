@@ -12,8 +12,16 @@
       </span>
       <span
         class="task-date"
-        v-text="dateEnd"
-      />
+      >
+        <Icon
+          text
+          :icon="mdiCalendar"
+          size="20px"
+          color="gray-lighten-1"
+          style="margin-right: 4px"
+        />
+        {{ dateEnd }}
+      </span>
     </div>
     <div
       v-if="taskData.completed === (undefined || null)"
@@ -42,6 +50,7 @@ import {
 } from '@nuxtjs/composition-api'
 import {
   mdiCheck,
+  mdiCalendar,
 } from '@mdi/js'
 import { userTaskDataInterface } from '~/composition/userTaskData'
 import useUserProfile, { userProfileKey, userProfileType } from '~/composition/userProfile'
@@ -93,6 +102,7 @@ export default defineComponent({
       completed,
 
       mdiCheck,
+      mdiCalendar,
     }
   },
 })
@@ -115,7 +125,7 @@ export default defineComponent({
 
     padding: 16px;
 
-    border-radius: 16px;
+    border-radius: 16px 8px 8px 16px;
     background-color: $white;
 
     border: 1px solid #E6EBF0;
@@ -144,7 +154,7 @@ export default defineComponent({
     max-width: 80px;
     height: 100%;
 
-    border-radius: 16px;
+    border-radius: 8px 16px 16px 8px;
     text-align: center;
     background-color: $lightblue-lighten-1;
 
@@ -186,6 +196,8 @@ export default defineComponent({
 
   .task-date {
     position: absolute;
+    display: inline-flex;
+    align-items: flex-end;
 
     bottom: 16px;
     left: 16px;

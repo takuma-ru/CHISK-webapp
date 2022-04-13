@@ -95,7 +95,7 @@ export default defineComponent({
     font: 15px/24px sans-serif;
     box-sizing: border-box;
     border: 0px solid $gray-lighten-1;
-    border-radius: 28px;
+    border-radius: 16px;
     background-color: #bec6cf50;
 
     resize: vertical;

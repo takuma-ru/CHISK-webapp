@@ -1,8 +1,5 @@
 <template>
   <div>
-    <Button>
-      button
-    </Button>
     <div
       id="task-group"
     >

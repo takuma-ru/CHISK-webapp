@@ -104,7 +104,7 @@ export default defineComponent({
 
     border-radius: 0px 16px 16px 0px;
     filter: drop-shadow(0px 16px 40px rgba(0, 37, 80, 0.2));
-    background-color: $primary-lighten-1;
+    background-color: $primary;
   }
 
   .link-btn-list {
@@ -126,7 +126,7 @@ export default defineComponent({
 
     border: none;
     border-radius: 14px;
-    background-color: $primary-lighten-1;
+    background-color: transparent;
 
     -webkit-transition: background-color 0.05s linear;
     -moz-transition: background-color 0.05s linear;

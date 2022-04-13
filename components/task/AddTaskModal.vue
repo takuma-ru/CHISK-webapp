@@ -31,22 +31,47 @@
           <TextField
             v-model="inputData.title"
             label="タイトル"
-            :icon="mdiPlus"
+            :icon="mdiFormatTitle"
           />
           <Textarea
             v-model="inputData.text"
             label="詳細説明"
-            :icon="mdiPlus"
+            :icon="mdiFormatListBulleted"
+          />
+          <DateField
+            v-model="inputData.dateStart"
+            label="開始日"
+            :icon="mdiCalendarStart"
+          />
+          <DateField
+            v-model="inputData.dateEnd"
+            label="終了日"
+            :icon="mdiCalendarEnd"
           />
         </div>
 
         <div class="task-modal-action">
           <Divider />
-          <Button
-            @click="modal = false"
-          >
-            閉じる
-          </Button>
+          <div class="button-group">
+            <Button
+              color="transparent"
+              @click="modal = false"
+            >
+              閉じる
+            </Button>
+            <Button
+              text
+              color="lightblue"
+              @click=""
+            >
+              <Icon
+                text
+                :icon="mdiPlus"
+                color="gray-darken-1"
+              />
+              &nbsp;&nbsp;追加する
+            </Button>
+          </div>
           <!-- <div class="button-group">
             <Button
               v-if="taskData.completed"
@@ -112,10 +137,15 @@ import {
 } from '@nuxtjs/composition-api'
 import {
   mdiPlus,
+  mdiFormatTitle,
+  mdiFormatListBulleted,
+  mdiCalendarStart,
+  mdiCalendarEnd,
 } from '@mdi/js'
 import { Timestamp } from 'firebase/firestore'
 import TextField from '../field/textField.vue'
 import Textarea from '../field/Textarea.vue'
+import DateField from '../field/DateField.vue'
 import scssVar from '~/composable/scss/returnVariables'
 
 interface inputData {
@@ -129,7 +159,7 @@ interface inputData {
 }
 
 export default defineComponent({
-  components: { TextField, Textarea },
+  components: { TextField, Textarea, DateField },
   setup () {
     // const
     const modal = ref(false)
@@ -156,8 +186,14 @@ export default defineComponent({
     return {
       modal,
       inputData,
+
       scssVar,
+
       mdiPlus,
+      mdiFormatTitle,
+      mdiFormatListBulleted,
+      mdiCalendarStart,
+      mdiCalendarEnd,
     }
   },
 })
@@ -182,6 +218,14 @@ export default defineComponent({
 
     &-contents {
 
+    }
+
+    &-action {
+      .button-group {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
     }
   }
 }
