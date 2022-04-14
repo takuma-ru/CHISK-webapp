@@ -134,7 +134,7 @@ export default defineComponent({
           opacity: 0;
         }
         &-active {
-          transition: all 0.05s ease-out;
+          transition: all 0.2s ease-out;
         }
         &-to {
           opacity: 1;
@@ -145,7 +145,7 @@ export default defineComponent({
           opacity: 1;
         }
         &-active {
-          transition: all 0.05s ease-out;
+          transition: all 0.2s ease-out;
         }
         &-to {
           opacity: 0;

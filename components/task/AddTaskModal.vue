@@ -46,6 +46,7 @@
           <DateField
             v-model="inputData.dateEnd"
             label="終了日"
+            :date-start="inputData.dateStart"
             :icon="mdiCalendarEnd"
           />
         </div>

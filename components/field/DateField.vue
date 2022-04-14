@@ -11,6 +11,9 @@
       <DatePicker
         v-model="model"
         input-class="date-picker"
+        popup-style="border-radius: 16px"
+        value-type="date"
+        :disabled-date="notBeforeToday"
         style="width: 100%"
       />
       <label
@@ -66,6 +69,10 @@ export default defineComponent({
       type: String,
       default: '',
     },
+    dateStart: {
+      type: Date,
+      default: new Date('1900/01/01'),
+    },
   },
 
   emits: ['update:modelValue'],
@@ -80,9 +87,20 @@ export default defineComponent({
       set: (value: any) => ctx.emit('update:modelValue', value),
     })
 
+    // metohed
+    const notBeforeToday = (date :Date) => {
+      if (props.dateStart) {
+        return date < props.dateStart
+      } else {
+        return date
+      }
+    }
+
     return {
       msg,
       model,
+
+      notBeforeToday,
     }
   },
 })
