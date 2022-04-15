@@ -11,8 +11,11 @@
       <DatePicker
         v-model="model"
         input-class="date-picker"
-        popup-style="border-radius: 16px"
+        :popup-style="{
+          borderRadius: '16px'
+        }"
         value-type="date"
+        :editable="false"
         :disabled-date="notBeforeToday"
         style="width: 100%"
       />
@@ -89,11 +92,7 @@ export default defineComponent({
 
     // metohed
     const notBeforeToday = (date :Date) => {
-      if (props.dateStart) {
-        return date < props.dateStart
-      } else {
-        return date
-      }
+      return date < props.dateStart
     }
 
     return {
