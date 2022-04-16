@@ -8,7 +8,7 @@
         style="
           filter: drop-shadow(0px 16px 40px rgba(0, 37, 80, 0.2));
         "
-        @click="modal = true"
+        @click="isModal = true"
       >
         <Icon
           text
@@ -19,7 +19,7 @@
       </Button>
     </div>
     <swipe-modal
-      v-model="modal"
+      v-model="isModal"
       border-top-radius="16px"
       fullscreen
       contents-width="min(100vw, 960px)"
@@ -58,13 +58,14 @@
           <div class="button-group">
             <Button
               color="transparent"
-              @click="modal = false"
+              @click="isModal = false"
             >
               閉じる
             </Button>
             <Button
               text
               color="lightblue"
+              :disabled="isAddCurrently"
               @click="submit()"
             >
               <Icon
@@ -88,6 +89,7 @@ import {
   ref,
   reactive,
   inject,
+  watch,
 } from '@nuxtjs/composition-api'
 import {
   mdiPlus,
@@ -96,7 +98,7 @@ import {
   mdiCalendarStart,
   mdiCalendarEnd,
 } from '@mdi/js'
-import useVuelidate, { ValidationArgs } from '@vuelidate/core'
+import useVuelidate from '@vuelidate/core'
 import {
   required,
   maxLength,
@@ -121,8 +123,9 @@ export default defineComponent({
   components: { TextField, Textarea, DateField },
   setup () {
     // const
-    const modal = ref(false)
-    const inputData = reactive<inputDataType>({
+    const isModal = ref(false)
+    const isAddCurrently = ref(false)
+    let inputData = reactive<inputDataType>({
       title: null,
       text: null,
       dateStart: new Date(),
@@ -142,7 +145,7 @@ export default defineComponent({
       dateEnd: { required },
       tag: { required },
     }
-    const v$ = useVuelidate<inputDataType, ValidationArgs<inputDataType>>(inputDataRules, inputData as inputDataType)
+    const v$ = useVuelidate(inputDataRules, inputData as inputDataType)
 
     const {
       userProfile,
@@ -150,18 +153,47 @@ export default defineComponent({
 
     // let, computed
 
+    // watch
+    watch(isModal, (newIsModal) => {
+      if (!newIsModal) {
+        init()
+      }
+    })
+
     // methods
-    const submit = () => {
-      addTaskData(userProfile.uid, {
-        title: inputData.title!,
-        text: inputData.text!,
-        dateStart: Timestamp.fromDate(inputData.dateStart as Date),
-        dateEnd: Timestamp.fromDate(inputData.dateEnd as Date),
-        group: '進行中',
-        completed: null,
-        tag: inputData.tag!,
-        id: '',
-      })
+    const init = () => {
+      isAddCurrently.value = false
+      inputData = {
+        title: null,
+        text: null,
+        dateStart: new Date(),
+        dateEnd: new Date(),
+        tag: [1],
+      }
+      // v$.value.title.$model = null
+    }
+
+    const submit = async () => {
+      const isFormCorrect = await v$.value.$validate()
+
+      if (isFormCorrect) {
+        isAddCurrently.value = true
+        if (await addTaskData(userProfile.uid, {
+          title: inputData.title!,
+          text: inputData.text!,
+          dateStart: Timestamp.fromDate(inputData.dateStart as Date),
+          dateEnd: Timestamp.fromDate(inputData.dateEnd as Date),
+          group: '進行中',
+          completed: null,
+          tag: inputData.tag!,
+          id: '',
+        })) {
+          isModal.value = false
+        }
+      } else {
+        isAddCurrently.value = false
+        console.log('修正が必要です')
+      }
     }
 
     // lifeCycle
@@ -171,8 +203,9 @@ export default defineComponent({
     // other
 
     return {
-      modal,
+      isModal,
       inputData,
+      isAddCurrently,
       v$,
 
       submit,

@@ -6,14 +6,24 @@ import { collection, doc, getFirestore, setDoc } from 'firebase/firestore'
 import { userTaskDataInterface } from '@/composition/userTaskData'
 
 export default async function addTaskData (uid: string | null, data: userTaskDataInterface) {
+  let isAddSuccess = false
   const firestore = getFirestore()
 
   if (uid && data) {
-    console.log(data)
     const newTaskDataRef = doc(collection(firestore, 'tasks', uid, 'Task'))
     data.id = newTaskDataRef.id
     await setDoc(newTaskDataRef, data)
+      .then(function () {
+        isAddSuccess = true
+      })
+      .catch(function (err) {
+        isAddSuccess = false
+        console.log(err)
+      })
   } else {
-    console.error('uid not found')
+    isAddSuccess = false
+    console.error('uid or data not found')
   }
+
+  return isAddSuccess
 }

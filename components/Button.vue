@@ -77,6 +77,8 @@ export default defineComponent({
 
   .text {
     display: flex;
+    position: relative;
+    z-index: 1;
     height: calc(100% - 0.5rem);
     padding: 0.25rem 1em;
     margin: 0px;
@@ -92,7 +94,7 @@ export default defineComponent({
 
   &:hover::before {
     position: absolute;
-    z-index: 1;
+    z-index: 2;
     content: '';
     width: 100%;
     height: 100%;
@@ -104,8 +106,38 @@ export default defineComponent({
     background-color: #CCCCCC2D;
   }
 
-  &[disabled] {
+  &:disabled {
+    color: rgba(16, 16, 16, 0.5);
+    svg path {
+      fill: rgba(16, 16, 16, 0.5);
+    }
 
+    &::after {
+      position: absolute;
+      z-index: 0;
+      content: '';
+      width: 100%;
+      height: 100%;
+      top: 0px;
+      left: 0px;
+
+      border-radius: 8px;
+      background-color: $gray-lighten-2;
+    }
+  }
+
+  &:disabled:hover::before {
+    position: absolute;
+    z-index: 1;
+    content: '';
+    width: 100%;
+    height: 100%;
+
+    top: 0%;
+    left: 0%;
+
+    border-radius: 8px;
+    background-color: #CCCCCC00;
   }
 
   &[fab] {
