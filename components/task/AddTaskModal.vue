@@ -29,12 +29,14 @@
       <div class="task-modal">
         <div class="task-modal-contents">
           <TextField
-            v-model="inputData.title"
+            v-model="v$.title.$model"
+            :v="v$.title"
             label="タイトル"
             :icon="mdiFormatTitle"
           />
           <Textarea
-            v-model="inputData.text"
+            v-model="v$.text.$model"
+            :v="v$.text"
             label="詳細説明"
             :icon="mdiFormatListBulleted"
           />
@@ -63,7 +65,7 @@
             <Button
               text
               color="lightblue"
-              @click=""
+              @click="submit()"
             >
               <Icon
                 text
@@ -73,56 +75,6 @@
               &nbsp;&nbsp;追加する
             </Button>
           </div>
-          <!-- <div class="button-group">
-            <Button
-              v-if="taskData.completed"
-              color="red-lighten-1"
-              @click="inCompleted(userProfile.uid, taskData.id)"
-            >
-              <Icon
-                text
-                :icon="mdiClose"
-                color="gray-darken-1"
-              />
-              &nbsp;&nbsp;やっぱり完了じゃない
-            </Button>
-            <Button
-              v-else
-              text
-              color="lightblue"
-              @click="completed(userProfile.uid, taskData.id)"
-            >
-              <Icon
-                text
-                :icon="mdiCheck"
-                color="gray-darken-1"
-              />
-              &nbsp;&nbsp;完了とする！
-            </Button>
-            <div class="icon-group">
-              <Button
-                color="transparent"
-              >
-                <Icon
-                  text
-                  :icon="mdiPencilOutline"
-                  color="black"
-                  size="1.5rem"
-                />
-              </Button>
-              <Button
-                color="transparent"
-                @click="dialog = true"
-              >
-                <Icon
-                  text
-                  :icon="mdiTrashCanOutline"
-                  color="black"
-                  size="1.5rem"
-                />
-              </Button>
-            </div>
-          </div> -->
         </div>
       </div>
     </swipe-modal>
@@ -135,6 +87,7 @@ import {
   onBeforeMount,
   ref,
   reactive,
+  inject,
 } from '@nuxtjs/composition-api'
 import {
   mdiPlus,
@@ -143,19 +96,24 @@ import {
   mdiCalendarStart,
   mdiCalendarEnd,
 } from '@mdi/js'
+import useVuelidate, { ValidationArgs } from '@vuelidate/core'
+import {
+  required,
+  maxLength,
+} from '@vuelidate/validators'
 import { Timestamp } from 'firebase/firestore'
 import TextField from '../field/textField.vue'
 import Textarea from '../field/Textarea.vue'
 import DateField from '../field/DateField.vue'
+import useUserProfile, { userProfileKey, userProfileType } from '~/composition/userProfile'
 import scssVar from '~/composable/scss/returnVariables'
+import addTaskData from '~/composable/firebase/addTaskData'
 
-interface inputData {
-  title?: string,
-  text?: string,
-  dateStart?: Timestamp | Date,
-  dateEnd?: Timestamp | Date,
-  group?: string,
-  completed?: Timestamp | Date,
+interface inputDataType {
+  title: string | null,
+  text: string | null,
+  dateStart: Date,
+  dateEnd: Date,
   tag?: Array<any>,
 }
 
@@ -164,19 +122,47 @@ export default defineComponent({
   setup () {
     // const
     const modal = ref(false)
-    const inputData = reactive<inputData>({
-      title: undefined,
-      text: undefined,
+    const inputData = reactive<inputDataType>({
+      title: null,
+      text: null,
       dateStart: new Date(),
       dateEnd: new Date(),
-      group: undefined,
-      completed: new Date(),
-      tag: [],
+      tag: [1],
     })
+    const inputDataRules = {
+      title: {
+        required,
+        maxLength: maxLength(30),
+      },
+      text: {
+        required,
+        maxLength: maxLength(300),
+      },
+      dateStart: { required },
+      dateEnd: { required },
+      tag: { required },
+    }
+    const v$ = useVuelidate<inputDataType, ValidationArgs<inputDataType>>(inputDataRules, inputData)
+
+    const {
+      userProfile,
+    } = inject(userProfileKey, useUserProfile()) as userProfileType
 
     // let, computed
 
     // methods
+    const submit = () => {
+      addTaskData(userProfile.uid, {
+        title: inputData.title!,
+        text: inputData.text!,
+        dateStart: Timestamp.fromDate(inputData.dateStart),
+        dateEnd: Timestamp.fromDate(inputData.dateEnd),
+        group: '進行中',
+        completed: null,
+        tag: inputData.tag!,
+        id: '',
+      })
+    }
 
     // lifeCycle
     onBeforeMount(async () => {
@@ -187,7 +173,9 @@ export default defineComponent({
     return {
       modal,
       inputData,
+      v$,
 
+      submit,
       scssVar,
 
       mdiPlus,
@@ -214,8 +202,16 @@ export default defineComponent({
     height: calc(100vh - 20px - 16px);
 
     padding: 0px 16px 16px 16px;
+    border-radius: 16px;
     flex-direction: column;
     justify-content: space-between;
+    overflow: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
     &-contents {
 

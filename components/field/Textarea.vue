@@ -13,6 +13,16 @@
         required
       />
       <label>{{ label }}</label>
+      <div class="input-invalid">
+        <div v-for="(error, index) in v.$errors" :key="index">
+          <div v-if="error.$validator == 'required'">
+            入力してください
+          </div>
+          <div v-if="error.$validator == 'maxLength'">
+            {{ error.$params.max }}字以内にしてください
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -35,6 +45,9 @@ export default defineComponent({
   props: {
     modelValue: {
       type: String,
+      default: null,
+    },
+    v: {
       default: null,
     },
     icon: {
@@ -83,6 +96,12 @@ export default defineComponent({
   &-textarea {
     position: relative;
     flex-grow: 1;
+  }
+
+  &-invalid {
+    color: $red;
+    font-size: small;
+    padding-left: 1rem;
   }
 
   textarea {

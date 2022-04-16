@@ -2,14 +2,17 @@
   Firestoreに新しいタスクデータを追加する
 **/
 
-import { doc, getFirestore, setDoc } from 'firebase/firestore'
-import userTaskDataInterface from '@/composition/userTaskData'
+import { collection, doc, getFirestore, setDoc } from 'firebase/firestore'
+import { userTaskDataInterface } from '@/composition/userTaskData'
 
-export default async function addTaskData (uid: string | null, data: typeof userTaskDataInterface) {
+export default async function addTaskData (uid: string | null, data: userTaskDataInterface) {
   const firestore = getFirestore()
 
-  if (uid) {
-    await setDoc(doc(firestore, 'tasks', uid, 'Task'), data)
+  if (uid && data) {
+    console.log(data)
+    const newTaskDataRef = doc(collection(firestore, 'tasks', uid, 'Task'))
+    data.id = newTaskDataRef.id
+    await setDoc(newTaskDataRef, data)
   } else {
     console.error('uid not found')
   }

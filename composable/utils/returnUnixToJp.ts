@@ -3,7 +3,7 @@
  **/
 import { Timestamp } from 'firebase/firestore'
 
-export default function returnUnixToJp (unix: Timestamp | null) {
+export default function returnUnixToJp (unix: Timestamp | Date | null) {
   let dateJp = null
   if (unix instanceof Timestamp) {
     const date = new Date(unix.seconds * 1000)
