@@ -136,10 +136,12 @@ export default defineComponent({
       title: {
         required,
         maxLength: maxLength(30),
+        $lazy: true,
       },
       text: {
         required,
         maxLength: maxLength(300),
+        $lazy: true,
       },
       dateStart: { required },
       dateEnd: { required },
@@ -155,7 +157,7 @@ export default defineComponent({
 
     // watch
     watch(isModal, (newIsModal) => {
-      if (!newIsModal) {
+      if (newIsModal) {
         init()
       }
     })
@@ -163,14 +165,11 @@ export default defineComponent({
     // methods
     const init = () => {
       isAddCurrently.value = false
-      inputData = {
-        title: null,
-        text: null,
-        dateStart: new Date(),
-        dateEnd: new Date(),
-        tag: [1],
-      }
-      // v$.value.title.$model = null
+      v$.value.title.$model = null
+      v$.value.text.$model = null
+      v$.value.dateStart.$model = new Date()
+      v$.value.dateEnd.$model = new Date()
+      v$.value.tag.$model = [1]
     }
 
     const submit = async () => {
