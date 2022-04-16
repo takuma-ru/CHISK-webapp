@@ -114,7 +114,7 @@ interface inputDataType {
   text: string | null,
   dateStart: Date,
   dateEnd: Date,
-  tag?: Array<any>,
+  tag: Array<any>,
 }
 
 export default defineComponent({
@@ -142,7 +142,7 @@ export default defineComponent({
       dateEnd: { required },
       tag: { required },
     }
-    const v$ = useVuelidate<inputDataType, ValidationArgs<inputDataType>>(inputDataRules, inputData)
+    const v$ = useVuelidate<inputDataType, ValidationArgs<inputDataType>>(inputDataRules, inputData as inputDataType)
 
     const {
       userProfile,
