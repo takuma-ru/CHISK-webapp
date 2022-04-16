@@ -155,8 +155,8 @@ export default defineComponent({
       addTaskData(userProfile.uid, {
         title: inputData.title!,
         text: inputData.text!,
-        dateStart: Timestamp.fromDate(inputData.dateStart),
-        dateEnd: Timestamp.fromDate(inputData.dateEnd),
+        dateStart: Timestamp.fromDate(inputData.dateStart as Date),
+        dateEnd: Timestamp.fromDate(inputData.dateEnd as Date),
         group: '進行中',
         completed: null,
         tag: inputData.tag!,
