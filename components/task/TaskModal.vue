@@ -50,6 +50,29 @@
         <div class="task-modal-action">
           <Divider />
           <div class="button-group">
+            <div class="icon-group">
+              <Button
+                color="transparent"
+              >
+                <Icon
+                  text
+                  :icon="mdiPencilOutline"
+                  color="black"
+                  size="1.5rem"
+                />
+              </Button>
+              <Button
+                color="transparent"
+                @click="dialog = true"
+              >
+                <Icon
+                  text
+                  :icon="mdiTrashCanOutline"
+                  color="black"
+                  size="1.5rem"
+                />
+              </Button>
+            </div>
             <Button
               v-if="taskData.completed"
               color="red-lighten-1"
@@ -75,29 +98,6 @@
               />
               &nbsp;&nbsp;完了とする！
             </Button>
-            <div class="icon-group">
-              <Button
-                color="transparent"
-              >
-                <Icon
-                  text
-                  :icon="mdiPencilOutline"
-                  color="black"
-                  size="1.5rem"
-                />
-              </Button>
-              <Button
-                color="transparent"
-                @click="dialog = true"
-              >
-                <Icon
-                  text
-                  :icon="mdiTrashCanOutline"
-                  color="black"
-                  size="1.5rem"
-                />
-              </Button>
-            </div>
           </div>
         </div>
       </div>

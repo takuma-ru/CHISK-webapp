@@ -10,6 +10,10 @@ export default {
     MEASUREMENT_ID: process.env.MEASUREMENT_ID,
   },
 
+  loadingIndicator: {
+    name: './assets/loadingIndicator.html',
+  },
+
   ssr: false,
 
   head: {
