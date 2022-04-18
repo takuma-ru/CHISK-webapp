@@ -246,11 +246,11 @@ export default defineComponent({
 #swipe-modal {
   position: fixed;
   scrollbar-width: none;
-  z-index: 5;
+  z-index: 15;
 }
 .modal-background {
   position: fixed;
-  z-index: 1;
+  z-index: 11;
   width: 100vw;
   height: 100vh;
   top: 50%;
@@ -261,7 +261,7 @@ export default defineComponent({
   --contents-height: 30vh;
   --contents-bottom-position: 0%;
   position: fixed;
-  z-index: 2;
+  z-index: 12;
   min-height: var(--contents-height);
   max-height: 100vh;
   bottom: var(--contents-bottom-position);
@@ -279,7 +279,7 @@ export default defineComponent({
   }
   &-chip {
     --tip-color: #c8c8c8;
-    z-index: 2;
+    z-index: 12;
     position: relative;
     top: 0px;
     height: 4px;

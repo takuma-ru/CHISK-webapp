@@ -88,6 +88,7 @@ export default defineComponent({
 #bottom-navigation-drawer {
   & {
     position: fixed;
+    z-index: 13;
     width: 100vw;
     min-height: 64px;
 
@@ -132,7 +133,7 @@ export default defineComponent({
 
   &:hover::before {
     position: absolute;
-    z-index: 1;
+    z-index: 11;
     content: '';
     width: 100%;
     height: 100%;

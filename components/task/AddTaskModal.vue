@@ -3,6 +3,7 @@
     <div class="add-button">
       <Button
         color="blue-lighten-1"
+        text-color="white"
         size="large"
         fab
         style="
@@ -13,9 +14,9 @@
         <Icon
           text
           :icon="mdiPlus"
-          color="white"
           size="2rem"
         />
+        &nbsp;&nbsp;追加する
       </Button>
     </div>
     <swipe-modal
@@ -223,13 +224,13 @@ export default defineComponent({
 <style lang="scss" scoped>
 .add-task-modal {
   .add-button {
+    z-index: 10;
     position: fixed;
     bottom: 64px + 16px;
     right: 16px;
   }
 
   .task-modal {
-    padding: 0px 16px 16px;
     display: flex;
     height: calc(100vh - 20px - 16px);
 

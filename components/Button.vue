@@ -9,7 +9,12 @@
     :fab="fab"
     @click="$emit('click')"
   >
-    <div class="text">
+    <div
+      class="text"
+      :style="`
+        --color: ${scssVar(textColor)}
+      `"
+    >
       <slot />
     </div>
   </button>
@@ -30,6 +35,10 @@ export default defineComponent({
     color: {
       type: String,
       default: 'primary',
+    },
+    textColor: {
+      type: String,
+      default: 'black',
     },
     size: {
       type: String,
@@ -76,6 +85,7 @@ export default defineComponent({
   -webkit-tap-highlight-color:rgba(0,0,0,0);
 
   .text {
+    --color: $white;
     display: flex;
     position: relative;
     z-index: 1;
@@ -86,10 +96,14 @@ export default defineComponent({
     text-align: center;
     font-size: 14px;
     font-weight: normal;
-    /* color: $white; */
+    color: var(--color);
 
     justify-content: center;
     align-items: center;
+
+    svg path {
+      fill: var(--color);
+    }
   }
 
   &:hover::before {

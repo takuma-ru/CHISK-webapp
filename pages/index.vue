@@ -10,6 +10,7 @@
       />
     </div>
     <AddTaskModal />
+    <Earth />
   </div>
 </template>
 
@@ -32,9 +33,10 @@ import useUserTaskData, {
 } from '~/composition/userTaskData'
 import deleteTaskData from '~/composable/firebase/deleteTaskData'
 import AddTaskModal from '~/components/task/AddTaskModal.vue'
+import Earth from '~/components/earth/earth.vue'
 
 export default defineComponent({
-  components: { TaskCard, AddTaskModal },
+  components: { TaskCard, AddTaskModal, Earth },
   setup () {
     // store
     // const
@@ -73,3 +75,7 @@ export default defineComponent({
   head: {},
 })
 </script>
+
+<style lang="scss" scoped>
+
+</style>
