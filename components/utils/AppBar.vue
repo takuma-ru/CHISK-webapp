@@ -2,15 +2,19 @@
   <div
     id="app-bar"
   >
-    <span>
+    <span class="title">
       {{ nowPage.title }}
     </span>
 
-    <img
-      :src="userProfile.photoURL"
-      alt="Avatar"
-      style="border-radius: 50%;"
-    >
+    <div class="profile">
+      <!-- <span style="margin-right: 8px">{{ userProfile.name }}</span> -->
+      <img
+        :src="userProfile.photoURL"
+        alt="Avatar"
+        height="36px"
+        style="border-radius: 50%;"
+      >
+    </div>
   </div>
 </template>
 
@@ -75,6 +79,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
   #app-bar {
+    z-index: 12;
     display: flex;
     position: relative;
     width: auto;
@@ -84,7 +89,14 @@ export default defineComponent({
 
     justify-content: space-between;
 
-    span {
+    .profile {
+      display: inline-flex;
+      align-items: center;
+
+      color: $gray-lighten-2;
+    }
+
+    .title {
       color: $white;
       font-size: large;
       font-weight: 600;

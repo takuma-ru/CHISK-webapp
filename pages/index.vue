@@ -1,13 +1,19 @@
 <template>
   <div>
-    <div
-      id="task-group"
-    >
-      <TaskCard
-        v-for="task in userTaskData"
-        :key="task.id"
-        :task-data="task"
-      />
+    <div class="contents">
+      <div
+        class="task-group"
+      >
+        <h3>タスク一覧</h3>
+        <Divider />
+        <TaskCard
+          :task-data="userTaskData.find((v) => v.group === '目標')"
+        />
+      </div>
+      <div class="earth-info">
+        <h3>情報</h3>
+        <Divider />
+      </div>
     </div>
     <AddTaskModal />
     <Earth />
@@ -34,9 +40,10 @@ import useUserTaskData, {
 import deleteTaskData from '~/composable/firebase/deleteTaskData'
 import AddTaskModal from '~/components/task/AddTaskModal.vue'
 import Earth from '~/components/earth/earth.vue'
+import Divider from '~/components/Divider.vue'
 
 export default defineComponent({
-  components: { TaskCard, AddTaskModal, Earth },
+  components: { TaskCard, AddTaskModal, Earth, Divider },
   setup () {
     // store
     // const
@@ -77,5 +84,29 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.contents {
+  position: relative;
+  z-index: 11;
+  display: flex;
+  width: fit-content;
 
+  flex-direction: column;
+
+  h3 {
+    margin: 0px;
+    color: $white;
+  }
+
+  .task-group {
+    position: relative;
+    width: fit-content;
+
+  }
+
+  .earth-info {
+    position: relative;
+
+    margin-top: 32px;
+  }
+}
 </style>
