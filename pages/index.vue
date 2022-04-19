@@ -30,11 +30,11 @@
           <tbody>
             <tr>
               <td>誕生してから</td>
-              <td><span class="data-num">{{ 0 }}</span>&nbsp;&nbsp;日</td>
+              <td><span class="data-num">{{ 0 }}</span>日</td>
             </tr>
             <tr>
               <td>ペンギンが</td>
-              <td><span class="data-num">{{ 0 }}</span>&nbsp;&nbsp;匹</td>
+              <td><span class="data-num">{{ 0 }}</span>匹</td>
             </tr>
           </tbody>
         </table>
@@ -147,19 +147,22 @@ export default defineComponent({
     margin-top: 32px;
 
     .data-num {
-      font-size: x-large;
+      padding-right: 12px;
+
+      font-size: large;
+      font-weight: bold;
     }
 
     table {
       width: 100%;
 
       border-radius: 16px;
-      font-size: medium;
       color: $white;
       background-color: #4242422D;
 
       td {
         padding: 8px 16px;
+        font-weight: normal;
       }
     }
   }
