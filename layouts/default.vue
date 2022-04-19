@@ -81,6 +81,7 @@ body {
 
 #main-contents {
   position: relative;
+  width: calc(100vw - 48px);
   margin: 24px;
 }
 

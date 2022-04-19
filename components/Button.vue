@@ -177,7 +177,7 @@ export default defineComponent({
 
   &[size = "normal"] {
     width: auto;
-    height: calc(100% - 0.8rem);
+    line-height: calc(100% - 0.8rem);
   }
 
   &[size = "large"] {

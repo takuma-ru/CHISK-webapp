@@ -158,7 +158,7 @@ export default defineComponent({
     text-align: center;
     background-color: $lightblue-lighten-1;
 
-    border: 1px solid $lightblue-darken-1;
+    border: 1px solid $lightblue;
     cursor: pointer;
     outline: none;
     -webkit-tap-highlight-color:rgba(0,0,0,0);

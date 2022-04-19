@@ -116,9 +116,9 @@ export default defineComponent({
 <style lang="scss" scoped>
 .contents {
   position: relative;
-  z-index: 11;
   display: flex;
-  width: fit-content;
+  z-index: 11;
+  width: calc(100vw - 24px);
 
   flex-direction: column;
 
@@ -129,7 +129,7 @@ export default defineComponent({
 
   .task-group {
     position: relative;
-    width: fit-content;
+    width: calc(100% - 24px);
 
     .task-list {
       display: flex;
@@ -143,6 +143,7 @@ export default defineComponent({
 
   .earth-info {
     position: relative;
+    width: calc(100% - 24px);
 
     margin-top: 32px;
 

@@ -122,7 +122,7 @@
         </Button>
         <Button
           color="red-lighten-1"
-          @click="deleteTaskData( userProfile.uid, taskData.id)"
+          @click="deleteTaskData(userProfile.uid, taskData.id).then(() => { dialog = false; router.push('?') })"
         >
           <Icon
             text
@@ -145,6 +145,7 @@ import {
   onMounted,
   ref,
   useRoute,
+  useRouter,
   watch,
 } from '@nuxtjs/composition-api'
 import {
@@ -170,6 +171,7 @@ export default defineComponent({
   setup () {
     // const
     const route = useRoute()
+    const router = useRouter()
     const {
       userProfile,
     } = inject(userProfileKey, useUserProfile()) as userProfileType
@@ -186,6 +188,10 @@ export default defineComponent({
       checkTaskId(newTaskId)
     })
 
+    watch(userTaskData, () => {
+      checkTaskId(taskId.value)
+    })
+
     // methods
     const checkTaskId = (newTaskId: string | (string | null)[]) => {
       if (taskId.value) {
@@ -198,6 +204,7 @@ export default defineComponent({
         modal.value = false
       }
     }
+
     const {
       completed,
       inCompleted,
@@ -211,6 +218,7 @@ export default defineComponent({
     // other
 
     return {
+      router,
       modal,
       taskId,
       taskData,

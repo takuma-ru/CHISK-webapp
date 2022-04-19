@@ -72,7 +72,7 @@ export default defineComponent({
     right: -100vmin;
 
     animation: earth;
-    animation-duration: 100s;
+    animation-duration: 365s;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
   }

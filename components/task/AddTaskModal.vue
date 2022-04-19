@@ -229,7 +229,7 @@ export default defineComponent({
     bottom: 64px + 16px;
     right: 16px;
 
-    filter: drop-shadow(0px 16px 40px rgba(0, 37, 80, 0.4));
+    filter: drop-shadow(0px 16px 40px rgba(0, 37, 80, 0.2));
   }
 
   .task-modal {
