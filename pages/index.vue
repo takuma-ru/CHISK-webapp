@@ -6,13 +6,38 @@
       >
         <h3>タスク一覧</h3>
         <Divider />
-        <TaskCard
-          :task-data="userTaskData.find((v) => v.group === '目標')"
-        />
+        <div class="task-list">
+          <TaskCard
+            :task-data="userTaskData.find((v) => v.group === '目標')"
+          />
+          <Button
+            color="blue-lighten-1"
+            text-color="white"
+            class="taskboard-button"
+            to="/taskboard"
+          >
+            <Icon
+              :icon="mdiViewDashboard"
+            />
+            &nbsp;&nbsp;タスクボードでもっと見る
+          </Button>
+        </div>
       </div>
       <div class="earth-info">
-        <h3>情報</h3>
+        <h3>この星の情報</h3>
         <Divider />
+        <table>
+          <tbody>
+            <tr>
+              <td>誕生してから</td>
+              <td><span class="data-num">{{ 0 }}</span>&nbsp;&nbsp;日</td>
+            </tr>
+            <tr>
+              <td>ペンギンが</td>
+              <td><span class="data-num">{{ 0 }}</span>&nbsp;&nbsp;匹</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
     <AddTaskModal />
@@ -28,6 +53,9 @@ import {
   useMeta,
   onMounted,
 } from '@nuxtjs/composition-api'
+import {
+  mdiViewDashboard,
+} from '@mdi/js'
 import TaskCard from '~/components/task/TaskCard.vue'
 import useUserProfile, {
   userProfileType,
@@ -77,6 +105,8 @@ export default defineComponent({
 
       deleteUserTaskData,
       deleteTaskData,
+
+      mdiViewDashboard,
     }
   },
   head: {},
@@ -101,12 +131,37 @@ export default defineComponent({
     position: relative;
     width: fit-content;
 
+    .task-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .taskboard-button {
+      margin: 8px 0px;
+    }
   }
 
   .earth-info {
     position: relative;
 
     margin-top: 32px;
+
+    .data-num {
+      font-size: x-large;
+    }
+
+    table {
+      width: 100%;
+
+      border-radius: 16px;
+      font-size: medium;
+      color: $white;
+      background-color: #4242422D;
+
+      td {
+        padding: 8px 16px;
+      }
+    }
   }
 }
 </style>

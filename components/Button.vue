@@ -7,7 +7,7 @@
     }"
     :size="size"
     :fab="fab"
-    @click="$emit('click')"
+    @click="to ? pushRoute() : $emit('click')"
   >
     <div
       class="text"
@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import {
-  defineComponent,
+  defineComponent, useRouter,
 } from '@nuxtjs/composition-api'
 import scssVar from '~/composable/scss/returnVariables'
 
@@ -51,13 +51,21 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    to: {
+      type: String,
+      default: null,
+    },
   },
-  setup () {
+  setup (props) {
     // store
 
     // const
+    const router = useRouter()
 
     // methods
+    const pushRoute = () => {
+      router.push(props.to)
+    }
 
     // lifeCycle
 
@@ -65,6 +73,7 @@ export default defineComponent({
 
     return {
       scssVar,
+      pushRoute,
     }
   },
 })
@@ -76,7 +85,7 @@ export default defineComponent({
   width: auto;
   height: auto;
 
-  line-height: 28px;
+  line-height: calc(100% - 0.8rem);
   border: none;
   border-radius: 8px;
   background-color: $primary-lighten-1;
@@ -86,11 +95,11 @@ export default defineComponent({
 
   .text {
     --color: $white;
-    display: flex;
+    display: inline-flex;
     position: relative;
     z-index: 1;
-    height: calc(100% - 0.5rem);
-    padding: 0.25rem 1em;
+    line-height: calc(100% - 0.8rem);
+    padding: 0.4rem 1em;
     margin: 0px;
 
     text-align: center;
@@ -168,7 +177,7 @@ export default defineComponent({
 
   &[size = "normal"] {
     width: auto;
-    height: 36px;
+    height: calc(100% - 0.8rem);
   }
 
   &[size = "large"] {
