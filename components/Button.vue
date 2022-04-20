@@ -15,6 +15,12 @@
         --color: ${scssVar(textColor)}
       `"
     >
+      <Icon
+        v-if="icon"
+        size="24px"
+        :icon="icon"
+      />
+      <span v-if="icon">&nbsp;&nbsp;</span>
       <slot />
     </div>
   </button>
@@ -31,6 +37,10 @@ export default defineComponent({
     disabled: {
       type: Boolean,
       default: false,
+    },
+    icon: {
+      type: String,
+      default: null,
     },
     color: {
       type: String,
@@ -83,9 +93,8 @@ export default defineComponent({
 #Button {
   position: relative;
   width: auto;
-  height: auto;
+  height: 100%;
 
-  line-height: calc(100% - 0.8rem);
   border: none;
   border-radius: 8px;
   background-color: $primary-lighten-1;
@@ -98,7 +107,6 @@ export default defineComponent({
     display: inline-flex;
     position: relative;
     z-index: 1;
-    line-height: calc(100% - 0.8rem);
     padding: 0.4rem 1em;
     margin: 0px;
 
@@ -110,8 +118,10 @@ export default defineComponent({
     justify-content: center;
     align-items: center;
 
-    svg path {
-      fill: var(--color);
+    svg {
+      path {
+        fill: var(--color);
+      }
     }
   }
 
@@ -177,7 +187,7 @@ export default defineComponent({
 
   &[size = "normal"] {
     width: auto;
-    line-height: calc(100% - 0.8rem);
+    height: 40.78px;
   }
 
   &[size = "large"] {

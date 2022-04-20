@@ -76,27 +76,19 @@
             <Button
               v-if="taskData.completed"
               color="red-lighten-1"
+              :icon="mdiClose"
               @click="inCompleted(userProfile.uid, taskData.id)"
             >
-              <Icon
-                text
-                :icon="mdiClose"
-                color="gray-darken-1"
-              />
-              &nbsp;&nbsp;やっぱり完了じゃない
+              やっぱり完了じゃない
             </Button>
             <Button
               v-else
               text
               color="lightblue"
+              :icon="mdiCheck"
               @click="completed(userProfile.uid, taskData.id)"
             >
-              <Icon
-                text
-                :icon="mdiCheck"
-                color="gray-darken-1"
-              />
-              &nbsp;&nbsp;完了とする！
+              完了とする！
             </Button>
           </div>
         </div>
@@ -122,15 +114,10 @@
         </Button>
         <Button
           color="red-lighten-1"
+          :icon="mdiTrashCanOutline"
           @click="deleteTaskData(userProfile.uid, taskData.id).then(() => { dialog = false; router.push('?') })"
         >
-          <Icon
-            text
-            :icon="mdiTrashCanOutline"
-            color="black"
-            size="1.5rem"
-          />
-          &nbsp;&nbsp;削除
+          削除
         </Button>
       </div>
     </Dialog>

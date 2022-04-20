@@ -8,12 +8,32 @@
 
     <div class="profile">
       <!-- <span style="margin-right: 8px">{{ userProfile.name }}</span> -->
-      <img
-        :src="userProfile.photoURL"
-        alt="Avatar"
-        height="36px"
-        style="border-radius: 50%;"
+      <Button
+        v-if="userProfile.uid"
+        color="transparent"
+        text-color="white"
+        :icon="mdiLogoutVariant"
+        style="margin-right: 16px"
+        @click="trySignOut()"
       >
+        サインアウト
+      </Button>
+      <Button
+        v-else
+        color="transparent"
+        text-color="white"
+        :icon="mdiLoginVariant"
+        style="margin-right: 16px"
+        @click="trySignIn()"
+      >
+        サインイン
+      </Button>
+      <div class="avatar">
+        <img
+          :src="userProfile.photoURL"
+          height="36px"
+        >
+      </div>
     </div>
   </div>
 </template>
@@ -35,6 +55,8 @@ import {
   mdiInformationOutline,
   mdiViewDashboard,
   mdiViewDashboardOutline,
+  mdiLoginVariant,
+  mdiLogoutVariant,
 } from '@mdi/js'
 import auth from '~/composable/firebase/auth'
 import useUserProfile, { userProfileKey, userProfileType } from '~/composition/userProfile'
@@ -42,13 +64,8 @@ import useUserProfile, { userProfileKey, userProfileType } from '~/composition/u
 export default defineComponent({
   setup () {
     // const
-    const {
-      trySignIn,
-      trySignOut,
-    } = auth()
-    const {
-      userProfile,
-    } = inject(userProfileKey, useUserProfile()) as userProfileType
+    const { trySignIn, trySignOut } = auth()
+    const { userProfile } = inject(userProfileKey, useUserProfile()) as userProfileType
     const route = useRoute()
     const items = ref([
       { title: 'タスクボード', icon: mdiViewDashboard, icon_outline: mdiViewDashboardOutline, link: '/taskboard' },
@@ -64,14 +81,15 @@ export default defineComponent({
       }
       return item
     })
-
     return {
       nowPage,
       items,
       userProfile,
-
       trySignIn,
       trySignOut,
+
+      mdiLoginVariant,
+      mdiLogoutVariant,
     }
   },
 })
@@ -94,6 +112,17 @@ export default defineComponent({
       align-items: center;
 
       color: $gray-lighten-2;
+
+      .avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background-color: $gray-lighten-1;
+
+        img {
+          border-radius: 50%;
+        }
+      }
     }
 
     .title {

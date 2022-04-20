@@ -126,7 +126,7 @@ export default defineComponent({
     // const
     const isModal = ref(false)
     const isAddCurrently = ref(false)
-    let inputData = reactive<inputDataType>({
+    const inputData = reactive<inputDataType>({
       title: null,
       text: null,
       dateStart: new Date(),
@@ -226,7 +226,8 @@ export default defineComponent({
   .add-button {
     position: fixed;
     z-index: 15;
-    bottom: 64px + 16px;
+    bottom: calc(64px + 16px + constant(safe-area-inset-bottom));
+    bottom: calc(64px + 16px + env(safe-area-inset-bottom));
     right: 16px;
 
     filter: drop-shadow(0px 16px 40px rgba(0, 37, 80, 0.2));

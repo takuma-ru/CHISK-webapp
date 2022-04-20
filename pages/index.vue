@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="index">
     <div class="contents">
       <div
         class="task-group"
@@ -13,12 +13,10 @@
           <Button
             color="blue-lighten-1"
             text-color="white"
-            class="taskboard-button"
+            :icon="mdiViewDashboard"
             to="/taskboard"
+            class="taskboard-button"
           >
-            <Icon
-              :icon="mdiViewDashboard"
-            />
             &nbsp;&nbsp;タスクボードでもっと見る
           </Button>
         </div>
@@ -114,56 +112,60 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.contents {
-  position: relative;
-  display: flex;
-  z-index: 11;
-  width: calc(100vw - 24px);
+.index {
+  max-width: 342px;
 
-  flex-direction: column;
-
-  h3 {
-    margin: 0px;
-    color: $white;
-  }
-
-  .task-group {
+  .contents {
     position: relative;
-    width: calc(100% - 24px);
+    display: flex;
+    z-index: 11;
+    max-width: 342px;
 
-    .task-list {
-      display: flex;
-      flex-direction: column;
+    flex-direction: column;
+
+    h3 {
+      margin: 0px;
+      color: $white;
     }
 
-    .taskboard-button {
-      margin: 8px 0px;
-    }
-  }
-
-  .earth-info {
-    position: relative;
-    width: calc(100% - 24px);
-
-    margin-top: 32px;
-
-    .data-num {
-      padding-right: 12px;
-
-      font-size: large;
-      font-weight: bold;
-    }
-
-    table {
+    .task-group {
+      position: relative;
       width: 100%;
 
-      border-radius: 16px;
-      color: $white;
-      background-color: #4242422D;
+      .task-list {
+        display: flex;
+        flex-direction: column;
+      }
 
-      td {
-        padding: 8px 16px;
-        font-weight: normal;
+      .taskboard-button {
+        margin: 8px 0px;
+      }
+    }
+
+    .earth-info {
+      position: relative;
+      width: 100%;
+
+      margin-top: 32px;
+
+      .data-num {
+        padding-right: 12px;
+
+        font-size: large;
+        font-weight: bold;
+      }
+
+      table {
+        width: 100%;
+
+        border-radius: 16px;
+        color: $white;
+        background-color: #4242422D;
+
+        td {
+          padding: 8px 16px;
+          font-weight: normal;
+        }
       }
     }
   }

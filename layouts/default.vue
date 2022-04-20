@@ -67,6 +67,13 @@ html {
   width: 100%;
   overscroll-behavior-y: none;
   background-color: $background;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 body {
@@ -81,7 +88,7 @@ body {
 
 #main-contents {
   position: relative;
-  width: calc(100vw - 48px);
+  max-width: calc(100vw - 48px);
   margin: 24px;
 }
 
@@ -89,12 +96,27 @@ body {
   display: flex;
 }
 
-.page-enter-active,
-.page-leave-active {
-  transition: opacity 0.1s;
+.page-enter {
+  left: -100%;
 }
-.page-enter,
+.page-enter-active {
+  position: relative;
+  max-width: 100%;
+  transition: all .3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.page-enter-to {
+  left: 0px;
+}
+
+.page-leave {
+  left: 0px;
+}
 .page-leave-active {
-  opacity: 0;
+  position: relative;
+  max-width: 100%;
+  transition: all .2s cubic-bezier(0.64, 0, 0.78, 0);
+}
+.page-leave-to {
+  left: 100%;
 }
 </style>

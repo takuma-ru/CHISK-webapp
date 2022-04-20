@@ -4,6 +4,7 @@
     :text="text"
     :style="{
       width: size,
+      height: size,
       height: `calc(${size} + 4px)`,
     }"
   >
@@ -24,6 +25,7 @@ export default defineComponent({
   props: {
     icon: {
       type: String,
+      default: null,
       require: true,
     },
     color: {
