@@ -38,7 +38,7 @@ https://play.google.com/store/apps/details?id=takumaru.nekoo.taskmgt
 
 ## ScreenShot
 ホーム画面
-![CHISK 2021_07_12 14_02_13](https://user-images.githubusercontent.com/49429291/125233658-02c43500-e31a-11eb-860e-84093d1bba77.png)
+![desktop-top](https://user-images.githubusercontent.com/49429291/164344009-1d997f1f-3d1a-4309-ba6f-ce6fa2d45e33.png)
 タスク詳細
 ![desktop_taskmodal](https://user-images.githubusercontent.com/49429291/164344006-d1fd067b-7838-452b-8e77-51d2bb8ef499.png)
 タスク追加
