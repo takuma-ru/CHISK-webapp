@@ -3,88 +3,65 @@
 **/
 
 import {
-  collection,
-  getFirestore,
-  onSnapshot,
-  query,
-  Timestamp,
-} from 'firebase/firestore'
-import {
-  reactive,
   InjectionKey,
   readonly,
+  ref,
 } from '@nuxtjs/composition-api'
+import {
+  doc,
+  getFirestore,
+  onSnapshot,
+} from 'firebase/firestore'
 
 export interface userPlanetDataInterface {
-  created: Timestamp | Date,
+  created: Date,
   creatures: Number,
   elapsed: Number,
   name: String,
 }
 
-export default function userPlanetData () {
+export default function useUserPlanetData () {
   /*
     state
   */
-  const state = reactive({
-    // ユーザーのタスクデータ
-    userPlanetData: reactive<userPlanetDataInterface>({
+  const state = {
+    userPlanetData: ref<userPlanetDataInterface>({
       created: new Date('1900-01-01'),
       creatures: 0,
       elapsed: 0,
-      name: 'earth',
+      name: 'NULL',
     }),
-  })
+  }
 
   /*
     mutation
   */
-  // 引数のデータをUserPlanetDataに挿入
-  const updateUserPlanetData = (newUserPlanetData: userPlanetDataInterface) => {
-    state.userPlanetData = newUserPlanetData
-  }
-
-  // UserPlanetDataを初期化
-  const initUserPlanetData = () => {
-    state.userPlanetData = {
-      created: new Date('1900-01-01'),
-      creatures: 0,
-      elapsed: 0,
-      name: 'earth',
-    }
+  const updateUserPlanetData = (userPlanetData: userPlanetDataInterface) => {
+    state.userPlanetData.value = userPlanetData
   }
 
   /*
     action
   */
-  // Firestoreからデータを取得し、UserPlanetDataに挿入
   const getUserPlanetData = (uid: string | null) => {
     const firestore = getFirestore()
 
     if (uid != null) {
-      const q = query(collection(firestore, 'tasks', uid, 'Data', 'Planet'))
+      onSnapshot(doc(firestore, 'tasks', uid, 'Data', 'Planet'), (doc) => {
+        // console.log('data: ', doc.data())
+        const planetData = {
+          created: doc.data()?.created.toDate(),
+          creatures: doc.data()?.creatures,
+          elapsed: doc.data()?.elapsed,
+          name: doc.data()?.name,
+        } as userPlanetDataInterface
 
-      onSnapshot(q, { includeMetadataChanges: true }, (snapshot) => {
-        snapshot.docChanges().forEach((change) => {
-          if (change.type === 'added' || change.type === 'modified') {
-            // console.log('data: ', change.doc.data().id)
-            const planetData = {
-              created: change.doc.data().created,
-              creatures: change.doc.data().creatures,
-              elapsed: change.doc.data().elapsed,
-              name: change.doc.data().name,
-            } as userPlanetDataInterface
+        updateUserPlanetData(planetData)
 
-            updateUserPlanetData(planetData)
-          }
+        // console.log(state.userPlanetData)
 
-          if (change.type === 'removed') {
-            initUserPlanetData()
-          }
-
-          const source = snapshot.metadata.fromCache ? 'local cache' : 'server'
-          console.log('Data came from ' + source)
-        })
+        const source = doc.metadata.fromCache ? 'local cache' : 'server'
+        console.log('Data came from ' + source)
       })
     } else {
       console.error('uid not found')
@@ -95,10 +72,8 @@ export default function userPlanetData () {
     userPlanetData: readonly(state.userPlanetData),
 
     getUserPlanetData,
-    updateUserPlanetData,
-    initUserPlanetData,
   }
 }
 
-export type UserPlanetDataType = ReturnType<typeof userPlanetData>
-export const UserPlanetDataKey: InjectionKey<UserPlanetDataType> = Symbol('UserPlanetDataKey')
+export type userPlanetDataType = ReturnType<typeof useUserPlanetData>
+export const userPlanetDataKey: InjectionKey<userPlanetDataType> = Symbol('userPlanetDataKey')

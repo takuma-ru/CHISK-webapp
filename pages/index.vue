@@ -28,11 +28,11 @@
           <tbody>
             <tr>
               <td>誕生してから</td>
-              <td><span class="data-num">{{ 0 }}</span>日</td>
+              <td><span class="data-num">{{ Math.floor((new Date().getTime() - userPlanetData.created.getTime()) / 86400000) }}</span>日</td>
             </tr>
             <tr>
               <td>ペンギンが</td>
-              <td><span class="data-num">{{ 0 }}</span>匹</td>
+              <td><span class="data-num">{{ userPlanetData.creatures }}</span>匹</td>
             </tr>
           </tbody>
         </table>
@@ -50,6 +50,8 @@ import {
   inject,
   useMeta,
   onMounted,
+  provide,
+  ref,
 } from '@nuxtjs/composition-api'
 import {
   mdiViewDashboard,
@@ -63,6 +65,10 @@ import useUserTaskData, {
   userTaskDataType,
   userTaskDataKey,
 } from '~/composition/userTaskData'
+import useUserPlanetData, {
+  userPlanetDataType,
+  userPlanetDataKey,
+} from '~/composition/userPlanetData'
 import deleteTaskData from '~/composable/firebase/deleteTaskData'
 import AddTaskModal from '~/components/task/AddTaskModal.vue'
 import Earth from '~/components/earth/earth.vue'
@@ -72,7 +78,9 @@ export default defineComponent({
   components: { TaskCard, AddTaskModal, Earth, Divider },
   setup () {
     // store
+    provide(userPlanetDataKey, useUserPlanetData())
     // const
+    const termDay = ref<number>(0)
     const {
       userProfile,
     } = inject(userProfileKey, useUserProfile()) as userProfileType
@@ -81,15 +89,33 @@ export default defineComponent({
       getUserTaskData,
       deleteUserTaskData,
     } = inject(userTaskDataKey, useUserTaskData()) as userTaskDataType
+    const {
+      userPlanetData,
+      getUserPlanetData,
+    } = inject(userPlanetDataKey, useUserPlanetData()) as userPlanetDataType
 
     // watch
     watch(userProfile, async (newUserProfile) => {
       await getUserTaskData(newUserProfile.uid)
+      await getUserPlanetData(newUserProfile.uid)
+    })
+
+    watch(userPlanetData, (newUserPlanetData) => {
+      console.log(newUserPlanetData)
+      /* console.log(newUserPlanetData)
+      const today = new Date().getTime()
+      const created = userPlanetData.value.created.getTime()
+      termDay.value = (today - created) / 86400000 */
     })
 
     // methods
     onMounted(() => {
       getUserTaskData(userProfile.uid)
+      getUserPlanetData(userProfile.uid)
+      /* console.log(userPlanetData)
+      const today = new Date().getTime()
+      const created = userPlanetData.value.created.getTime()
+      termDay.value = (today - created) / 86400000 */
     })
 
     // lifeCycle
@@ -98,8 +124,10 @@ export default defineComponent({
     useMeta({ title: 'Home' })
 
     return {
+      termDay,
       userProfile,
       userTaskData,
+      userPlanetData,
 
       deleteUserTaskData,
       deleteTaskData,

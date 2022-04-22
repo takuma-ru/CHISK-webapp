@@ -42,7 +42,6 @@ export default function useUserTaskData () {
   // 引数のデータをuserTaskDataに挿入
   const updateUserTaskData = (taskData: userTaskDataInterface) => {
     state.userTaskData.push(taskData)
-    // console.log(state.userTaskData)
   }
 
   // 引数のidをuserTaskDataから削除

@@ -35,12 +35,14 @@ import getIsPhone from '~/composable/utils/isPhone'
 // composition
 import useUserProfile, { userProfileKey } from '~/composition/userProfile'
 import useUserTaskData, { userTaskDataKey } from '~/composition/userTaskData'
+import useUserPlanetData, { userPlanetDataKey } from '~/composition/userPlanetData'
 
 export default defineComponent({
   components: { NavigationBar, BottomNavigationBar, TaskModal, AppBar },
   setup () {
     provide(userProfileKey, useUserProfile())
     provide(userTaskDataKey, useUserTaskData())
+    provide(userPlanetDataKey, useUserPlanetData())
 
     // const
     const isPhone = ref<boolean>(false)
