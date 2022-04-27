@@ -28,11 +28,21 @@
           <tbody>
             <tr>
               <td>誕生してから</td>
-              <td><span class="data-num">{{ Math.floor((new Date().getTime() - userPlanetData.created.getTime()) / 86400000) }}</span>日</td>
+              <td style="text-align: right;">
+                <span class="data-num">
+                  {{ Math.floor((new Date().getTime() - userPlanetData.created.getTime()) / 86400000) }}
+                </span>
+                日
+              </td>
             </tr>
             <tr>
               <td>ペンギンが</td>
-              <td><span class="data-num">{{ userPlanetData.creatures }}</span>匹</td>
+              <td style="text-align: right;">
+                <span class="data-num">
+                  {{ userPlanetData.creatures }}
+                </span>
+                匹
+              </td>
             </tr>
           </tbody>
         </table>
@@ -100,22 +110,10 @@ export default defineComponent({
       await getUserPlanetData(newUserProfile.uid)
     })
 
-    watch(userPlanetData, (newUserPlanetData) => {
-      console.log(newUserPlanetData)
-      /* console.log(newUserPlanetData)
-      const today = new Date().getTime()
-      const created = userPlanetData.value.created.getTime()
-      termDay.value = (today - created) / 86400000 */
-    })
-
     // methods
     onMounted(() => {
       getUserTaskData(userProfile.uid)
       getUserPlanetData(userProfile.uid)
-      /* console.log(userPlanetData)
-      const today = new Date().getTime()
-      const created = userPlanetData.value.created.getTime()
-      termDay.value = (today - created) / 86400000 */
     })
 
     // lifeCycle
@@ -179,7 +177,7 @@ export default defineComponent({
       .data-num {
         padding-right: 12px;
 
-        font-size: large;
+        font-size: x-large;
         font-weight: bold;
       }
 

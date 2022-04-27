@@ -26,7 +26,7 @@ export default function useUserPlanetData () {
   */
   const state = {
     userPlanetData: ref<userPlanetDataInterface>({
-      created: new Date('1900-01-01'),
+      created: new Date(),
       creatures: 0,
       elapsed: 0,
       name: 'NULL',
