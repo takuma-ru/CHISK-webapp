@@ -33,8 +33,8 @@ import {
   ref,
   computed,
   useRoute,
-  useRouter,
   onBeforeMount,
+  inject,
 } from '@nuxtjs/composition-api'
 import {
   mdiCog,
@@ -44,12 +44,15 @@ import {
   mdiViewDashboard,
   mdiViewDashboardOutline,
 } from '@mdi/js'
+import usePageTransition, { pageTransitionKey, pageTransitionType } from '~/composition/pageTransition'
 
 export default defineComponent({
   setup () {
     // const
+    const {
+      push,
+    } = inject(pageTransitionKey, usePageTransition()) as pageTransitionType
     const route = useRoute()
-    const router = useRouter()
     const mini = ref(true)
     const items = ref([
       { title: 'ボード', icon: mdiViewDashboard, icon_outline: mdiViewDashboardOutline, link: '/taskboard' },
@@ -65,7 +68,7 @@ export default defineComponent({
 
     // methods
     const pushRoute = (path: string) => {
-      router.push(path)
+      push(nowPath.value, path)
     }
     // lifeCycle
     onBeforeMount(() => {

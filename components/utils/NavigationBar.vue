@@ -35,10 +35,10 @@ TODO: マウスホバー時にtitleを表示させたい
 <script lang="ts">
 import {
   defineComponent,
+  inject,
   ref,
   computed,
   useRoute,
-  useRouter,
   onBeforeMount,
 } from '@nuxtjs/composition-api'
 import {
@@ -51,12 +51,15 @@ import {
   mdiViewDashboard,
   mdiViewDashboardOutline,
 } from '@mdi/js'
+import usePageTransition, { pageTransitionKey, pageTransitionType } from '~/composition/pageTransition'
 
 export default defineComponent({
   setup () {
     // const
+    const {
+      push,
+    } = inject(pageTransitionKey, usePageTransition()) as pageTransitionType
     const route = useRoute()
-    const router = useRouter()
     const mini = ref(true)
     const items = ref([
       { title: 'ホーム', icon: mdiHomeVariant, icon_outline: mdiHomeVariantOutline, link: '/' },
@@ -73,7 +76,7 @@ export default defineComponent({
 
     // methods
     const pushRoute = (path: string) => {
-      router.push(path)
+      push(nowPath.value, path)
     }
     // lifeCycle
     onBeforeMount(() => {

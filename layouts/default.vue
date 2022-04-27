@@ -21,6 +21,7 @@
 <script lang="ts">
 import {
   defineComponent,
+  inject,
   ref,
   onMounted,
   provide,
@@ -33,6 +34,7 @@ import AppBar from '~/components/utils/AppBar.vue'
 // composable
 import getIsPhone from '~/composable/utils/isPhone'
 // composition
+import usePageTransition, { pageTransitionType, pageTransitionKey } from '~/composition/pageTransition'
 import useUserProfile, { userProfileKey } from '~/composition/userProfile'
 import useUserTaskData, { userTaskDataKey } from '~/composition/userTaskData'
 import useUserPlanetData, { userPlanetDataKey } from '~/composition/userPlanetData'
@@ -40,31 +42,47 @@ import useUserPlanetData, { userPlanetDataKey } from '~/composition/userPlanetDa
 export default defineComponent({
   components: { NavigationBar, BottomNavigationBar, TaskModal, AppBar },
   setup () {
+    provide(pageTransitionKey, usePageTransition())
     provide(userProfileKey, useUserProfile())
     provide(userTaskDataKey, useUserTaskData())
     provide(userPlanetDataKey, useUserPlanetData())
 
     // const
     const isPhone = ref<boolean>(false)
+    const {
+      scssVariables,
+    } = inject(pageTransitionKey, usePageTransition()) as pageTransitionType
+
     // let, computed
+
     // methods
     const resizeEvent = () => {
       isPhone.value = getIsPhone().isPhone
     }
+
     // lifeCycle
     onMounted(() => {
       window.addEventListener('resize', resizeEvent)
       resizeEvent()
+      document.documentElement.style.setProperty('--transition-left', scssVariables.value.left)
+      document.documentElement.style.setProperty('--transition-top', scssVariables.value.top)
     })
+
     // other
     return {
       isPhone,
+      scssVariables,
     }
   },
 })
 </script>
 
 <style lang="scss">
+:root {
+  --transition-left: 0%;
+  --transition-top: 0%;
+}
+
 html {
   width: 100%;
   overscroll-behavior-y: none;
@@ -98,27 +116,41 @@ body {
   display: flex;
 }
 
-.page-enter {
-  left: -100%;
-}
-.page-enter-active {
-  position: relative;
-  max-width: 100%;
-  transition: all .3s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.page-enter-to {
-  left: 0px;
-}
+.page {
+  &-enter {
+    left: var(--transition-left);
+    top: var(--transition-top);
+    opacity: 0;
 
-.page-leave {
-  left: 0px;
-}
-.page-leave-active {
-  position: relative;
-  max-width: 100%;
-  transition: all .2s cubic-bezier(0.64, 0, 0.78, 0);
-}
-.page-leave-to {
-  left: 100%;
+    &-active {
+      position: relative;
+      max-width: 100%;
+      transition: all .2s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    &-to {
+      left: 0px;
+      top: 0px;
+      opacity: 1;
+    }
+  }
+
+  &-leave {
+    left: 0px;
+    top: 0px;
+    opacity: 1;
+
+    &-active {
+      position: relative;
+      max-width: 100%;
+      transition: all .2s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    &-to {
+      left: calc(-1 * var(--transition-left));
+      top: calc(-1 * var(--transition-top));
+      opacity: 0;
+    }
+  }
 }
 </style>
