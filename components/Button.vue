@@ -28,9 +28,12 @@
 
 <script lang="ts">
 import {
-  defineComponent, useRouter,
+  defineComponent,
+  inject,
+  useRoute,
 } from '@nuxtjs/composition-api'
 import scssVar from '~/composable/scss/returnVariables'
+import usePageTransition, { pageTransitionKey, pageTransitionType } from '~/composition/pageTransition'
 
 export default defineComponent({
   props: {
@@ -68,13 +71,16 @@ export default defineComponent({
   },
   setup (props) {
     // store
-
+    const {
+      push,
+    } = inject(pageTransitionKey, usePageTransition()) as pageTransitionType
     // const
-    const router = useRouter()
+    const route = useRoute()
 
     // methods
     const pushRoute = () => {
-      router.push(props.to)
+      const nowPath = route.value.path
+      push(nowPath, props.to)
     }
 
     // lifeCycle

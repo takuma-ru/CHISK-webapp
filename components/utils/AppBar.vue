@@ -13,21 +13,17 @@
         color="transparent"
         text-color="white"
         :icon="mdiLogoutVariant"
-        style="margin-right: 16px"
+        style="margin-right: 4px"
         @click="trySignOut()"
-      >
-        サインアウト
-      </Button>
+      />
       <Button
         v-else
         color="transparent"
         text-color="white"
         :icon="mdiLoginVariant"
-        style="margin-right: 16px"
+        style="margin-right: 4px"
         @click="trySignIn()"
-      >
-        サインイン
-      </Button>
+      />
       <div class="avatar">
         <img
           :src="userProfile.photoURL"
