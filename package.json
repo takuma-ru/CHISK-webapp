@@ -13,9 +13,11 @@
   },
   "dependencies": {
     "@nuxtjs/pwa": "^3.3.5",
+    "@types/animejs": "^3.1.4",
     "@types/vue2-datepicker": "^3.3.1",
     "@vuelidate/core": "^2.0.0-alpha.40",
     "@vuelidate/validators": "^2.0.0-alpha.28",
+    "animejs": "^3.2.1",
     "core-js": "^3.19.3",
     "firebase": "^9.6.6",
     "nuxt": "^2.15.8",

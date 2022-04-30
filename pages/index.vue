@@ -39,7 +39,7 @@
               <td>ペンギンが</td>
               <td style="text-align: right;">
                 <span class="data-num">
-                  {{ userPlanetData.creatures }}
+                  {{ userPlanetData.creatures.valueOf() }}
                 </span>
                 匹
               </td>
@@ -49,7 +49,7 @@
       </div>
     </div>
     <AddTaskModal />
-    <Earth />
+    <Earth :creatures="userPlanetData.creatures.valueOf()" />
   </div>
 </template>
 

@@ -59,7 +59,7 @@ export default defineComponent({
 
     // methods
     onMounted(() => {
-      getUserTaskData(userProfile.uid)
+      // getUserTaskData(userProfile.uid)
     })
 
     // lifeCycle
