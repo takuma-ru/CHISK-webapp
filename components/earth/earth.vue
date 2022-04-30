@@ -147,7 +147,7 @@ export default defineComponent({
       anime({
         targets: '.earth',
         rotate: 360,
-        duration: 365000 * 0.01,
+        duration: 365000,
         loop: true,
         easing: 'linear',
       })
