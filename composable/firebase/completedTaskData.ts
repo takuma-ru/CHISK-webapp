@@ -2,7 +2,7 @@
   指定したタスクのflagを完了済みにする
 **/
 
-import { doc, getFirestore, updateDoc } from 'firebase/firestore'
+import { doc, getFirestore, increment, updateDoc } from 'firebase/firestore'
 
 export default function completedTaskData () {
   const firestore = getFirestore()
@@ -11,6 +11,10 @@ export default function completedTaskData () {
     if (uid) {
       await updateDoc(doc(firestore, 'tasks', uid, 'Task', completedId), {
         completed: new Date(),
+      }).then(async () => {
+        await updateDoc(doc(firestore, 'tasks', uid, 'Data', 'Planet'), {
+          creatures: increment(1),
+        })
       })
     } else {
       console.error('uid not found')
@@ -21,6 +25,10 @@ export default function completedTaskData () {
     if (uid) {
       await updateDoc(doc(firestore, 'tasks', uid, 'Task', completedId), {
         completed: null,
+      }).then(async () => {
+        await updateDoc(doc(firestore, 'tasks', uid, 'Data', 'Planet'), {
+          creatures: increment(-1),
+        })
       })
     } else {
       console.error('uid not found')

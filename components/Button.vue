@@ -20,7 +20,6 @@
         size="24px"
         :icon="icon"
       />
-      <span v-if="icon">&nbsp;&nbsp;</span>
       <slot />
     </div>
   </button>

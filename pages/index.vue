@@ -105,9 +105,6 @@ export default defineComponent({
     } = inject(userPlanetDataKey, useUserPlanetData()) as userPlanetDataType
 
     // watch
-    watch(userTaskData, () => {
-      console.log(userTaskData.find(v => v.group === '目標'))
-    })
     watch(userProfile, async (newUserProfile) => {
       await getUserTaskData(newUserProfile.uid)
       await getUserPlanetData(newUserProfile.uid)
