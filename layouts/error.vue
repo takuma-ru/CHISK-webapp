@@ -1,14 +1,28 @@
 <template>
-  <div>
+  <div class="error">
     <h1 v-if="error.statusCode === 404">
       {{ pageNotFound }}
     </h1>
     <h1 v-else>
       {{ otherError }}
     </h1>
-    <NuxtLink to="/">
-      Home page
-    </NuxtLink>
+    <div>
+      <Button
+        color="blue-lighten-1"
+        text-color="white"
+        to="/"
+      >
+        ホームに戻る
+      </Button>
+      <Button
+        color="blue-lighten-1"
+        text-color="white"
+        style="margin-left: 16px"
+        @click="reload()"
+      >
+        リロードする
+      </Button>
+    </div>
   </div>
 </template>
 
@@ -35,11 +49,24 @@ export default {
       title,
     }
   },
+  methods: {
+    reload () {
+      this.$router.go({ path: this.$router.currentRoute.path, force: true })
+    },
+  },
 }
 </script>
 
-<style scoped>
-h1 {
-  font-size: 20px;
+<style lang="scss" scoped>
+.error {
+  display: flex;
+  flex-flow: column;
+  justify-items: center;
+  align-items: center;
+
+  h1 {
+    font-size: 64px;
+    color: $white;
+  }
 }
 </style>

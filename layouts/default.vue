@@ -1,16 +1,19 @@
 <template>
   <div id="app">
-    <NavigationBar v-if="!isPhone" />
-    <BottomNavigationBar v-if="isPhone" />
     <div
       id="main"
       :style="{
-        marginLeft: isPhone ? '0px' : '64px',
-        marginBottom: isPhone ? '64px' : '0px'
+        marginLeft: userProfile.uid ? isPhone ? '0px' : '64px' : '0px',
+        marginBottom: userProfile.uid ? isPhone ? '64px' : '0px' : '0px'
       }"
     >
       <AppBar />
-      <div id="main-contents">
+      <div v-if="!userProfile.uid && (route.path === '/' || route.path === '/taskboard')" id="main-contents-login">
+        <LogInPage />
+      </div>
+      <div v-else id="main-contents">
+        <NavigationBar v-if="!isPhone" />
+        <BottomNavigationBar v-if="isPhone" />
         <Nuxt />
         <TaskModal />
       </div>
@@ -25,8 +28,10 @@ import {
   ref,
   onMounted,
   provide,
+  useRoute,
 } from '@nuxtjs/composition-api'
 // components
+import LogInPage from '../components/utils/LogInPage.vue'
 import NavigationBar from '~/components/utils/NavigationBar.vue'
 import BottomNavigationBar from '~/components/utils/BottomNavigationBar.vue'
 import TaskModal from '~/components/task/TaskModal.vue'
@@ -35,12 +40,12 @@ import AppBar from '~/components/utils/AppBar.vue'
 import getIsPhone from '~/composable/utils/isPhone'
 // composition
 import usePageTransition, { pageTransitionType, pageTransitionKey } from '~/composition/pageTransition'
-import useUserProfile, { userProfileKey } from '~/composition/userProfile'
+import useUserProfile, { userProfileKey, userProfileType } from '~/composition/userProfile'
 import useUserTaskData, { userTaskDataKey } from '~/composition/userTaskData'
 import useUserPlanetData, { userPlanetDataKey } from '~/composition/userPlanetData'
 
 export default defineComponent({
-  components: { NavigationBar, BottomNavigationBar, TaskModal, AppBar },
+  components: { NavigationBar, BottomNavigationBar, TaskModal, AppBar, LogInPage },
   setup () {
     provide(pageTransitionKey, usePageTransition())
     provide(userProfileKey, useUserProfile())
@@ -49,9 +54,13 @@ export default defineComponent({
 
     // const
     const isPhone = ref<boolean>(false)
+    const route = useRoute()
     const {
       scssVariables,
     } = inject(pageTransitionKey, usePageTransition()) as pageTransitionType
+    const {
+      userProfile,
+    } = inject(userProfileKey, useUserProfile()) as userProfileType
 
     // let, computed
 
@@ -71,7 +80,9 @@ export default defineComponent({
     // other
     return {
       isPhone,
+      route,
       scssVariables,
+      userProfile,
     }
   },
 })
@@ -97,7 +108,7 @@ html {
 }
 
 body {
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: 'Zen Maru Gothic', 'Noto Sans JP', sans-serif;
   scrollbar-width: none;
   margin: 0px;
 }
@@ -110,6 +121,13 @@ body {
   position: relative;
   max-width: calc(100vw - 48px);
   margin: 24px;
+}
+
+#main-contents-login {
+  position: relative;
+  max-width: calc(100vw - 48px);
+  padding: 24px;
+  height: calc(100vh - 52px - 48px);
 }
 
 #header {
