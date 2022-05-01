@@ -65,7 +65,7 @@ export default defineComponent({
       { title: 'ホーム', icon: mdiHomeVariant, icon_outline: mdiHomeVariantOutline, link: '/' },
       { title: 'ボード', icon: mdiViewDashboard, icon_outline: mdiViewDashboardOutline, link: '/taskboard' },
       { title: '設定', icon: mdiCog, icon_outline: mdiCogOutline, link: '/setting' },
-      { title: 'このアプリは？', icon: mdiInformation, icon_outline: mdiInformationOutline, link: '/about' },
+      /* { title: 'このアプリは？', icon: mdiInformation, icon_outline: mdiInformationOutline, link: '/about' }, */
     ])
     // let, computed
     const nowPath = computed(() => {
@@ -106,9 +106,9 @@ export default defineComponent({
     top: 0%;
     left: 0%;
 
-    border-radius: 0px 16px 16px 0px;
+    /* border-radius: 0px 16px 16px 0px; */
     filter: drop-shadow(0px 16px 40px rgba(0, 37, 80, 0.2));
-    background-color: $primary;
+    /* background-color: $primary; */
   }
 
   .link-btn-list {

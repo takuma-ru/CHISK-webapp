@@ -98,10 +98,10 @@ export default defineComponent({
     bottom: 0%;
     left: 0%;
 
-    border-radius: 16px 16px 0px 0px;
+    /* border-radius: 16px 16px 0px 0px; */
     filter: drop-shadow(0px 16px 40px rgba(0, 37, 80, 0.2));
 
-    background-color: $primary;
+    background-color: #0025504D;
 
     padding-bottom: constant(safe-area-inset-bottom);
     padding-bottom: env(safe-area-inset-bottom);

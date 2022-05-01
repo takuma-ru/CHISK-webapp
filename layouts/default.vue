@@ -7,7 +7,7 @@
         marginBottom: userProfile.uid ? isPhone ? '64px' : '0px' : '0px'
       }"
     >
-      <AppBar />
+      <AppBar v-if="userProfile.uid" />
       <div v-if="!userProfile.uid && (route.path === '/' || route.path === '/taskboard')" id="main-contents-login">
         <LogInPage />
       </div>
@@ -108,7 +108,7 @@ html {
 }
 
 body {
-  font-family: 'Zen Maru Gothic', 'Noto Sans JP', sans-serif;
+  font-family: 'Noto Sans JP', sans-serif;
   scrollbar-width: none;
   margin: 0px;
 }

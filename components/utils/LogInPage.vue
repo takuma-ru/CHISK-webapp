@@ -1,21 +1,28 @@
 <template>
   <div class="login">
-    <h1 class="title">
-      <!-- <img src="../../static/icons/icon_64.svg" alt=""> -->
-      <span>
+    <div class="title">
+      <img src="../../static/icons/icon_64.svg" alt="">
+      <span class="name">
         CHISK
       </span>
-    </h1>
-    <div class="button-group">
-      <button
-        type="button"
-        class="login-with-google-btn"
-        @click="userProfile.uid ? trySignOut() : trySignIn()"
-      >
-        {{ userProfile.uid ? 'サインアウト' : 'Googleでサインイン' }}
-      </button>
+      <span class="text">
+        - 楽しくタスクをこなそう！ -
+      </span>
     </div>
-    <Earth :creatures="35" />
+    <div class="button-group">
+      <div class="items">
+        <span class="sub-title">ログインして始める</span>
+        <button
+          type="button"
+          class="login-with-google-btn"
+          @click="userProfile.uid ? trySignOut() : trySignIn()"
+        >
+          {{ userProfile.uid ? 'サインアウト' : 'Googleでサインイン' }}
+        </button>
+      </div>
+    </div>
+    <div class="background" />
+    <Earth :creatures="15" />
   </div>
 </template>
 
@@ -80,31 +87,62 @@ export default defineComponent({
 <style lang="scss" scoped>
 .login {
   display: flex;
-  flex-flow: column;
   height: 100%;
+  flex-flow: column;
+  justify-items: center;
+  justify-content: space-around;
+  align-items: center;
+  color: $white;
 
   .title {
-    display: inline-flex;
     z-index: 99;
+    margin-bottom: 32px;
+    display: inline-flex;
+    flex-flow: column;
     align-items: center;
-    margin-top: 0px;
-    color: $white;
 
     img {
-      height: 64px;
-      margin-right: 24px;
+      margin-bottom: 0px;
     }
 
-    span {
-      font-size: 64px;
-      line-height: 64px;
+    .name {
+      color: #7786FF;
+      font-family: 'Rodina';
+      font-size: 88px;
+      line-height: 88px;
       vertical-align: top;
-      font-weight: bold;
+    }
+
+    .text {
+      margin-top: 24px;
     }
   }
 
   .button-group {
     z-index: 99;
+    display: flex;
+    flex-flow: column;
+
+    .items {
+      display: inline-flex;
+      flex-flow: column;
+      align-items: center;
+      .sub-title {
+        font-size: small;
+        margin-bottom: 8px;
+      }
+    }
+  }
+
+  .background {
+    z-index: 98;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0px;
+    left: 0px;
+
+    background-color: #002550EA;
   }
 }
 
