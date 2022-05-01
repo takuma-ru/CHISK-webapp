@@ -127,7 +127,7 @@ body {
   position: relative;
   max-width: calc(100vw - 48px);
   padding: 24px;
-  height: calc(100vh - 52px - 48px);
+  height: calc(100vh - 48px);
 }
 
 #header {

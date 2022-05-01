@@ -1,10 +1,7 @@
 <template>
   <div class="login">
     <div class="title">
-      <img src="../../static/icons/icon_64.svg" alt="">
-      <span class="name">
-        CHISK
-      </span>
+      <img src="../../static/icons/title-logo.svg" alt="">
       <span class="text">
         - 楽しくタスクをこなそう！ -
       </span>
@@ -21,6 +18,9 @@
         </button>
       </div>
     </div>
+    <small class="copyright">
+      &copy;&nbsp;takuma-ru
+    </small>
     <div class="background" />
     <Earth :creatures="15" />
   </div>
@@ -35,14 +35,6 @@ import {
   useRoute,
 } from '@nuxtjs/composition-api'
 import {
-  mdiCog,
-  mdiCogOutline,
-  mdiHomeVariant,
-  mdiHomeVariantOutline,
-  mdiInformation,
-  mdiInformationOutline,
-  mdiViewDashboard,
-  mdiViewDashboardOutline,
   mdiLoginVariant,
   mdiLogoutVariant,
 } from '@mdi/js'
@@ -56,24 +48,7 @@ export default defineComponent({
     // const
     const { trySignIn, trySignOut } = auth()
     const { userProfile } = inject(userProfileKey, useUserProfile()) as userProfileType
-    const route = useRoute()
-    const items = ref([
-      { title: 'タスクボード', icon: mdiViewDashboard, icon_outline: mdiViewDashboardOutline, link: '/taskboard' },
-      { title: '', icon: mdiHomeVariant, icon_outline: mdiHomeVariantOutline, link: '/' },
-      { title: '設定', icon: mdiCog, icon_outline: mdiCogOutline, link: '/setting' },
-      { title: 'このアプリは？', icon: mdiInformation, icon_outline: mdiInformationOutline, link: '/about' },
-    ])
-    // let, computed
-    const nowPage = computed(() => {
-      let item = items.value.find(element => element.link === route.value.path)
-      if (item === undefined) {
-        item = { title: 'Not Found', icon: mdiViewDashboard, icon_outline: mdiViewDashboardOutline, link: '' }
-      }
-      return item
-    })
     return {
-      nowPage,
-      items,
       userProfile,
       trySignIn,
       trySignOut,
@@ -102,6 +77,7 @@ export default defineComponent({
     align-items: center;
 
     img {
+      width: calc(90vmin - 48px);
       margin-bottom: 0px;
     }
 
@@ -132,6 +108,13 @@ export default defineComponent({
         margin-bottom: 8px;
       }
     }
+  }
+
+  .copyright {
+    z-index: 99;
+    position: absolute;
+    bottom: 16px;
+    color: $white;
   }
 
   .background {

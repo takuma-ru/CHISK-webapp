@@ -115,6 +115,7 @@ export default defineComponent({
     padding: 0.4rem 1em;
     margin: 0px;
 
+    font-family: 'Noto Sans JP', sans-serif;
     text-align: center;
     font-size: 14px;
     font-weight: normal;

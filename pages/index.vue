@@ -59,7 +59,7 @@ import {
   watch,
   inject,
   useMeta,
-  onMounted,
+  onBeforeMount,
   provide,
   ref,
 } from '@nuxtjs/composition-api'
@@ -111,9 +111,9 @@ export default defineComponent({
     })
 
     // methods
-    onMounted(() => {
-      getUserTaskData(userProfile.uid)
-      getUserPlanetData(userProfile.uid)
+    onBeforeMount(async () => {
+      await getUserTaskData(userProfile.uid)
+      await getUserPlanetData(userProfile.uid)
     })
 
     // lifeCycle
