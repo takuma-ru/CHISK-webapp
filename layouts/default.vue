@@ -12,7 +12,7 @@
       </div>
       <div v-else>
         <AppBar v-if="userProfile.uid" />
-        <div v-if="!userProfile.uid && (route.path === '/' || route.path === '/taskboard')" id="main-contents-login">
+        <div v-if="!userProfile.uid && (route.path === '/' || route.path === '/taskboard' || route.path === '/setting')" id="main-contents-login">
           <LogInPage />
         </div>
         <div v-else id="main-contents">
@@ -151,7 +151,7 @@ body {
     &-active {
       position: relative;
       max-width: 100%;
-      transition: all .2s cubic-bezier(0.25, 1, 0.5, 1);
+      transition: all .3s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
     &-to {
@@ -169,7 +169,7 @@ body {
     &-active {
       position: relative;
       max-width: 100%;
-      transition: all .2s cubic-bezier(0.25, 1, 0.5, 1);
+      transition: all .3s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
     &-to {

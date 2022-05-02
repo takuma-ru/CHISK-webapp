@@ -6,6 +6,7 @@
       width: size,
       height: size,
       height: `calc(${size} + 4px)`,
+      marginRight: text ? '4px' : undefined,
     }"
   >
     <svg viewBox="0 0 24 24">

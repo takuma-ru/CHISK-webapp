@@ -17,6 +17,7 @@
     >
       <Icon
         v-if="icon"
+        text
         size="24px"
         :icon="icon"
       />

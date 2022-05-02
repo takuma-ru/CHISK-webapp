@@ -24,9 +24,9 @@
         style="margin-right: 4px"
         @click="trySignIn()"
       />
-      <div class="avatar">
+      <div class="avatar" @click="pushRoute('/setting')">
         <img
-          :src="userProfile.photoURL"
+          :src="userProfile.photoURL.toString()"
           height="36px"
         >
       </div>
@@ -56,10 +56,14 @@ import {
 } from '@mdi/js'
 import auth from '~/composable/firebase/auth'
 import useUserProfile, { userProfileKey, userProfileType } from '~/composition/userProfile'
+import usePageTransition, { pageTransitionKey, pageTransitionType } from '~/composition/pageTransition'
 
 export default defineComponent({
   setup () {
     // const
+    const {
+      push,
+    } = inject(pageTransitionKey, usePageTransition()) as pageTransitionType
     const { trySignIn, trySignOut } = auth()
     const { userProfile } = inject(userProfileKey, useUserProfile()) as userProfileType
     const route = useRoute()
@@ -77,12 +81,22 @@ export default defineComponent({
       }
       return item
     })
+    const nowPath = computed(() => {
+      return route.value.path
+    })
+
+    // methods
+    const pushRoute = (path: string) => {
+      push(nowPath.value, path)
+    }
+
     return {
       nowPage,
       items,
       userProfile,
       trySignIn,
       trySignOut,
+      pushRoute,
 
       mdiLoginVariant,
       mdiLogoutVariant,
@@ -114,6 +128,7 @@ export default defineComponent({
         height: 36px;
         border-radius: 50%;
         background-color: $gray-lighten-1;
+        cursor: pointer;
 
         img {
           border-radius: 50%;

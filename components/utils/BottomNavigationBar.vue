@@ -102,7 +102,7 @@ export default defineComponent({
     filter: drop-shadow(0px 16px 40px rgba(0, 37, 80, 0.2));
 
     background: rgb(0,37,80);
-    background: linear-gradient(0deg, rgba(0,37,80,0.8) 0%, rgba(0,37,80,0.4) 40%, rgba(0,37,80,0) 80%, rgba(0,37,80,0) 100%);
+    background: linear-gradient(0deg, rgba(0,37,80,0.8) 0%, rgba(0,37,80,0.4) 30%, rgba(0,37,80,0.1) 80%, rgba(0,37,80,0) 100%);
 
     padding-bottom: constant(safe-area-inset-bottom);
     padding-bottom: env(safe-area-inset-bottom);
