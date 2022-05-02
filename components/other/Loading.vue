@@ -58,50 +58,50 @@ html {
 
   overflow: hidden;
   border-radius: 8px;
-}
 
-.load-bar::after {
-  position: absolute;
-  content: "";
-  width: 0%;
-  height: 100%;
+  &::after {
+    position: absolute;
+    content: "";
+    width: 0%;
+    height: 100%;
 
-  border-radius: 2em;
-  background-color: #77edac;
-  animation-name: load-bar-anim;
-  animation-duration: 4s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-}
+    border-radius: 2em;
+    background-color: #77edac;
+    animation-name: load-bar-anim;
+    animation-duration: 4s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+  }
 
-.load-bar-two::after {
-  position: absolute;
-  content: "";
-  width: 0%;
-  height: 100%;
+  &-two::after {
+    position: absolute;
+    content: "";
+    width: 0%;
+    height: 100%;
 
-  border-radius: 2em;
-  background-color: #77edac;
-  animation-name: load-bar-anim;
-  animation-duration: 4s;
-  animation-delay: 0.3s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-}
+    border-radius: 2em;
+    background-color: #77edac;
+    animation-name: load-bar-anim;
+    animation-duration: 4s;
+    animation-delay: 0.3s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+  }
 
-.load-bar-three::after {
-  position: absolute;
-  content: "";
-  width: 0%;
-  height: 100%;
+  &-three::after {
+    position: absolute;
+    content: "";
+    width: 0%;
+    height: 100%;
 
-  border-radius: 2em;
-  background-color: #77edac;
-  animation-name: load-bar-anim;
-  animation-duration: 4s;
-  animation-delay: 0.9s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
+    border-radius: 2em;
+    background-color: #77edac;
+    animation-name: load-bar-anim;
+    animation-duration: 4s;
+    animation-delay: 0.9s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+  }
 }
 
 @keyframes load-bar-anim {

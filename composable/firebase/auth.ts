@@ -2,9 +2,11 @@
   Firebase Authentication周り
 **/
 
+import { async } from '@firebase/util'
 import {
   reactive,
   readonly,
+  ref,
 } from '@nuxtjs/composition-api'
 import {
   getAuth,
@@ -21,10 +23,10 @@ export default function auth () {
   const provider = new GoogleAuthProvider()
   const auth = getAuth()
   const nowUser = reactive<userProfileDataInterface>({
-    name: null,
-    email: null,
-    uid: null,
-    photoURL: null,
+    name: undefined,
+    email: undefined,
+    uid: undefined,
+    photoURL: undefined,
   })
 
   // ログイン状態を識別

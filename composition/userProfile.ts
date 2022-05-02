@@ -2,19 +2,21 @@
   Webアプリ内で使うログイン中のユーザーデータ管理
 **/
 
+import { isClassBody } from '@babel/types'
 import {
   reactive,
   readonly,
   InjectionKey,
   watch,
+  ref,
 } from '@nuxtjs/composition-api'
 import auth from '~/composable/firebase/auth'
 
 export interface userProfileDataInterface {
-  name: string | null,
-  email: string | null,
-  uid: string | null,
-  photoURL: string | null,
+  name?: string | null,
+  email?: string | null,
+  uid?: string | null,
+  photoURL?: string | null,
 }
 
 export default function useUserProfile () {
@@ -24,11 +26,13 @@ export default function useUserProfile () {
   const state = {
     // ユーザーのプロファイルデータ
     userProfile: reactive<userProfileDataInterface>({
-      name: null,
-      email: null,
-      uid: null,
-      photoURL: null,
+      name: undefined,
+      email: undefined,
+      uid: undefined,
+      photoURL: undefined,
     }),
+
+    isLoad: ref<boolean>(true),
   }
 
   /*
@@ -56,11 +60,17 @@ export default function useUserProfile () {
   // auth.tsからログイン状態を取得し、userProfileに代入
   const { nowUser } = auth()
   watch(nowUser, (newNowUser) => {
-    updateUserProfile(newNowUser.name, newNowUser.email, newNowUser.uid, newNowUser.photoURL)
+    if (newNowUser.uid === undefined) {
+      state.isLoad.value = true
+    } else {
+      state.isLoad.value = false
+    }
+    updateUserProfile(newNowUser.name!, newNowUser.email!, newNowUser.uid!, newNowUser.photoURL!)
   })
 
   return {
     userProfile: readonly(state.userProfile),
+    isLoad: readonly(state.isLoad),
 
     // updateUserProfile,
     initUserProfile,

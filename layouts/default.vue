@@ -7,15 +7,20 @@
         marginBottom: userProfile.uid ? isPhone ? '64px' : '0px' : '0px'
       }"
     >
-      <AppBar v-if="userProfile.uid" />
-      <div v-if="!userProfile.uid && (route.path === '/' || route.path === '/taskboard')" id="main-contents-login">
-        <LogInPage />
+      <div v-if="isLoad">
+        <Loading />
       </div>
-      <div v-else id="main-contents">
-        <NavigationBar v-if="!isPhone" />
-        <BottomNavigationBar v-if="isPhone" />
-        <Nuxt />
-        <TaskModal />
+      <div v-else>
+        <AppBar v-if="userProfile.uid" />
+        <div v-if="!userProfile.uid && (route.path === '/' || route.path === '/taskboard')" id="main-contents-login">
+          <LogInPage />
+        </div>
+        <div v-else id="main-contents">
+          <NavigationBar v-if="!isPhone" />
+          <BottomNavigationBar v-if="isPhone" />
+          <Nuxt />
+          <TaskModal />
+        </div>
       </div>
     </div>
   </div>
@@ -29,6 +34,7 @@ import {
   onMounted,
   provide,
   useRoute,
+  useAsync,
 } from '@nuxtjs/composition-api'
 // components
 import LogInPage from '../components/utils/LogInPage.vue'
@@ -43,9 +49,10 @@ import usePageTransition, { pageTransitionType, pageTransitionKey } from '~/comp
 import useUserProfile, { userProfileKey, userProfileType } from '~/composition/userProfile'
 import useUserTaskData, { userTaskDataKey } from '~/composition/userTaskData'
 import useUserPlanetData, { userPlanetDataKey } from '~/composition/userPlanetData'
+import Loading from '~/components/other/Loading.vue'
 
 export default defineComponent({
-  components: { NavigationBar, BottomNavigationBar, TaskModal, AppBar, LogInPage },
+  components: { NavigationBar, BottomNavigationBar, TaskModal, AppBar, LogInPage, Loading },
   setup () {
     provide(pageTransitionKey, usePageTransition())
     provide(userProfileKey, useUserProfile())
@@ -60,6 +67,7 @@ export default defineComponent({
     } = inject(pageTransitionKey, usePageTransition()) as pageTransitionType
     const {
       userProfile,
+      isLoad,
     } = inject(userProfileKey, useUserProfile()) as userProfileType
 
     // let, computed
@@ -80,6 +88,7 @@ export default defineComponent({
     // other
     return {
       isPhone,
+      isLoad,
       route,
       scssVariables,
       userProfile,

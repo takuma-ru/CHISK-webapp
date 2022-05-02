@@ -186,7 +186,7 @@ export default defineComponent({
 
         border-radius: 16px;
         color: $white;
-        background-color: #4242422D;
+        background-color: rgba(0,37,80,0.4);
 
         td {
           padding: 8px 16px;
