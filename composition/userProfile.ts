@@ -2,7 +2,6 @@
   Webアプリ内で使うログイン中のユーザーデータ管理
 **/
 
-import { isClassBody } from '@babel/types'
 import {
   reactive,
   readonly,

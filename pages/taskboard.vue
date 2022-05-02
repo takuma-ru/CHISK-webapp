@@ -54,7 +54,7 @@ export default defineComponent({
 
     // watch
     watch(userProfile, async (newUserProfile) => {
-      await getUserTaskData(newUserProfile.uid)
+      await getUserTaskData(newUserProfile.uid!)
     })
 
     // methods

@@ -106,14 +106,14 @@ export default defineComponent({
 
     // watch
     watch(userProfile, async (newUserProfile) => {
-      await getUserTaskData(newUserProfile.uid)
-      await getUserPlanetData(newUserProfile.uid)
+      await getUserTaskData(newUserProfile.uid!)
+      await getUserPlanetData(newUserProfile.uid!)
     })
 
     // methods
     onBeforeMount(async () => {
-      await getUserTaskData(userProfile.uid)
-      await getUserPlanetData(userProfile.uid)
+      await getUserTaskData(userProfile.uid!)
+      await getUserPlanetData(userProfile.uid!)
     })
 
     // lifeCycle

@@ -34,7 +34,6 @@ import {
   onMounted,
   provide,
   useRoute,
-  useAsync,
 } from '@nuxtjs/composition-api'
 // components
 import LogInPage from '../components/utils/LogInPage.vue'

@@ -178,7 +178,7 @@ export default defineComponent({
 
       if (isFormCorrect) {
         isAddCurrently.value = true
-        if (await addTaskData(userProfile.uid, {
+        if (await addTaskData(userProfile.uid!, {
           title: inputData.title!,
           text: inputData.text!,
           dateStart: Timestamp.fromDate(inputData.dateStart as Date),
