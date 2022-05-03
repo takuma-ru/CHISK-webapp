@@ -1,13 +1,22 @@
 <template>
   <div>
     <div
-      id="task-group"
+      class="task-group"
     >
-      <TaskCard
-        v-for="task in userTaskData"
-        :key="task.id"
-        :task-data="task"
-      />
+      <div class="group">
+        <TaskCard
+          v-for="task in userTaskData.filter((v) => v.group === '目標' || v.group === '進行中')"
+          :key="task.id"
+          :task-data="task"
+        />
+      </div>
+      <div class="group">
+        <TaskCard
+          v-for="task in userTaskData.filter((v) => v.group === '完了')"
+          :key="task.id"
+          :task-data="task"
+        />
+      </div>
     </div>
     <AddTaskModal />
   </div>
@@ -80,3 +89,13 @@ export default defineComponent({
   head: {},
 })
 </script>
+
+<style lang="scss" scoped>
+.task-group {
+  display: flex;
+
+  .group {
+    margin-right: 16px;
+  }
+}
+</style>

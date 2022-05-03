@@ -8,7 +8,7 @@
         <Divider />
         <div class="task-list">
           <TaskCard
-            :task-data="userTaskData.find((v) => v.group === '目標')"
+            :task-data="(userTaskData[0])"
           />
           <Button
             color="blue-lighten-1"
@@ -56,10 +56,8 @@
 <script lang="ts">
 import {
   defineComponent,
-  watch,
   inject,
   useMeta,
-  onBeforeMount,
   provide,
   ref,
 } from '@nuxtjs/composition-api'
@@ -79,7 +77,6 @@ import useUserPlanetData, {
   userPlanetDataType,
   userPlanetDataKey,
 } from '~/composition/userPlanetData'
-import deleteTaskData from '~/composable/firebase/deleteTaskData'
 import AddTaskModal from '~/components/task/AddTaskModal.vue'
 import Earth from '~/components/earth/earth.vue'
 import Divider from '~/components/Divider.vue'
@@ -96,25 +93,10 @@ export default defineComponent({
     } = inject(userProfileKey, useUserProfile()) as userProfileType
     const {
       userTaskData,
-      getUserTaskData,
-      deleteUserTaskData,
     } = inject(userTaskDataKey, useUserTaskData()) as userTaskDataType
     const {
       userPlanetData,
-      getUserPlanetData,
     } = inject(userPlanetDataKey, useUserPlanetData()) as userPlanetDataType
-
-    // watch
-    watch(userProfile, async (newUserProfile) => {
-      await getUserTaskData(newUserProfile.uid!)
-      await getUserPlanetData(newUserProfile.uid!)
-    })
-
-    // methods
-    onBeforeMount(async () => {
-      await getUserTaskData(userProfile.uid!)
-      await getUserPlanetData(userProfile.uid!)
-    })
 
     // lifeCycle
 
@@ -126,9 +108,6 @@ export default defineComponent({
       userProfile,
       userTaskData,
       userPlanetData,
-
-      deleteUserTaskData,
-      deleteTaskData,
 
       mdiViewDashboard,
     }

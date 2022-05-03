@@ -1,124 +1,124 @@
-<template>
+<html>
   <div class="main">
     <p class="load-text">
       読み込み中...
     </p>
-    <div class="load-bar" />
-    <div class="load-bar-two" />
-    <div class="load-bar-three" />
+    <div class="load-bar"></div>
+    <div class="load-bar-two"></div>
+    <div class="load-bar-three"></div>
     <p class="tips">
       読み込みが終わらない場合は<br>アプリを開きなおしてみてください
     </p>
   </div>
-</template>
+  <style lang="scss" scoped>
+  body {
+    margin: 0px;
+  }
 
-<style lang="scss" scoped>
-body {
-  margin: 0px;
-}
+  html {
+    overflow-y: hidden;
 
-html {
-  overflow-y: hidden;
+    background-color: #002550;
+  }
 
-  background-color: #002550;
-}
+  .main {
+    position: fixed;
+    display: flex;
+    width: 100vw;
+    height: 30vh;
 
-.main {
-  position: fixed;
-  display: flex;
-  width: 100vw;
-  height: 30vh;
+    top: 50%;
+    left: 50%;
 
-  top: 50%;
-  left: 50%;
+    transform: translate(-50%, -50%);
 
-  transform: translate(-50%, -50%);
+    flex-direction: column;
+    align-items: center;
+  }
 
-  flex-direction: column;
-  align-items: center;
-}
+  .tips {
+    color: #bec6cf;
+    font-size: small;
+    text-align: center;
+  }
 
-.tips {
-  color: #bec6cf;
-  font-size: small;
-  text-align: center;
-}
+  .load-text {
+    color: #f7fbff;
+    font-size: x-large;
+    font-weight: bold;
+  }
 
-.load-text {
-  color: #f7fbff;
-  font-size: x-large;
-  font-weight: bold;
-}
+  .load-bar, .load-bar-two, .load-bar-three {
+    position: relative;
+    width: 80vmin;
+    height: 8px;
+    margin-bottom: 4px;
 
-.load-bar, .load-bar-two, .load-bar-three {
-  position: relative;
-  width: 80vmin;
-  height: 8px;
-  margin-bottom: 4px;
+    overflow: hidden;
+    border-radius: 8px;
+  }
 
-  overflow: hidden;
-  border-radius: 8px;
-}
-
-.load-bar::after {
-  position: absolute;
-  content: "";
-  width: 0%;
-  height: 100%;
-
-  border-radius: 2em;
-  background-color: #77edac;
-  animation-name: load-bar-anim;
-  animation-duration: 4s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-}
-
-.load-bar-two::after {
-  position: absolute;
-  content: "";
-  width: 0%;
-  height: 100%;
-
-  border-radius: 2em;
-  background-color: #77edac;
-  animation-name: load-bar-anim;
-  animation-duration: 4s;
-  animation-delay: 0.3s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-}
-
-.load-bar-three::after {
-  position: absolute;
-  content: "";
-  width: 0%;
-  height: 100%;
-
-  border-radius: 2em;
-  background-color: #77edac;
-  animation-name: load-bar-anim;
-  animation-duration: 4s;
-  animation-delay: 0.9s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-}
-
-@keyframes load-bar-anim {
-  0% {
+  .load-bar::after {
+    position: absolute;
+    content: "";
     width: 0%;
+    height: 100%;
+
+    border-radius: 2em;
     background-color: #77edac;
+    animation-name: load-bar-anim;
+    animation-duration: 4s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
   }
 
-  50% {
-    width: 100%;
-    background-color: #8bccff;
-  }
-
-  100% {
+  .load-bar-two::after {
+    position: absolute;
+    content: "";
     width: 0%;
-    right: 0px;
-    background-color: #7786ff;
+    height: 100%;
+
+    border-radius: 2em;
+    background-color: #77edac;
+    animation-name: load-bar-anim;
+    animation-duration: 4s;
+    animation-delay: 0.3s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
   }
-}
-</style>
+
+  .load-bar-three::after {
+    position: absolute;
+    content: "";
+    width: 0%;
+    height: 100%;
+
+    border-radius: 2em;
+    background-color: #77edac;
+    animation-name: load-bar-anim;
+    animation-duration: 4s;
+    animation-delay: 0.9s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes load-bar-anim {
+    0% {
+      width: 0%;
+      background-color: #77edac;
+    }
+
+    50% {
+      width: 100%;
+      background-color: #8bccff;
+    }
+
+    100% {
+      width: 0%;
+      right: 0px;
+      background-color: #7786ff;
+    }
+  }
+  </style>
+</html>
+

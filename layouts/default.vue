@@ -34,6 +34,8 @@ import {
   onMounted,
   provide,
   useRoute,
+  onBeforeMount,
+  watch,
 } from '@nuxtjs/composition-api'
 // components
 import LogInPage from '../components/utils/LogInPage.vue'
@@ -46,8 +48,8 @@ import getIsPhone from '~/composable/utils/isPhone'
 // composition
 import usePageTransition, { pageTransitionType, pageTransitionKey } from '~/composition/pageTransition'
 import useUserProfile, { userProfileKey, userProfileType } from '~/composition/userProfile'
-import useUserTaskData, { userTaskDataKey } from '~/composition/userTaskData'
-import useUserPlanetData, { userPlanetDataKey } from '~/composition/userPlanetData'
+import useUserTaskData, { userTaskDataKey, userTaskDataType } from '~/composition/userTaskData'
+import useUserPlanetData, { userPlanetDataKey, userPlanetDataType } from '~/composition/userPlanetData'
 import Loading from '~/components/other/Loading.vue'
 
 export default defineComponent({
@@ -68,8 +70,20 @@ export default defineComponent({
       userProfile,
       isLoad,
     } = inject(userProfileKey, useUserProfile()) as userProfileType
+    const {
+      getUserTaskData,
+    } = inject(userTaskDataKey, useUserTaskData()) as userTaskDataType
+    const {
+      getUserPlanetData,
+    } = inject(userPlanetDataKey, useUserPlanetData()) as userPlanetDataType
 
     // let, computed
+
+    // watch
+    watch(userProfile, async (newUserProfile) => {
+      await getUserTaskData(newUserProfile.uid!)
+      await getUserPlanetData(newUserProfile.uid!)
+    })
 
     // methods
     const resizeEvent = () => {
@@ -77,6 +91,11 @@ export default defineComponent({
     }
 
     // lifeCycle
+    onBeforeMount(async () => {
+      await getUserTaskData(userProfile.uid!)
+      await getUserPlanetData(userProfile.uid!)
+    })
+
     onMounted(() => {
       window.addEventListener('resize', resizeEvent)
       resizeEvent()

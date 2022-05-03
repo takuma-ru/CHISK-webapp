@@ -11,6 +11,7 @@ export default function completedTaskData () {
     if (uid) {
       await updateDoc(doc(firestore, 'tasks', uid, 'Task', completedId), {
         completed: new Date(),
+        group: '完了',
       }).then(async () => {
         await updateDoc(doc(firestore, 'tasks', uid, 'Data', 'Planet'), {
           creatures: increment(1),
@@ -25,6 +26,7 @@ export default function completedTaskData () {
     if (uid) {
       await updateDoc(doc(firestore, 'tasks', uid, 'Task', completedId), {
         completed: null,
+        group: '進行中',
       }).then(async () => {
         await updateDoc(doc(firestore, 'tasks', uid, 'Data', 'Planet'), {
           creatures: increment(-1),
