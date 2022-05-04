@@ -25,7 +25,6 @@
 <script lang="ts">
 import {
   defineComponent,
-  watch,
   inject,
   useMeta,
   onMounted,
@@ -47,7 +46,6 @@ export default defineComponent({
   components: { TaskCard, AddTaskModal },
   setup () {
     // store
-    // const
     const {
       trySignIn,
       trySignOut,
@@ -57,18 +55,14 @@ export default defineComponent({
     } = inject(userProfileKey, useUserProfile()) as userProfileType
     const {
       userTaskData,
-      getUserTaskData,
-      deleteUserTaskData,
     } = inject(userTaskDataKey, useUserTaskData()) as userTaskDataType
 
+    // const
+
     // watch
-    watch(userProfile, async (newUserProfile) => {
-      await getUserTaskData(newUserProfile.uid!)
-    })
 
     // methods
     onMounted(() => {
-      // getUserTaskData(userProfile.uid)
     })
 
     // lifeCycle
@@ -82,7 +76,6 @@ export default defineComponent({
 
       trySignIn,
       trySignOut,
-      deleteUserTaskData,
       deleteTaskData,
     }
   },

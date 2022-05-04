@@ -1,15 +1,16 @@
 <template>
   <div class="error">
-    <h1 v-if="error.statusCode === 404">
-      {{ pageNotFound }}
+    <h1>
+      {{ error.statusCode }}
     </h1>
-    <h1 v-else>
-      {{ otherError }}
-    </h1>
+    <p>
+      {{ error.message }}
+    </p>
     <div>
       <Button
         color="blue-lighten-1"
         text-color="white"
+        :icon="mdiHomeVariantOutline"
         to="/"
       >
         ホームに戻る
@@ -17,6 +18,7 @@
       <Button
         color="blue-lighten-1"
         text-color="white"
+        :icon="mdiReload"
         style="margin-left: 16px"
         @click="reload()"
       >
@@ -26,8 +28,41 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import {
+  mdiHomeVariantOutline,
+  mdiReload,
+} from '@mdi/js'
+import { defineComponent, useRouter } from '@nuxtjs/composition-api'
+
+export default defineComponent({
+  name: 'EmptyLayout',
+  layout: 'empty',
+  props: {
+    error: {
+      type: Object,
+      default: null,
+    },
+  },
+  setup () {
+    // const
+    const router = useRouter()
+
+    // methods
+    const reload = () => {
+      router.go(0)
+    }
+
+    return {
+      reload,
+
+      mdiHomeVariantOutline,
+      mdiReload,
+    }
+  },
+})
+
+/* export default {
   name: 'EmptyLayout',
   layout: 'empty',
   props: {
@@ -54,7 +89,7 @@ export default {
       this.$router.go({ path: this.$router.currentRoute.path, force: true })
     },
   },
-}
+} */
 </script>
 
 <style lang="scss" scoped>
@@ -63,10 +98,19 @@ export default {
   flex-flow: column;
   justify-items: center;
   align-items: center;
+  align-content: space-around;
 
   h1 {
     font-size: 64px;
     color: $white;
+    text-align: center;
+    margin-top: 48px;
+    margin-bottom: 0px;
+  }
+
+  p {
+    color: $white;
+    margin-bottom: 48px;
   }
 }
 </style>

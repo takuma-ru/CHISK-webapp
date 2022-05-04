@@ -2,11 +2,9 @@
   Firebase Authentication周り
 **/
 
-import { async } from '@firebase/util'
 import {
   reactive,
-  readonly,
-  ref,
+  shallowReadonly,
 } from '@nuxtjs/composition-api'
 import {
   getAuth,
@@ -87,7 +85,7 @@ export default function auth () {
   }
 
   return {
-    nowUser: readonly(nowUser),
+    nowUser: shallowReadonly(nowUser),
 
     trySignIn,
     trySignOut,

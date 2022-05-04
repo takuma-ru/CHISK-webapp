@@ -85,9 +85,6 @@ export default defineComponent({
   components: { TaskCard, AddTaskModal, Earth, Divider },
   setup () {
     // store
-    provide(userPlanetDataKey, useUserPlanetData())
-    // const
-    const termDay = ref<number>(0)
     const {
       userProfile,
     } = inject(userProfileKey, useUserProfile()) as userProfileType
@@ -104,7 +101,6 @@ export default defineComponent({
     useMeta({ title: 'Home' })
 
     return {
-      termDay,
       userProfile,
       userTaskData,
       userPlanetData,

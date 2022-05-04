@@ -4,7 +4,7 @@
 
 import {
   reactive,
-  readonly,
+  shallowReadonly,
   InjectionKey,
   watch,
   ref,
@@ -68,8 +68,8 @@ export default function useUserProfile () {
   })
 
   return {
-    userProfile: readonly(state.userProfile),
-    isLoad: readonly(state.isLoad),
+    userProfile: shallowReadonly(state.userProfile),
+    isLoad: shallowReadonly(state.isLoad),
 
     // updateUserProfile,
     initUserProfile,

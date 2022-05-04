@@ -4,7 +4,7 @@
 
 import {
   InjectionKey,
-  readonly,
+  shallowReadonly,
   ref,
 } from '@nuxtjs/composition-api'
 import {
@@ -48,7 +48,6 @@ export default function useUserPlanetData () {
 
     if (uid != null) {
       onSnapshot(doc(firestore, 'tasks', uid, 'Data', 'Planet'), (doc) => {
-        // console.log('data: ', doc.data())
         const planetData = {
           created: doc.data()?.created.toDate(),
           creatures: doc.data()?.creatures,
@@ -57,8 +56,6 @@ export default function useUserPlanetData () {
         } as userPlanetDataInterface
 
         updateUserPlanetData(planetData)
-
-        // console.log(state.userPlanetData)
 
         const source = doc.metadata.fromCache ? 'local cache' : 'server'
         console.log('Data came from ' + source)
@@ -69,7 +66,7 @@ export default function useUserPlanetData () {
   }
 
   return {
-    userPlanetData: readonly(state.userPlanetData),
+    userPlanetData: shallowReadonly(state.userPlanetData),
 
     getUserPlanetData,
   }

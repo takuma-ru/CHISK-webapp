@@ -4,7 +4,7 @@
 
 import {
   InjectionKey,
-  readonly,
+  shallowReadonly,
   ref,
   useRouter,
 } from '@nuxtjs/composition-api'
@@ -142,8 +142,8 @@ export default function usePageTransition () {
   }
 
   return {
-    transitionMode: readonly(state.transitionMode),
-    scssVariables: readonly(state.scssVariables),
+    transitionMode: shallowReadonly(state.transitionMode),
+    scssVariables: shallowReadonly(state.scssVariables),
 
     push,
   }

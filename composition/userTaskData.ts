@@ -24,7 +24,7 @@ export interface userTaskDataInterface {
   dateEnd?: Timestamp | Date,
   group: string,
   completed: Timestamp | Date | null,
-  tag: Array<any>,
+  tag: Array<string | number>,
 }
 
 export default function useUserTaskData () {
