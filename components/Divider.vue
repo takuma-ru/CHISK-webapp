@@ -2,6 +2,7 @@
   <hr
     class="divider"
     :dashed="dashed"
+    :vertical="vertical"
     :style="{
       margin: `${margin} 0px`,
       borderTopColor: scssVar(color),
@@ -27,6 +28,10 @@ export default defineComponent({
       type: String,
       default: '#BEC6CF7A',
     },
+    vertical: {
+      type: Boolean,
+      default: false,
+    },
   },
   setup () {
     return {
@@ -40,5 +45,12 @@ export default defineComponent({
 .divider {
   border-top: 1px solid;
   border-bottom: 0px;
+
+  &[vertical] {
+    width: 1px;
+    height: 100%;
+    border-width:0;
+    margin: 0px;
+  }
 }
 </style>

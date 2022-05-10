@@ -14,10 +14,10 @@ import {
 } from 'firebase/firestore'
 
 export interface userPlanetDataInterface {
-  created: Date,
-  creatures: Number,
-  elapsed: Number,
-  name: String,
+  created?: Date | null,
+  creatures?: Number | null,
+  elapsed?: Number | null,
+  name?: String | null,
 }
 
 export default function useUserPlanetData () {
@@ -26,10 +26,10 @@ export default function useUserPlanetData () {
   */
   const state = {
     userPlanetData: ref<userPlanetDataInterface>({
-      created: new Date(),
-      creatures: 0,
-      elapsed: 0,
-      name: 'NULL',
+      created: undefined,
+      creatures: undefined,
+      elapsed: undefined,
+      name: undefined,
     }),
   }
 
@@ -57,10 +57,19 @@ export default function useUserPlanetData () {
 
         updateUserPlanetData(planetData)
 
-        const source = doc.metadata.fromCache ? 'local cache' : 'server'
-        console.log('Data came from ' + source)
+        const source = doc.metadata.fromCache ? '\u001B[31mlocal cache' : '\u001B[34mserver'
+        console.log('\u001B[35mPlanet\u001B[39m data came from ' + source)
       })
     } else {
+      const planetData = {
+        created: null,
+        creatures: null,
+        elapsed: null,
+        name: null,
+      } as userPlanetDataInterface
+
+      updateUserPlanetData(planetData)
+
       console.error('uid not found')
     }
   }

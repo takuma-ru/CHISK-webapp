@@ -56,7 +56,6 @@ export default defineComponent({
   margin: auto;
 
   &[text] {
-    height: 0.8rem;
     margin: 0px;
   }
 }

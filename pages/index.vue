@@ -30,7 +30,7 @@
               <td>誕生してから</td>
               <td style="text-align: right;">
                 <span class="data-num">
-                  {{ Math.floor((new Date().getTime() - userPlanetData.created.getTime()) / 86400000) }}
+                  {{ userPlanetData.created ? Math.floor((new Date().getTime() - userPlanetData.created.getTime()) / 86400000) : 0 }}
                 </span>
                 日
               </td>
@@ -39,7 +39,7 @@
               <td>ペンギンが</td>
               <td style="text-align: right;">
                 <span class="data-num">
-                  {{ userPlanetData.creatures.valueOf() }}
+                  {{ userPlanetData.creatures ? userPlanetData.creatures.valueOf() : 0 }}
                 </span>
                 匹
               </td>
@@ -49,7 +49,7 @@
       </div>
     </div>
     <AddTaskModal />
-    <Earth :creatures="userPlanetData.creatures.valueOf()" />
+    <Earth :creatures="userPlanetData.creatures ? userPlanetData.creatures.valueOf() : 0" />
   </div>
 </template>
 
@@ -58,8 +58,6 @@ import {
   defineComponent,
   inject,
   useMeta,
-  provide,
-  ref,
 } from '@nuxtjs/composition-api'
 import {
   mdiViewDashboard,

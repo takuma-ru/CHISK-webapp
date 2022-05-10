@@ -11,13 +11,13 @@
         <Loading />
       </div>
       <div v-else>
-        <AppBar v-if="userProfile.uid" />
+        <AppBar v-if="userProfile.uid && (route.path !== '/signUp' && route.path !== '/about')" />
         <div v-if="!userProfile.uid && (route.path === '/' || route.path === '/taskboard' || route.path === '/setting')" id="main-contents-login">
           <LogInPage />
         </div>
         <div v-else id="main-contents">
-          <NavigationBar v-if="!isPhone" />
-          <BottomNavigationBar v-if="isPhone" />
+          <NavigationBar v-if="!isPhone && (route.path !== '/signUp' && route.path !== '/about')" />
+          <BottomNavigationBar v-if="isPhone && (route.path !== '/signUp' && route.path !== '/about')" />
           <Nuxt />
           <TaskModal />
         </div>
@@ -38,7 +38,8 @@ import {
   watch,
 } from '@nuxtjs/composition-api'
 // components
-import LogInPage from '../components/utils/LogInPage.vue'
+import LogInPage from '../components/layouts/LogInPage.vue'
+import Loading from '~/components/layouts/Loading.vue'
 import NavigationBar from '~/components/utils/NavigationBar.vue'
 import BottomNavigationBar from '~/components/utils/BottomNavigationBar.vue'
 import TaskModal from '~/components/task/TaskModal.vue'
@@ -50,7 +51,6 @@ import usePageTransition, { pageTransitionType, pageTransitionKey } from '~/comp
 import useUserProfile, { userProfileKey, userProfileType } from '~/composition/userProfile'
 import useUserTaskData, { userTaskDataKey, userTaskDataType } from '~/composition/userTaskData'
 import useUserPlanetData, { userPlanetDataKey, userPlanetDataType } from '~/composition/userPlanetData'
-import Loading from '~/components/other/Loading.vue'
 
 export default defineComponent({
   components: { NavigationBar, BottomNavigationBar, TaskModal, AppBar, LogInPage, Loading },
@@ -135,7 +135,8 @@ html {
 }
 
 body {
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: 'M PLUS 1', sans-serif;
+  user-select: none;
   scrollbar-width: none;
   margin: 0px;
 }

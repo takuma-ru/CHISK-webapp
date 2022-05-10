@@ -17,7 +17,7 @@ export default {
   ssr: false,
 
   head: {
-    titleTemplate: '%s | CHISK',
+    titleTemplate: '%s｜CHISK',
     title: 'CHISK',
     meta: [
       { charset: 'utf-8' },
@@ -37,7 +37,7 @@ export default {
     link: [
       { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
       { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: true },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&display=swap' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@100;300;400;500;700&display=swap' },
       { rel: 'icon', type: 'image/x-icon', href: '/icon_512x512.svg' },
       { rel: 'canonical', href: '/' },
     ],

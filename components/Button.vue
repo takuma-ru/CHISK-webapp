@@ -124,6 +124,7 @@ export default defineComponent({
 
     justify-content: center;
     align-items: center;
+    vertical-align: middle;
 
     svg {
       path {
@@ -194,7 +195,7 @@ export default defineComponent({
 
   &[size = "normal"] {
     width: auto;
-    height: 40.78px;
+    height: 42px;
   }
 
   &[size = "large"] {

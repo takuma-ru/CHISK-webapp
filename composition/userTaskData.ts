@@ -115,8 +115,8 @@ export default function useUserTaskData () {
             deleteUserTaskData(change.doc.data().id)
           }
 
-          const source = snapshot.metadata.fromCache ? 'local cache' : 'server'
-          console.log('Data came from ' + source)
+          const source = snapshot.metadata.fromCache ? '\u001B[31mlocal cache' : '\u001B[34mserver'
+          console.log('\u001B[35mTask\u001B[39m data came from ' + source)
         })
       })
     } else {

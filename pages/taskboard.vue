@@ -3,7 +3,7 @@
     <div
       class="task-group"
     >
-      <div class="group">
+      <div class="group" style="margin-right: 16px;">
         <TaskCard
           v-for="task in userTaskData.filter((v) => v.group === '目標' || v.group === '進行中')"
           :key="task.id"
@@ -87,8 +87,15 @@ export default defineComponent({
 .task-group {
   display: flex;
 
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
   .group {
-    margin-right: 16px;
   }
 }
 </style>

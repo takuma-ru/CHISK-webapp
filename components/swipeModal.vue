@@ -342,7 +342,7 @@ export default defineComponent({
       bottom: var(--contents-bottom-position) !important;
     }
     &-active {
-      transition: all 0.2s cubic-bezier(.25,.8,.25,1);
+      transition: all 0.25s cubic-bezier(.25,.8,.25,1);
     }
     &-to {
       bottom: calc(-1 * var(--contents-height)) !important;
