@@ -263,7 +263,8 @@ export default defineComponent({
 
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 56px 1fr;
+    grid-template-rows: 1fr 1fr;
+    align-items: center;
 
     padding: 0px 24px;
 
