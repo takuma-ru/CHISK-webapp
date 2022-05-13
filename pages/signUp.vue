@@ -185,8 +185,8 @@ export default defineComponent({
 
     // methods
     const setStep = () => {
-      if (userPlanetData.value.name === null) {
-        if (userProfile.uid === null) {
+      if (userPlanetData.value.name === null || userPlanetData.value.name === undefined) {
+        if (userProfile.uid === null || userProfile.uid === undefined) {
           router.push('?step=login')
         } else {
           router.push('?step=create-earth')
@@ -202,7 +202,6 @@ export default defineComponent({
       if (isFormCorrect) {
         isAddCurrently.value = true
         await createPlanet(userProfile.uid!, inputData.name).then((res) => {
-          console.log(res)
           if (res) { router.push('?step=complete') }
         })
       } else {

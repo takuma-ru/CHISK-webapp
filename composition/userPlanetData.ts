@@ -2,10 +2,12 @@
   ユーザーの惑星データ管理
 **/
 
+import { async } from '@firebase/util'
 import {
   InjectionKey,
   shallowReadonly,
   ref,
+  useRouter,
 } from '@nuxtjs/composition-api'
 import {
   doc,
@@ -21,6 +23,8 @@ export interface userPlanetDataInterface {
 }
 
 export default function useUserPlanetData () {
+  const router = useRouter()
+
   /*
     state
   */
@@ -43,11 +47,11 @@ export default function useUserPlanetData () {
   /*
     action
   */
-  const getUserPlanetData = (uid: string | null) => {
+  const getUserPlanetData = async (uid: string | null) => {
     const firestore = getFirestore()
 
     if (uid != null) {
-      onSnapshot(doc(firestore, 'tasks', uid, 'Data', 'Planet'), (doc) => {
+      await onSnapshot(doc(firestore, 'tasks', uid, 'Data', 'Planet'), (doc) => {
         const planetData = {
           created: doc.data()?.created.toDate(),
           creatures: doc.data()?.creatures,
@@ -56,6 +60,9 @@ export default function useUserPlanetData () {
         } as userPlanetDataInterface
 
         updateUserPlanetData(planetData)
+        if (planetData.name === undefined) {
+          router.push('signUp?step=create-earth')
+        }
 
         const source = doc.metadata.fromCache ? '\u001B[31mlocal cache' : '\u001B[34mserver'
         console.log('\u001B[35mPlanet\u001B[39m data came from ' + source)

@@ -15,7 +15,6 @@ export default async function createPlanet (uid: string | null, name: string) {
       name,
     })
       .then(() => {
-        console.log('isSuccess')
         isSuccess = true
       })
       .catch((err) => {
