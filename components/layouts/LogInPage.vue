@@ -17,7 +17,7 @@
           :icon="mdiAccountPlus"
           to="/signUp?step=login"
         >
-          サインアップ・チュートリアル
+          サインアップ
         </Button>
       </div>
     </div>
