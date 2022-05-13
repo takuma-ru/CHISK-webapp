@@ -149,6 +149,12 @@ export default defineComponent({
 
   &:disabled {
     color: rgba(16, 16, 16, 0.5);
+    cursor: not-allowed;
+
+    .text {
+      color: rgba(16, 16, 16, 0.5);
+    }
+
     svg path {
       fill: rgba(16, 16, 16, 0.5);
     }

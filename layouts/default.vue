@@ -3,8 +3,8 @@
     <div
       id="main"
       :style="{
-        marginLeft: userProfile.uid ? isPhone ? '0px' : '64px' : '0px',
-        marginBottom: userProfile.uid ? isPhone ? '64px' : '0px' : '0px'
+        marginLeft: userProfile.uid && (route.path !== '/signUp' && route.path !== '/about') ? isPhone ? '0px' : '64px' : '0px',
+        marginBottom: userProfile.uid && (route.path !== '/signUp' && route.path !== '/about') ? isPhone ? '64px' : '0px' : '0px'
       }"
     >
       <div v-if="isLoad">

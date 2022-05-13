@@ -1,9 +1,9 @@
 <template>
-  <div class="input">
+  <div class="input" :dark="dark">
     <div class="input-icon">
       <Icon
         :icon="icon"
-        color="gray"
+        :color="dark ? 'white' : 'gray'"
         size="1.5rem"
       />
     </div>
@@ -45,19 +45,23 @@ export default defineComponent({
 
   props: {
     modelValue: {
-      type: String,
+      type: String || null,
       default: null,
     },
     v: {
+      type: Object,
       default: null,
     },
     icon: {
       type: String,
-      require: true,
     },
     label: {
       type: String,
       default: '',
+    },
+    dark: {
+      type: Boolean,
+      default: false,
     },
   },
 
@@ -150,6 +154,12 @@ export default defineComponent({
       transition: 0.2s;
       letter-spacing: 0.5px;
       color: $gray;
+    }
+  }
+
+  &[dark] {
+    input {
+      color: $white;
     }
   }
 }

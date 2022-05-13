@@ -113,11 +113,11 @@ import scssVar from '~/composable/scss/returnVariables'
 import addTaskData from '~/composable/firebase/addTaskData'
 
 interface inputDataType {
-  title: string | null,
-  text: string | null,
+  title: string,
+  text: string,
   dateStart: Date,
   dateEnd: Date,
-  tag: Array<any>,
+  tag: Array<string | number>,
 }
 
 export default defineComponent({
@@ -127,8 +127,8 @@ export default defineComponent({
     const isModal = ref(false)
     const isAddCurrently = ref(false)
     const inputData = reactive<inputDataType>({
-      title: null,
-      text: null,
+      title: '',
+      text: '',
       dateStart: new Date(),
       dateEnd: new Date(),
       tag: [1],
@@ -166,8 +166,8 @@ export default defineComponent({
     // methods
     const init = () => {
       isAddCurrently.value = false
-      v$.value.title.$model = null
-      v$.value.text.$model = null
+      v$.value.title.$model = ''
+      v$.value.text.$model = ''
       v$.value.dateStart.$model = new Date()
       v$.value.dateEnd.$model = new Date()
       v$.value.tag.$model = [1]

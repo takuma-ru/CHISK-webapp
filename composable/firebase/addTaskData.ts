@@ -13,10 +13,10 @@ export default async function addTaskData (uid: string | null, data: userTaskDat
     const newTaskDataRef = doc(collection(firestore, 'tasks', uid, 'Task'))
     data.id = newTaskDataRef.id
     await setDoc(newTaskDataRef, data)
-      .then(function () {
+      .then(() => {
         isAddSuccess = true
       })
-      .catch(function (err) {
+      .catch((err) => {
         isAddSuccess = false
         console.log(err)
       })

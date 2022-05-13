@@ -31,11 +31,7 @@
 
 <script lang="ts">
 import {
-  computed,
   defineComponent,
-  inject,
-  ref,
-  useRouter,
 } from '@nuxtjs/composition-api'
 import {
   mdiLoginVariant,
