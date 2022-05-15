@@ -38,9 +38,9 @@ https://play.google.com/store/apps/details?id=takumaru.nekoo.taskmgt
 
 ## ScreenShot
 ホーム画面
-![desktop-top](https://user-images.githubusercontent.com/49429291/168499910-3d0aa09a-3173-4b5b-813c-3b16f4d08ee9.png)
+![desktop-top](https://user-images.githubusercontent.com/49429291/168499911-200bed04-20bb-4f8b-8ba4-e8820223563f.png)
 タスク詳細
-![desktop_taskmodal](https://user-images.githubusercontent.com/49429291/168499911-200bed04-20bb-4f8b-8ba4-e8820223563f.png)
+![desktop_taskmodal](https://user-images.githubusercontent.com/49429291/168499910-3d0aa09a-3173-4b5b-813c-3b16f4d08ee9.png)
 タスク追加
 ![desktop_addmodal](https://user-images.githubusercontent.com/49429291/168499913-7ea5504f-158d-45db-aeef-149a55ce68f8.png)
 モバイル画面
