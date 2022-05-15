@@ -52,6 +52,7 @@ import {
   useMeta,
   onMounted,
   ref,
+  computed,
 } from '@nuxtjs/composition-api'
 import TaskCard from '~/components/task/TaskCard.vue'
 import auth from '~/composable/firebase/auth'
@@ -84,9 +85,13 @@ export default defineComponent({
     } = inject(userTaskDataKey, useUserTaskData()) as userTaskDataType
 
     // const
-    const isPhone = getIsPhone().isPhone
     const tabPath = ref<string>('進行中')
     const tabItem = ref(['進行中', '完了'])
+
+    // computed
+    const isPhone = computed(() => {
+      return getIsPhone().isPhone
+    })
 
     // watch
 

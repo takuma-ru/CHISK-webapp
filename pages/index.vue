@@ -1,5 +1,10 @@
 <template>
-  <div class="index">
+  <div
+    class="index"
+    :style="{
+      margin: isPhone ? 'auto' : undefined
+    }"
+  >
     <div class="contents">
       <div
         class="task-group"
@@ -54,6 +59,7 @@
 
 <script lang="ts">
 import {
+  computed,
   defineComponent,
   inject,
   useMeta,
@@ -77,6 +83,7 @@ import useUserPlanetData, {
 import AddTaskModal from '~/components/task/AddTaskModal.vue'
 import Earth from '~/components/earth/earth.vue'
 import Divider from '~/components/Divider.vue'
+import getIsPhone from '~/composable/utils/isPhone'
 
 export default defineComponent({
   components: { TaskCard, AddTaskModal, Earth, Divider },
@@ -92,6 +99,11 @@ export default defineComponent({
       userPlanetData,
     } = inject(userPlanetDataKey, useUserPlanetData()) as userPlanetDataType
 
+    // computed
+    const isPhone = computed(() => {
+      return getIsPhone().isPhone
+    })
+
     // lifeCycle
 
     // other
@@ -101,6 +113,8 @@ export default defineComponent({
       userProfile,
       userTaskData,
       userPlanetData,
+
+      isPhone,
 
       mdiViewDashboard,
     }
@@ -112,8 +126,6 @@ export default defineComponent({
 <style lang="scss" scoped>
 .index {
   max-width: 342px;
-
-  margin: auto;
 
   .contents {
     position: relative;

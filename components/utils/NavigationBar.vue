@@ -152,7 +152,7 @@ export default defineComponent({
     top: 0%;
     left: 0%;
 
-    border-radius: 16px;
+    border-radius: 12px;
     background-color: #FFFFFF10;
   }
 
