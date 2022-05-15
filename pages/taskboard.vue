@@ -14,6 +14,12 @@
           :key="task.id"
           :task-data="task"
         />
+        <div
+          :style="{
+            width: '100%',
+            minHeight: '162px',
+          }"
+        />
       </div>
     </div>
     <div
@@ -120,8 +126,9 @@ export default defineComponent({
     align-items: center;
 
     width: fit-content;
+    max-height: calc(100vh - 24px - 36px - 32px);
 
-    overflow: scroll;
+    overflow-y: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
 
@@ -136,5 +143,10 @@ export default defineComponent({
   flex-flow: column;
   justify-items: center;
   align-items: center;
+
+  margin-bottom: -64px;
+  max-height: calc(100vh - 56px - 16px - 24px - 36px - 24px);
+
+  overflow-y: scroll;
 }
 </style>

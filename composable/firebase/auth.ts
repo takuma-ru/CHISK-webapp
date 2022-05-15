@@ -5,6 +5,7 @@
 import {
   reactive,
   shallowReadonly,
+  useRouter,
 } from '@nuxtjs/composition-api'
 import {
   getAuth,
@@ -18,6 +19,7 @@ import {
 import { userProfileDataInterface } from '~/composition/userProfile'
 
 export default function auth () {
+  const router = useRouter()
   const provider = new GoogleAuthProvider()
   const auth = getAuth()
   const nowUser = reactive<userProfileDataInterface>({
@@ -79,6 +81,7 @@ export default function auth () {
       nowUser.email = null
       nowUser.uid = null
       nowUser.photoURL = null
+      router.go(0)
     }).catch((error) => {
       console.log(error)
     })

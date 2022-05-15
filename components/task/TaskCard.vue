@@ -112,7 +112,8 @@ export default defineComponent({
 .task-card {
   position: relative;
   display: flex;
-  height: 96px;
+  min-height: 96px;
+  max-height: 96px;
   width: calc(100vw - 48px);
   max-width: 342px;
 
@@ -154,7 +155,8 @@ export default defineComponent({
     position: relative;
     min-width: 80px;
     max-width: 80px;
-    height: 100%;
+    min-height: 96px;
+    max-height: 96px;
 
     border-radius: 8px 16px 16px 8px;
     text-align: center;
