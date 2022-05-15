@@ -2,7 +2,6 @@
   ユーザーの惑星データ管理
 **/
 
-import { async } from '@firebase/util'
 import {
   InjectionKey,
   shallowReadonly,

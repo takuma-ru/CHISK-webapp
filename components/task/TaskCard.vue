@@ -113,9 +113,10 @@ export default defineComponent({
   position: relative;
   display: flex;
   height: 96px;
+  width: calc(100vw - 48px);
   max-width: 342px;
 
-  margin: 8px 0px;
+  margin: 4px 0px;
 
   filter: drop-shadow(0px 16px 40px rgba(0, 37, 80, 0.2));
   transition: all 0.2s linear;

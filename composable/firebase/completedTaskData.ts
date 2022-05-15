@@ -7,7 +7,7 @@ import { doc, getFirestore, increment, updateDoc } from 'firebase/firestore'
 export default function completedTaskData () {
   const firestore = getFirestore()
 
-  const completed = async (uid: string | null, completedId: string) => {
+  const completed = async (uid: string | null | undefined, completedId: string) => {
     if (uid) {
       await updateDoc(doc(firestore, 'tasks', uid, 'Task', completedId), {
         completed: new Date(),

@@ -119,6 +119,7 @@ export default defineComponent({
 :root {
   --transition-left: 0%;
   --transition-top: 0%;
+  --is-phone: 'false';
 }
 
 html {

@@ -129,7 +129,7 @@ export default defineComponent({
     margin: 12px;
 
     border: none;
-    border-radius: 14px;
+    border-radius: 12px;
     background-color: transparent;
 
     -webkit-transition: background-color 0.05s linear;

@@ -60,6 +60,9 @@ export default function usePageTransition () {
           case '/about':
             isPhone ? updateTransitionMode('none') : updateTransitionMode('B2T')
             break
+          default:
+            updateTransitionMode('none')
+            break
         }
         break
       case '/taskboard':
@@ -72,6 +75,9 @@ export default function usePageTransition () {
             break
           case '/about':
             isPhone ? updateTransitionMode('none') : updateTransitionMode('B2T')
+            break
+          default:
+            updateTransitionMode('none')
             break
         }
         break
@@ -86,6 +92,9 @@ export default function usePageTransition () {
           case '/about':
             isPhone ? updateTransitionMode('none') : updateTransitionMode('B2T')
             break
+          default:
+            updateTransitionMode('none')
+            break
         }
         break
       case '/about':
@@ -99,14 +108,20 @@ export default function usePageTransition () {
           case '/setting':
             isPhone ? updateTransitionMode('none') : updateTransitionMode('T2B')
             break
+          default:
+            updateTransitionMode('none')
+            break
         }
+        break
+      default:
+        updateTransitionMode('none')
         break
     }
 
     switch (state.transitionMode.value) {
       case 'none':
         await updateScssVariables({
-          left: '0%',
+          left: '-100%',
           top: '0%',
         })
         break

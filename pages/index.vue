@@ -5,7 +5,6 @@
         class="task-group"
       >
         <h3>ハイライト</h3>
-        <Divider />
         <div class="task-list">
           <TaskCard
             :task-data="(userTaskData[0])"
@@ -21,9 +20,9 @@
           </Button>
         </div>
       </div>
+      <Divider />
       <div class="earth-info">
         <h3>この星の情報</h3>
-        <Divider />
         <table>
           <tbody>
             <tr>
@@ -114,6 +113,8 @@ export default defineComponent({
 .index {
   max-width: 342px;
 
+  margin: auto;
+
   .contents {
     position: relative;
     display: flex;
@@ -131,6 +132,10 @@ export default defineComponent({
       position: relative;
       width: 100%;
 
+      h3 {
+        margin-bottom: 16px;
+      }
+
       .task-list {
         display: flex;
         flex-direction: column;
@@ -145,7 +150,9 @@ export default defineComponent({
       position: relative;
       width: 100%;
 
-      margin-top: 32px;
+      h3 {
+        margin-bottom: 16px;
+      }
 
       .data-num {
         padding-right: 12px;
