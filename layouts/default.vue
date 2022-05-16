@@ -20,6 +20,7 @@
           <BottomNavigationBar v-if="isPhone && (route.path !== '/signUp' && route.path !== '/about')" />
           <Nuxt />
           <TaskModal />
+          <SnackBar />
         </div>
       </div>
     </div>
@@ -51,9 +52,10 @@ import usePageTransition, { pageTransitionType, pageTransitionKey } from '~/comp
 import useUserProfile, { userProfileKey, userProfileType } from '~/composition/userProfile'
 import useUserTaskData, { userTaskDataKey, userTaskDataType } from '~/composition/userTaskData'
 import useUserPlanetData, { userPlanetDataKey, userPlanetDataType } from '~/composition/userPlanetData'
+import SnackBar from '~/components/utils/SnackBar.vue'
 
 export default defineComponent({
-  components: { NavigationBar, BottomNavigationBar, TaskModal, AppBar, LogInPage, Loading },
+  components: { NavigationBar, BottomNavigationBar, TaskModal, AppBar, LogInPage, Loading, SnackBar },
   setup () {
     provide(pageTransitionKey, usePageTransition())
     provide(userProfileKey, useUserProfile())

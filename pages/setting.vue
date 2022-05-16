@@ -10,7 +10,7 @@
         <span class="name">
           <Icon
             text
-            :icon="mdiAccountOutline"
+            icon="mdiAccountOutline"
             color="blue-lighten-2"
           />
           {{ userProfile.name }}
@@ -18,7 +18,7 @@
         <span class="email">
           <Icon
             text
-            :icon="mdiEmailOutline"
+            icon="mdiEmailOutline"
             color="blue-lighten-2"
           />
           {{ userProfile.email }}
@@ -43,10 +43,6 @@ import {
   inject,
   useMeta,
 } from '@nuxtjs/composition-api'
-import {
-  mdiAccountOutline,
-  mdiEmailOutline,
-} from '@mdi/js'
 import useUserProfile, { userProfileKey, userProfileType } from '~/composition/userProfile'
 
 export default defineComponent({
@@ -62,9 +58,6 @@ export default defineComponent({
     useMeta({ title: 'Setting' })
     return {
       userProfile,
-
-      mdiAccountOutline,
-      mdiEmailOutline,
     }
   },
   head: {},

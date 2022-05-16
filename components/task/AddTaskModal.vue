@@ -13,7 +13,7 @@
       >
         <Icon
           text
-          :icon="mdiPlus"
+          icon="mdiPlus"
           size="2rem"
         />
         &nbsp;&nbsp;追加する
@@ -33,24 +33,24 @@
             v-model="v$.title.$model"
             :v="v$.title"
             label="タイトル"
-            :icon="mdiFormatTitle"
+            icon="mdiFormatTitle"
           />
           <Textarea
             v-model="v$.text.$model"
             :v="v$.text"
             label="詳細説明"
-            :icon="mdiFormatListBulleted"
+            icon="mdiFormatListBulleted"
           />
           <DateField
             v-model="inputData.dateStart"
             label="開始日"
-            :icon="mdiCalendarStart"
+            icon="mdiCalendarStart"
           />
           <DateField
             v-model="inputData.dateEnd"
             label="終了日"
             :date-start="inputData.dateStart"
-            :icon="mdiCalendarEnd"
+            icon="mdiCalendarEnd"
           />
         </div>
 
@@ -66,12 +66,12 @@
             <Button
               text
               color="lightblue"
-              :disabled="isAddCurrently"
+              disabled="isAddCurrently"
               @click="submit()"
             >
               <Icon
                 text
-                :icon="mdiPlus"
+                icon="mdiPlus"
                 color="gray-darken-1"
               />
               &nbsp;&nbsp;追加する
@@ -92,13 +92,6 @@ import {
   inject,
   watch,
 } from '@nuxtjs/composition-api'
-import {
-  mdiPlus,
-  mdiFormatTitle,
-  mdiFormatListBulleted,
-  mdiCalendarStart,
-  mdiCalendarEnd,
-} from '@mdi/js'
 import useVuelidate from '@vuelidate/core'
 import {
   required,
@@ -210,12 +203,6 @@ export default defineComponent({
 
       submit,
       scssVar,
-
-      mdiPlus,
-      mdiFormatTitle,
-      mdiFormatListBulleted,
-      mdiCalendarStart,
-      mdiCalendarEnd,
     }
   },
 })

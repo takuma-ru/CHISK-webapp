@@ -14,7 +14,7 @@
         <Button
           color="red-lighten-1"
           text-color="white"
-          :icon="mdiAccountPlus"
+          icon="mdiAccountPlus"
           to="/signUp?step=login"
         >
           サインアップ
@@ -33,11 +33,6 @@
 import {
   defineComponent,
 } from '@nuxtjs/composition-api'
-import {
-  mdiLoginVariant,
-  mdiLogoutVariant,
-  mdiAccountPlus,
-} from '@mdi/js'
 import Earth from '../earth/earth.vue'
 import SignInButton from '../utils/SignInButton.vue'
 
@@ -47,9 +42,6 @@ export default defineComponent({
     // const
 
     return {
-      mdiLoginVariant,
-      mdiLogoutVariant,
-      mdiAccountPlus,
     }
   },
 })

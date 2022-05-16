@@ -27,14 +27,14 @@
       <div class="actions">
         <Button
           color="red-lighten-1"
-          :icon="mdiChevronLeft"
+          icon="mdiChevronLeft"
           to="/"
         >
           トップに戻る
         </Button>
         <Button
           color="lightblue"
-          :icon="mdiChevronRight"
+          icon="mdiChevronRight"
           :disabled="userProfile.uid ? false : true"
           to="?step=create-earth"
         >
@@ -66,21 +66,21 @@
           v-model="v$.name.$model"
           :v="v$.name"
           label="星の名前"
-          :icon="mdiEarth"
+          icon="mdiEarth"
           dark
         />
       </div>
       <div class="actions">
         <Button
           color="red-lighten-1"
-          :icon="mdiChevronLeft"
+          icon="mdiChevronLeft"
           to="?step=login"
         >
           サインインに戻る
         </Button>
         <Button
           color="lightblue"
-          :icon="mdiCheck"
+          icon="mdiCheck"
           @click="submit()"
         >
           星を作る
@@ -111,7 +111,7 @@
         <div />
         <Button
           color="lightblue"
-          :icon="mdiChevronRight"
+          icon="mdiChevronRight"
           to="/"
         >
           使い始める！
@@ -133,12 +133,6 @@ import {
   reactive,
   ref,
 } from '@nuxtjs/composition-api'
-import {
-  mdiChevronLeft,
-  mdiChevronRight,
-  mdiEarth,
-  mdiCheck,
-} from '@mdi/js'
 import useVuelidate from '@vuelidate/core'
 import {
   required,
@@ -227,11 +221,6 @@ export default defineComponent({
       userPlanetData,
 
       submit,
-
-      mdiChevronLeft,
-      mdiChevronRight,
-      mdiEarth,
-      mdiCheck,
     }
   },
   head: {},

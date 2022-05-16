@@ -17,7 +17,7 @@
           <Button
             color="blue-lighten-1"
             text-color="white"
-            :icon="mdiViewDashboard"
+            icon="mdiViewDashboard"
             to="/taskboard"
             class="taskboard-button"
           >
@@ -64,9 +64,6 @@ import {
   inject,
   useMeta,
 } from '@nuxtjs/composition-api'
-import {
-  mdiViewDashboard,
-} from '@mdi/js'
 import TaskCard from '~/components/task/TaskCard.vue'
 import useUserProfile, {
   userProfileType,
@@ -115,8 +112,6 @@ export default defineComponent({
       userPlanetData,
 
       isPhone,
-
-      mdiViewDashboard,
     }
   },
   head: {},

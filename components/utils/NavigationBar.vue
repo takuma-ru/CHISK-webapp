@@ -41,16 +41,6 @@ import {
   useRoute,
   onBeforeMount,
 } from '@nuxtjs/composition-api'
-import {
-  mdiCog,
-  mdiCogOutline,
-  mdiHomeVariant,
-  mdiHomeVariantOutline,
-  mdiInformation,
-  mdiInformationOutline,
-  mdiViewDashboard,
-  mdiViewDashboardOutline,
-} from '@mdi/js'
 import usePageTransition, { pageTransitionKey, pageTransitionType } from '~/composition/pageTransition'
 
 export default defineComponent({
@@ -62,9 +52,9 @@ export default defineComponent({
     const route = useRoute()
     const mini = ref(true)
     const items = ref([
-      { title: 'ホーム', icon: mdiHomeVariant, icon_outline: mdiHomeVariantOutline, link: '/' },
-      { title: 'ボード', icon: mdiViewDashboard, icon_outline: mdiViewDashboardOutline, link: '/taskboard' },
-      { title: '設定', icon: mdiCog, icon_outline: mdiCogOutline, link: '/setting' },
+      { title: 'ホーム', icon: 'mdiHomeVariant', icon_outline: 'mdiHomeVariantOutline', link: '/' },
+      { title: 'ボード', icon: 'mdiViewDashboard', icon_outline: 'mdiViewDashboardOutline', link: '/taskboard' },
+      { title: '設定', icon: 'mdiCog', icon_outline: 'mdiCogOutline', link: '/setting' },
       /* { title: 'このアプリは？', icon: mdiInformation, icon_outline: mdiInformationOutline, link: '/about' }, */
     ])
     // let, computed

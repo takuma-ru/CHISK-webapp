@@ -19,7 +19,7 @@
           <div class="task-modal-contents-date">
             <Icon
               text
-              :icon="mdiCalendar"
+              icon="mdiCalendar"
               color="gray-lighten-1"
             />
             <h4 style="margin: 0px">
@@ -35,7 +35,7 @@
             <span class="title">
               <Icon
                 text
-                :icon="mdiFormatListBulleted"
+                icon="mdiFormatListBulleted"
                 color="gray-lighten-1"
                 size="1rem"
               />
@@ -56,7 +56,7 @@
               >
                 <Icon
                   text
-                  :icon="mdiPencilOutline"
+                  icon="mdiPencilOutline"
                   color="black"
                   size="1.5rem"
                 />
@@ -67,7 +67,7 @@
               >
                 <Icon
                   text
-                  :icon="mdiTrashCanOutline"
+                  icon="mdiTrashCanOutline"
                   color="black"
                   size="1.5rem"
                 />
@@ -76,7 +76,7 @@
             <Button
               v-if="taskData.completed"
               color="red-lighten-1"
-              :icon="mdiClose"
+              icon="mdiClose"
               @click="inCompleted(userProfile.uid, taskData.id)"
             >
               やっぱり完了じゃない
@@ -85,7 +85,7 @@
               v-else
               text
               color="lightblue"
-              :icon="mdiCheck"
+              icon="mdiCheck"
               @click="completed(userProfile.uid, taskData.id)"
             >
               完了とする！
@@ -114,7 +114,7 @@
         </Button>
         <Button
           color="red-lighten-1"
-          :icon="mdiTrashCanOutline"
+          icon="mdiTrashCanOutline"
           @click="deleteTaskData(userProfile.uid, taskData.id).then(() => { dialog = false; router.push('?') })"
         >
           削除
@@ -135,14 +135,6 @@ import {
   useRouter,
   watch,
 } from '@nuxtjs/composition-api'
-import {
-  mdiCheck,
-  mdiCalendar,
-  mdiFormatListBulleted,
-  mdiPencilOutline,
-  mdiTrashCanOutline,
-  mdiClose,
-} from '@mdi/js'
 import swipeModal from '../swipeModal.vue'
 import useUserTaskData, { userTaskDataKey, userTaskDataType } from '~/composition/userTaskData'
 import useUserProfile, { userProfileKey, userProfileType } from '~/composition/userProfile'
@@ -217,13 +209,6 @@ export default defineComponent({
       completed,
       inCompleted,
       deleteTaskData,
-
-      mdiCheck,
-      mdiCalendar,
-      mdiFormatListBulleted,
-      mdiPencilOutline,
-      mdiTrashCanOutline,
-      mdiClose,
     }
   },
   head: {},

@@ -10,7 +10,7 @@
       <Button
         color="blue-lighten-1"
         text-color="white"
-        :icon="mdiHomeVariantOutline"
+        icon="mdiHomeVariantOutline"
         to="/"
       >
         ホームに戻る
@@ -18,7 +18,7 @@
       <Button
         color="blue-lighten-1"
         text-color="white"
-        :icon="mdiReload"
+        icon="mdiReload"
         style="margin-left: 16px"
         @click="reload()"
       >
@@ -29,10 +29,6 @@
 </template>
 
 <script lang="ts">
-import {
-  mdiHomeVariantOutline,
-  mdiReload,
-} from '@mdi/js'
 import { defineComponent, useRouter } from '@nuxtjs/composition-api'
 
 export default defineComponent({
@@ -55,9 +51,6 @@ export default defineComponent({
 
     return {
       reload,
-
-      mdiHomeVariantOutline,
-      mdiReload,
     }
   },
 })

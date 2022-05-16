@@ -15,7 +15,7 @@
       >
         <Icon
           text
-          :icon="mdiCalendar"
+          icon="mdiCalendar"
           size="20px"
           color="gray-lighten-1"
           style="margin-right: 4px"
@@ -30,7 +30,7 @@
     >
       <span class="text">
         <Icon
-          :icon="mdiCheck"
+          icon="mdiCheck"
           color="black"
         />
         完了
@@ -48,10 +48,6 @@ import {
   computed,
   inject,
 } from '@nuxtjs/composition-api'
-import {
-  mdiCheck,
-  mdiCalendar,
-} from '@mdi/js'
 import { userTaskDataInterface } from '~/composition/userTaskData'
 import useUserProfile, { userProfileKey, userProfileType } from '~/composition/userProfile'
 import returnUnixToJp from '~/composable/utils/returnUnixToJp'
@@ -100,9 +96,6 @@ export default defineComponent({
 
       returnUnixToJp,
       completed,
-
-      mdiCheck,
-      mdiCalendar,
     }
   },
 })

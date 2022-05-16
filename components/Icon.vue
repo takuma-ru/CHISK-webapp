@@ -11,7 +11,7 @@
   >
     <svg viewBox="0 0 24 24">
       <path
-        :d="icon"
+        :d="returnMdiIcon(icon)"
         :fill="scssVar(color)"
       />
     </svg>
@@ -21,6 +21,7 @@
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api'
 import scssVar from '~/composable/scss/returnVariables'
+import returnMdiIcon from '~/composable/utils/returnMdiIcon'
 
 export default defineComponent({
   props: {
@@ -45,6 +46,7 @@ export default defineComponent({
   setup () {
     return {
       scssVar,
+      returnMdiIcon,
     }
   },
 })

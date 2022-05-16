@@ -12,7 +12,7 @@
         v-if="userProfile.uid"
         color="transparent"
         text-color="white"
-        :icon="mdiLogoutVariant"
+        icon="mdiLogoutVariant"
         style="margin-right: 4px"
         @click="trySignOut()"
       />
@@ -20,7 +20,7 @@
         v-else
         color="transparent"
         text-color="white"
-        :icon="mdiLoginVariant"
+        icon="mdiLoginVariant"
         style="margin-right: 4px"
         @click="trySignIn()"
       />
@@ -42,18 +42,6 @@ import {
   ref,
   useRoute,
 } from '@nuxtjs/composition-api'
-import {
-  mdiCog,
-  mdiCogOutline,
-  mdiHomeVariant,
-  mdiHomeVariantOutline,
-  mdiInformation,
-  mdiInformationOutline,
-  mdiViewDashboard,
-  mdiViewDashboardOutline,
-  mdiLoginVariant,
-  mdiLogoutVariant,
-} from '@mdi/js'
 import auth from '~/composable/firebase/auth'
 import useUserProfile, { userProfileKey, userProfileType } from '~/composition/userProfile'
 import usePageTransition, { pageTransitionKey, pageTransitionType } from '~/composition/pageTransition'
@@ -68,16 +56,16 @@ export default defineComponent({
     const { userProfile } = inject(userProfileKey, useUserProfile()) as userProfileType
     const route = useRoute()
     const items = ref([
-      { title: 'タスクボード', icon: mdiViewDashboard, icon_outline: mdiViewDashboardOutline, link: '/taskboard' },
-      { title: '', icon: mdiHomeVariant, icon_outline: mdiHomeVariantOutline, link: '/' },
-      { title: '設定', icon: mdiCog, icon_outline: mdiCogOutline, link: '/setting' },
-      { title: 'このアプリは？', icon: mdiInformation, icon_outline: mdiInformationOutline, link: '/about' },
+      { title: 'タスクボード', icon: 'mdiViewDashboard', icon_outline: 'mdiViewDashboardOutline', link: '/taskboard' },
+      { title: '', icon: 'mdiHomeVariant', icon_outline: 'mdiHomeVariantOutline', link: '/' },
+      { title: '設定', icon: 'mdiCog', icon_outline: 'mdiCogOutline', link: '/setting' },
+      { title: 'このアプリは？', icon: 'mdiInformation', icon_outline: 'mdiInformationOutline', link: '/about' },
     ])
     // let, computed
     const nowPage = computed(() => {
       let item = items.value.find(element => element.link === route.value.path)
       if (item === undefined) {
-        item = { title: 'Not Found', icon: mdiViewDashboard, icon_outline: mdiViewDashboardOutline, link: '' }
+        item = { title: 'Not Found', icon: 'mdiViewDashboard', icon_outline: 'mdiViewDashboardOutline', link: '' }
       }
       return item
     })
@@ -97,9 +85,6 @@ export default defineComponent({
       trySignIn,
       trySignOut,
       pushRoute,
-
-      mdiLoginVariant,
-      mdiLogoutVariant,
     }
   },
 })
