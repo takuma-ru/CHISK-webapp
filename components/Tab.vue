@@ -80,8 +80,10 @@ export default defineComponent({
     padding: 8px 16px;
 
     font-size: 14px;
+    font-weight: 700;
     line-height: 24px;
     border-radius: 12px;
+    background-color: #cccccc10;
     color: $white;
     cursor: pointer;
     outline: none;

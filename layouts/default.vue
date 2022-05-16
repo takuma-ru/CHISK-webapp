@@ -45,6 +45,7 @@ import NavigationBar from '~/components/utils/NavigationBar.vue'
 import BottomNavigationBar from '~/components/utils/BottomNavigationBar.vue'
 import TaskModal from '~/components/task/TaskModal.vue'
 import AppBar from '~/components/utils/AppBar.vue'
+import SnackBar from '~/components/utils/SnackBar.vue'
 // composable
 import getIsPhone from '~/composable/utils/isPhone'
 // composition
@@ -52,7 +53,7 @@ import usePageTransition, { pageTransitionType, pageTransitionKey } from '~/comp
 import useUserProfile, { userProfileKey, userProfileType } from '~/composition/userProfile'
 import useUserTaskData, { userTaskDataKey, userTaskDataType } from '~/composition/userTaskData'
 import useUserPlanetData, { userPlanetDataKey, userPlanetDataType } from '~/composition/userPlanetData'
-import SnackBar from '~/components/utils/SnackBar.vue'
+import useSnackBarNoticeData, { snackBarNoticeDataKey } from '~/composition/snackBarNoticeData'
 
 export default defineComponent({
   components: { NavigationBar, BottomNavigationBar, TaskModal, AppBar, LogInPage, Loading, SnackBar },
@@ -61,6 +62,7 @@ export default defineComponent({
     provide(userProfileKey, useUserProfile())
     provide(userTaskDataKey, useUserTaskData())
     provide(userPlanetDataKey, useUserPlanetData())
+    provide(snackBarNoticeDataKey, useSnackBarNoticeData())
 
     // const
     const isPhone = ref<boolean>(false)

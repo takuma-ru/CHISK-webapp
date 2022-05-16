@@ -3,10 +3,11 @@
     id="Button"
     :disabled="disabled"
     :style="{
-      backgroundColor: scssVar(color)
+      backgroundColor: !iconMode ? scssVar(color) : 'transparent'
     }"
     :size="size"
     :fab="fab"
+    :icon="iconMode"
     @click="to ? pushRoute() : $emit('click')"
   >
     <div
@@ -61,6 +62,10 @@ export default defineComponent({
       },
     },
     fab: {
+      type: Boolean,
+      default: false,
+    },
+    iconMode: {
       type: Boolean,
       default: false,
     },
@@ -191,6 +196,13 @@ export default defineComponent({
     .text {
       height: calc(100% - 16px);
       padding: 8px;
+    }
+  }
+
+  &[icon] {
+    .text {
+      height: calc(100% - 16px);
+      padding: 0px;
     }
   }
 
