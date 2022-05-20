@@ -66,7 +66,7 @@
             <Button
               text
               color="lightblue"
-              disabled="isAddCurrently"
+              :disabled="isAddCurrently"
               @click="submit()"
             >
               <Icon
