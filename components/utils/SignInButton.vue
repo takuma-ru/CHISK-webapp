@@ -45,12 +45,15 @@ export default defineComponent({
   background-repeat: no-repeat;
   background-position: 12px center;
   cursor: pointer;
+
   &:hover {
     box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .25);
   }
+
   &:active {
     background-color: #eeeeee;
   }
+
   &:focus {
     outline: none;
     box-shadow:

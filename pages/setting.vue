@@ -6,7 +6,7 @@
       </h3>
       <Divider />
       <div class="main">
-        <img :src="userProfile.photoURL.toString()">
+        <img :src="userProfile.photoURL">
         <span class="name">
           <Icon
             text

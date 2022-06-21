@@ -138,6 +138,14 @@ export default {
           type: 'image/gif',
         },
       ],
+      prefer_related_applications: false,
+      related_applications: [
+        {
+          platform: 'play',
+          url: 'https://play.google.com/store/apps/details?id=takumaru.nekoo.taskmgt',
+          id: 'takumaru.nekoo.taskmgt',
+        },
+      ],
     },
   },
 

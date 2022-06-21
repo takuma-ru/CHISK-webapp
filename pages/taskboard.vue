@@ -10,7 +10,7 @@
       />
       <div class="task-group-phone">
         <TaskCard
-          v-for="task in userTaskData.filter((v) => v.group === tabPath)"
+          v-for="(task) in userTaskData.filter((v) => v.group === tabPath)"
           :key="task.id"
           :task-data="task"
         />

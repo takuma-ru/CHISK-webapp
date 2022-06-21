@@ -15,12 +15,14 @@ import {
   setPersistence,
   browserLocalPersistence,
   onAuthStateChanged,
+  GithubAuthProvider,
 } from 'firebase/auth'
 import { userProfileDataInterface } from '~/composition/userProfile'
 
 export default function auth () {
   const router = useRouter()
-  const provider = new GoogleAuthProvider()
+  const googleProvider = new GoogleAuthProvider()
+  const githubProvider = new GithubAuthProvider()
   const auth = getAuth()
   const nowUser = reactive<userProfileDataInterface>({
     name: undefined,
@@ -45,10 +47,10 @@ export default function auth () {
   })
 
   // Googleアカウントログイン処理
-  const trySignIn = () => {
+  const trySignIn = (type?: 'google' | 'github') => {
     setPersistence(auth, browserLocalPersistence)
       .then(() => {
-        return signInWithPopup(auth, provider).then((result) => {
+        return signInWithPopup(auth, type === 'google' ? googleProvider : type === 'github' ? githubProvider : googleProvider).then((result) => {
           // const credential = GoogleAuthProvider.credentialFromResult(result)
           // const token = credential?.accessToken
           const user = result.user

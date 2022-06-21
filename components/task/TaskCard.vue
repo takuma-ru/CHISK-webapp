@@ -43,12 +43,10 @@
 import {
   defineComponent,
   onBeforeMount,
-  PropType,
   useRouter,
   computed,
   inject,
 } from '@nuxtjs/composition-api'
-import { userTaskDataInterface } from '~/composition/userTaskData'
 import useUserProfile, { userProfileKey, userProfileType } from '~/composition/userProfile'
 import returnUnixToJp from '~/composable/utils/returnUnixToJp'
 import completedTaskData from '~/composable/firebase/completedTaskData'
@@ -56,7 +54,7 @@ import completedTaskData from '~/composable/firebase/completedTaskData'
 export default defineComponent({
   props: {
     taskData: {
-      type: Object as PropType<userTaskDataInterface>,
+      type: Object,
       default: () => ({
         id: 'id',
         title: 'title',
