@@ -10,6 +10,7 @@
       <div class="items">
         <span class="sub-title">ログインして始める</span>
         <SignInButton />
+        <SignInButton provider="github" />
         <span class="sub-title">初めての方はこちら</span>
         <Button
           color="red-lighten-1"
