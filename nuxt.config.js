@@ -72,7 +72,7 @@ export default {
       lang: 'ja',
       name: 'CHISK',
       short_name: 'CHISK',
-      description: '## Build Setup',
+      description: '「楽しくこなそう！」がコンセプトのタスク管理アプリです。タスクを完了するとあなたの星にペンギンが生まれます。',
       start_url: '/',
       display_override: ['window-controls-overlay'],
       display: 'standalone',
