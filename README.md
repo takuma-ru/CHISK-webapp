@@ -28,7 +28,7 @@ PWA・TWA化をしているので、ネイティブアプリに並ぶ操作性�
 
 ## Deploy Service
 **use firebase Hosting**<br>
-https://taskmgt-fd097.firebaseapp.com/<br>
+[taskmgt.takumaru.dev](https://taskmgt.takumaru.dev/)<br>
 
 
 ## PlayStore
