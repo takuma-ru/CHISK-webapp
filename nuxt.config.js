@@ -137,13 +137,23 @@ export default {
           sizes: '384x854',
           type: 'image/gif',
         },
+        {
+          src: '/screenshots/screenshots_02.png',
+          sizes: '384x854',
+          type: 'image/gif',
+        },
+        {
+          src: '/screenshots/screenshots_03.png',
+          sizes: '384x854',
+          type: 'image/gif',
+        },
       ],
-      prefer_related_applications: false,
+      prefer_related_applications: true,
       related_applications: [
         {
           platform: 'play',
-          url: 'https://play.google.com/store/apps/details?id=takumaru.nekoo.taskmgt',
-          id: 'takumaru.nekoo.taskmgt',
+          url: 'https://play.google.com/store/apps/details?id=takumaru.dev.taskmgt',
+          id: 'takumaru.dev.taskmgt',
         },
       ],
     },

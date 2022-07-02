@@ -1,7 +1,6 @@
 <template>
   <div class="main">
     <p class="load-text">
-      読み込み中...
     </p>
     <div class="load-bar" />
     <div class="load-bar-two" />
