@@ -12,7 +12,7 @@
         <h3>ハイライト</h3>
         <div class="task-list">
           <TaskCard
-            :task-data="(userTaskData[0])"
+            :task-data="userTaskData[highLightTaskIndex]"
           />
           <Button
             color="blue-lighten-1"
@@ -91,6 +91,7 @@ export default defineComponent({
     } = inject(userProfileKey, useUserProfile()) as userProfileType
     const {
       userTaskData,
+      highLightTaskIndex,
     } = inject(userTaskDataKey, useUserTaskData()) as userTaskDataType
     const {
       userPlanetData,
@@ -112,6 +113,7 @@ export default defineComponent({
       userPlanetData,
 
       isPhone,
+      highLightTaskIndex,
     }
   },
   head: {},

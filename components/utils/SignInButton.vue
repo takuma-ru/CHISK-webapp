@@ -32,15 +32,6 @@ export default defineComponent({
     // const
     const { userProfile } = inject(userProfileKey, useUserProfile()) as userProfileType
     const { trySignIn, trySignOut } = auth()
-    /* const provider = reactive<{
-      provider?: 'google' | 'github'
-      class: string
-      text: string
-    }>({
-      provider: 'google',
-      class: 'login-with-google-btn',
-      text: 'Googleでサインイン',
-    }) */
 
     const providerContents = computed(() => {
       let value = {

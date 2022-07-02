@@ -14,6 +14,7 @@ import {
   reactive,
   InjectionKey,
   readonly,
+  computed,
 } from '@nuxtjs/composition-api'
 
 export interface userTaskDataInterface {
@@ -33,7 +34,24 @@ export default function useUserTaskData () {
   */
   const state = reactive({
     // ユーザーのタスクデータ
-    userTaskData: ref<userTaskDataInterface[]>([]),
+    userTaskData: ref<Array<userTaskDataInterface>>([]),
+  })
+
+  const highLightTaskIndex = computed(() => {
+    let highLightTaskIndex: number = 0
+    let minimumTimeDifference = Infinity
+    state.userTaskData.map((v, index) => {
+      const timeDifference = Math.abs(Date.now() - Number(v.dateEnd?.valueOf()))
+
+      if (minimumTimeDifference > timeDifference) {
+        minimumTimeDifference = timeDifference
+        highLightTaskIndex = index
+      }
+
+      return 0
+    })
+
+    return highLightTaskIndex
   })
 
   /*
@@ -126,6 +144,7 @@ export default function useUserTaskData () {
 
   return {
     userTaskData: readonly(state.userTaskData),
+    highLightTaskIndex: readonly(highLightTaskIndex),
 
     getUserTaskData,
     updateUserTaskData,

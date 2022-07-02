@@ -6,9 +6,6 @@
         text-color="white"
         size="large"
         fab
-        style="
-          filter: drop-shadow(0px 16px 40px rgba(0, 37, 80, 0.2));
-        "
         @click="isModal = true"
       >
         <Icon
