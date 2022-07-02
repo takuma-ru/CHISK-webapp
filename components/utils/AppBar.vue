@@ -8,7 +8,7 @@
 
     <div class="profile">
       <!-- <span style="margin-right: 8px">{{ userProfile.name }}</span> -->
-      <Button
+      <!-- <Button
         v-if="userProfile.uid"
         color="transparent"
         text-color="white"
@@ -23,10 +23,10 @@
         icon="mdiLoginVariant"
         style="margin-right: 4px"
         @click="trySignIn()"
-      />
+      /> -->
       <div class="avatar" @click="pushRoute('/setting')">
         <img
-          :src="userProfile.photoURL.toString()"
+          :src="userProfile.photoURL"
           height="36px"
         >
       </div>

@@ -148,7 +148,7 @@ export default {
           type: 'image/gif',
         },
       ],
-      prefer_related_applications: true,
+      prefer_related_applications: false,
       related_applications: [
         {
           platform: 'play',
