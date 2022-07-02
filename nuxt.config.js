@@ -73,7 +73,7 @@ export default {
       name: 'CHISK',
       short_name: 'CHISK',
       description: '「楽しくこなそう！」がコンセプトのタスク管理アプリです。タスクを完了するとあなたの星にペンギンが生まれます。',
-      start_url: '/',
+      start_url: '/mode=pwa',
       display_override: ['window-controls-overlay'],
       display: 'standalone',
       background_color: '#002550',
@@ -152,8 +152,8 @@ export default {
       related_applications: [
         {
           platform: 'play',
-          url: 'https://play.google.com/store/apps/details?id=takumaru.dev.taskmgt',
-          id: 'takumaru.dev.taskmgt',
+          url: 'https://play.google.com/store/apps/details?id=dev.takumaru.taskmgt',
+          id: 'dev.takumaru.taskmgt',
         },
       ],
     },
