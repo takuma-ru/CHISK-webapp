@@ -73,7 +73,7 @@ export default {
       name: 'CHISK',
       short_name: 'CHISK',
       description: '「楽しくこなそう！」がコンセプトのタスク管理アプリです。タスクを完了するとあなたの星にペンギンが生まれます。',
-      start_url: '/mode=pwa',
+      start_url: '/?mode=pwa',
       display_override: ['window-controls-overlay'],
       display: 'standalone',
       background_color: '#002550',
