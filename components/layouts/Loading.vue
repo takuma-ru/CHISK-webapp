@@ -1,6 +1,7 @@
 <template>
   <div class="main">
     <p class="load-text">
+      Loading
     </p>
     <div class="load-bar" />
     <div class="load-bar-two" />
