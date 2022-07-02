@@ -48,6 +48,16 @@
           `"
           @mousedown="mouseDown"
         />
+        <div class="modal-contents-close-button">
+          <Button
+            color="transparent"
+            icon="mdiChevronDown"
+            style="width: 100%"
+            @click="close()"
+          >
+            閉じる
+          </Button>
+        </div>
         <slot />
       </div>
     </transition>
@@ -277,6 +287,7 @@ export default defineComponent({
   &::-webkit-scrollbar {
     width: 0px;
   }
+
   &-chip {
     --tip-color: #c8c8c8;
     z-index: 12;
@@ -297,6 +308,12 @@ export default defineComponent({
       margin-left: calc(50% - 17.5px);
       border-radius: 10px;
     }
+  }
+
+  &-close-button {
+    position: relative;
+    width: clac(100%  32px);
+    padding: 0% 16px;
   }
 }
 

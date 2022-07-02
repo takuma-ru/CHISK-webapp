@@ -54,12 +54,7 @@
         <div class="task-modal-action">
           <Divider />
           <div class="button-group">
-            <Button
-              color="transparent"
-              @click="isModal = false"
-            >
-              閉じる
-            </Button>
+            <div />
             <Button
               text
               color="lightblue"
@@ -219,7 +214,7 @@ export default defineComponent({
 
   .task-modal {
     display: flex;
-    height: calc(100vh - 20px - 16px);
+    height: calc(100vh - 20px - 16px - 42px);
 
     padding: 0px 16px 16px 16px;
     border-radius: 16px;

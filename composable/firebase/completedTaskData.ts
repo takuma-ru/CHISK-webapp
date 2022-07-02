@@ -22,7 +22,7 @@ export default function completedTaskData () {
     }
   }
 
-  const inCompleted = async (uid: string | null, completedId: string) => {
+  const inCompleted = async (uid: string | null | undefined, completedId: string) => {
     if (uid) {
       await updateDoc(doc(firestore, 'tasks', uid, 'Task', completedId), {
         completed: null,

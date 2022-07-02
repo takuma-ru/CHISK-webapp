@@ -85,7 +85,7 @@
               v-else
               text
               color="lightblue"
-              icon="mdiCheck"
+              icon="mdiCheckAll"
               @click="completed(userProfile.uid, taskData.id)"
             >
               完了とする！
@@ -218,7 +218,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .task-modal {
   display: flex;
-  height: calc(100vh - 20px - 16px);
+  height: calc(100vh - 20px - 16px - 42px);
 
   padding: 0px 16px 16px 16px;
   flex-direction: column;
