@@ -4,7 +4,29 @@
     class="task-card"
   >
     <div
-      class="task-contents-left"
+      :completed="isCompleted"
+      class="task-card-completed-button"
+      @click="isCompleted ? inCompleted(userProfile.uid, taskData.id) : completed(userProfile.uid, taskData.id)"
+    >
+      <Icon
+        v-if="isCompleted"
+        icon="mdiCheckboxOutline"
+        color="red-darken-1"
+        size="32px"
+      />
+      <Icon
+        v-else
+        icon="mdiCheckboxBlankOutline"
+        color="lightblue-darken-1"
+        size="32px"
+      />
+      <span
+        :completed="isCompleted"
+        v-text="isCompleted ? '完了済み' : '押して完了'"
+      />
+    </div>
+    <div
+      class="task-card-contents"
       @click="router.push('?taskId=' + taskData.id)"
     >
       <span class="task-title">
@@ -21,19 +43,6 @@
           style="margin-right: 4px"
         />
         {{ dateEnd }}
-      </span>
-    </div>
-    <div
-      v-if="taskData.completed === (undefined || null)"
-      class="task-contents-right"
-      @click="completed(userProfile.uid, taskData.id)"
-    >
-      <span class="text">
-        <Icon
-          icon="mdiCheck"
-          color="black"
-        />
-        完了
       </span>
     </div>
   </div>
@@ -79,8 +88,12 @@ export default defineComponent({
     const dateEnd = computed(() => {
       return props.taskData.dateEnd ? returnUnixToJp(props.taskData.dateEnd) : null
     })
+    const isCompleted = computed(() => {
+      return props.taskData.completed !== (undefined || null)
+    })
+
     // methods
-    const { completed } = completedTaskData()
+    const { completed, inCompleted } = completedTaskData()
 
     // lifeCycle
     onBeforeMount(async () => {
@@ -91,9 +104,11 @@ export default defineComponent({
       router,
       dateEnd,
       userProfile,
+      isCompleted,
 
       returnUnixToJp,
       completed,
+      inCompleted,
     }
   },
 })
@@ -102,102 +117,103 @@ export default defineComponent({
 <style lang="scss" scoped>
 .task-card {
   position: relative;
-  display: flex;
-  min-height: 96px;
-  max-height: 96px;
   width: calc(100vw - 48px);
   max-width: 342px;
+  height: 96px;
+  min-height: 96px;
+  max-height: 96px;
 
   margin: 4px 0px;
 
-  filter: drop-shadow(0px 16px 40px rgba(0, 37, 80, 0.2));
+  background-color: $white;
+  border-radius: 16px;
   transition: all 0.2s linear;
 
-  .task-contents-left {
-    position: relative;
-    width: 342px;
-
-    padding: 16px;
-
-    border-radius: 16px 8px 8px 16px;
-    background-color: $white;
-
-    border: 1px solid #E6EBF0;
-    cursor: pointer;
-    outline: none;
-    -webkit-tap-highlight-color:rgba(0,0,0,0);
-
-    &:hover::after {
-      position: absolute;
-      z-index: 1;
-      content: '';
-      width: 100%;
-      height: 100%;
-
-      top: 0%;
-      left: 0%;
-
-      border-radius: 16px;
-      background-color: #CCCCCC3A;
-    }
-  }
-
-  .task-contents-right {
-    position: relative;
-    min-width: 80px;
-    max-width: 80px;
-    min-height: 96px;
-    max-height: 96px;
-
-    border-radius: 8px 16px 16px 8px;
-    text-align: center;
-    background-color: $lightblue-lighten-1;
-
-    border: 1px solid $lightblue;
-    cursor: pointer;
-    outline: none;
-    -webkit-tap-highlight-color:rgba(0,0,0,0);
-
-    &::before {
-      position: absolute;
-      content: '';
-
-      width: -1px;
-      height: calc(100% - 32px);
-      top: 50%;
-      left: 0px;
-
-      transform: translate(-50%, -50%);
-
-      border: 1px dashed;
-    }
-
-    .text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-
-      text-align: center;
-      color: $black;
-    }
-  }
-
-  .task-title {
-    font-size: 16px;
-    font-weight: bold;
-    line-height: 24px;
-  }
-
-  .task-date {
+  &-completed-button {
     position: absolute;
-    display: inline-flex;
-    align-items: flex-end;
+    left: 0px;
+    width: 104px;
+    height: 100%;
 
-    bottom: 16px;
-    left: 16px;
+    background-color: $lightblue-lighten-1;
+    border-radius: 16px 0px 0px 16px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    cursor: pointer;
 
-    color: $gray;
+    &[completed] {
+      background-color: $red-lighten-1;
+    }
+
+    span {
+      position: absolute;
+      top: 50%;
+      left: 16px;
+
+      transform: translate(-50%, -50%) rotate(-90deg);
+      font-size: 10px;
+      font-weight: bold;
+      color: $lightblue-darken-1;
+
+      &[completed] {
+        color: $red-darken-1;
+      }
+    }
+
+    #icon {
+      position: absolute;
+      top: 50%;
+      left: calc(50% - 16px);
+      transform: translate(calc(8px - 50%), -50%);
+    }
+  }
+
+  &-contents {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
+
+    position: absolute;
+    right: 0px;
+    width: calc(100% - 88px);
+    height: calc(100%);
+
+    padding: 8px;
+    padding-right: 24px;
+
+    background-color: $white;
+    border-radius: 8px 16px 16px 8px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    box-sizing: border-box;
+    cursor: pointer;
+
+    .task-title {
+      position: relative;
+
+      font-size: 16px;
+      font-weight: bold;
+      line-height: 24px;
+      white-space: nowrap;
+      overflow: hidden;
+
+      &::after {
+        content: '';
+
+        position: absolute;
+        width: 40px;
+        height: 100%;
+        right: 0px;
+
+        background: linear-gradient(270deg, #FFFFFF -3.05%, rgba(255, 255, 255, 0.8) 39.14%, rgba(255, 255, 255, 0.1) 76.17%, rgba(255, 255, 255, 0) 102.44%);
+      }
+    }
+
+    .task-date {
+      display: inline-flex;
+      align-items: flex-end;
+
+      color: $gray;
+    }
   }
 }
 </style>
