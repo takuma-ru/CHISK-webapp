@@ -4,7 +4,7 @@
 
 import { doc, getFirestore, deleteDoc } from 'firebase/firestore'
 
-export default async function deleteTaskData (uid: string | null, deleteId: string) {
+export default async function deleteTaskData (uid: string | null | undefined, deleteId: string) {
   const firestore = getFirestore()
 
   if (uid) {
