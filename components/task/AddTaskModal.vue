@@ -207,7 +207,7 @@ export default defineComponent({
     z-index: 15;
     bottom: calc(64px + 16px + constant(safe-area-inset-bottom));
     bottom: calc(64px + 16px + env(safe-area-inset-bottom));
-    right: 16px;
+    right: 24px;
 
     filter: drop-shadow(0px 16px 40px rgba(0, 37, 80, 0.2));
   }
