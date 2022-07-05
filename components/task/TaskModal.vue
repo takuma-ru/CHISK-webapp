@@ -225,12 +225,19 @@ export default defineComponent({
   justify-content: space-between;
 
   &-contents {
+    width: 100%;
+
     &-title {
-      display: inline-flex;
       width: 100%;
+      display: inline-flex;
 
       justify-content: space-between;
       align-self: center;
+
+      h2 {
+        width: 100%;
+        overflow-wrap: break-word;
+      }
     }
 
     &-date {
