@@ -144,11 +144,11 @@ export default defineComponent({
 }
 .task-group-phone {
   display: flex;
-
   flex-flow: column;
   justify-items: center;
   align-items: center;
 
+  padding-top: 8px;
   margin-bottom: -64px;
   max-height: calc(100vh - 56px - 16px - 24px - 36px - 24px);
 
