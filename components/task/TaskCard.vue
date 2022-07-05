@@ -130,6 +130,10 @@ export default defineComponent({
   transition: all 0.2s linear;
 
   &-completed-button {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+
     position: absolute;
     left: 0px;
     width: 104px;
@@ -161,10 +165,6 @@ export default defineComponent({
     }
 
     #icon {
-      position: absolute;
-      top: 50%;
-      left: calc(50% - 16px);
-      transform: translate(calc(8px - 50%), -50%);
     }
   }
 
