@@ -9,7 +9,7 @@
       background-color="#00255077"
     >
       <div
-        v-if="taskId"
+        v-if="taskId && !isEdit"
         class="task-modal"
       >
         <div class="task-modal-contents">
@@ -53,6 +53,7 @@
             <div class="icon-group">
               <Button
                 color="transparent"
+                @click="isEdit = true"
               >
                 <Icon
                   text
@@ -93,7 +94,11 @@
           </div>
         </div>
       </div>
+      <EditTaskModal
+        :is-edit="isEdit"
+      />
     </swipe-modal>
+
     <Dialog
       v-model="dialog"
       width="320px"
@@ -136,6 +141,7 @@ import {
   watch,
 } from '@nuxtjs/composition-api'
 import swipeModal from '../swipeModal.vue'
+import EditTaskModal from './EditTaskModal.vue'
 import useUserTaskData, { userTaskDataKey, userTaskDataType } from '~/composition/userTaskData'
 import useUserProfile, { userProfileKey, userProfileType } from '~/composition/userProfile'
 import returnUnixToJp from '~/composable/utils/returnUnixToJp'
@@ -146,6 +152,7 @@ import deleteTaskData from '~/composable/firebase/deleteTaskData'
 export default defineComponent({
   components: {
     swipeModal,
+    EditTaskModal,
   },
   setup () {
     // const
@@ -158,6 +165,7 @@ export default defineComponent({
     const { userTaskData } = inject(userTaskDataKey, useUserTaskData()) as userTaskDataType
     const modal = ref(false)
     const dialog = ref(false)
+    const isEdit = ref(false)
 
     // let, computed
     const taskId = computed(() => route.value.query.taskId)
@@ -203,6 +211,7 @@ export default defineComponent({
       taskData,
       userProfile,
       dialog,
+      isEdit,
 
       returnUnixToJp,
       scssVar,
@@ -278,7 +287,6 @@ export default defineComponent({
       }
     }
   }
-
 }
 
 .dialog-button-group {

@@ -84,7 +84,7 @@ import {
   inject,
   watch,
 } from '@nuxtjs/composition-api'
-import useVuelidate from '@vuelidate/core'
+import { useVuelidate } from '@vuelidate/core'
 import {
   required,
   maxLength,
