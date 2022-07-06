@@ -33,14 +33,26 @@ export default {
       { hid: 'twitter:image', name: 'twitter:image', content: 'https://firebasestorage.googleapis.com/v0/b/taskmgt-fd097.appspot.com/o/feature.png?alt=media&token=35f7a7b5-b011-4f3d-a461-3e2e42ff2bd5' },
       { name: 'twitter:card', content: 'summary' },
       { hid: 'twitter:site', name: 'twitter:site', content: '@takumaru_2222' },
+      { name: 'apple-mobile-web-app-capable', content: 'yes' },
+      { name: 'apple-mobile-web-app-title', content: 'CHISK' },
     ],
     link: [
       { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
       { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: true },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@100;300;400;500;700&display=swap' },
-      { rel: 'icon', type: 'image/x-icon', href: '/icon_512x512.svg' },
+      { rel: 'icon', type: 'image/x-icon', href: '/icon_512x512.png' },
       { rel: 'canonical', href: '/' },
     ],
+    script: [
+      {
+        innerHTML: `
+          if (('standalone' in navigator) && (!navigator.standalone)) {
+            import('https://unpkg.com/pwacompat');
+          }
+        `,
+      },
+    ],
+    __dangerouslyDisableSanitizers: ['script'],
   },
 
   css: [
@@ -84,49 +96,49 @@ export default {
           short_name: 'Taskboard',
           description: 'Open Taskboard',
           url: '/taskboard',
-          icons: [{ src: '/icons/icon_192.svg', sizes: '192x192' }],
+          icons: [{ src: '/icons/icon_192.png', sizes: '192x192' }],
         },
         {
           name: 'Open Setting',
           short_name: 'Setting',
           description: 'Open Setting',
           url: '/setting',
-          icons: [{ src: '/icons/icon_192.svg', sizes: '192x192' }],
+          icons: [{ src: '/icons/icon_192.png', sizes: '192x192' }],
         },
       ],
       icons: [
         {
-          src: '/icons/icon_64.svg',
+          src: '/icons/icon_64.png',
           sizes: '64x64',
           purpose: 'any',
         },
         {
-          src: '/icons/icon_120.svg',
+          src: '/icons/icon_120.png',
           sizes: '120x120',
           purpose: 'any',
         },
         {
-          src: '/icons/icon_144.svg',
+          src: '/icons/icon_144.png',
           sizes: '144x144',
           purpose: 'any',
         },
         {
-          src: '/icons/icon_152.svg',
+          src: '/icons/icon_152.png',
           sizes: '152x152',
           purpose: 'any',
         },
         {
-          src: '/icons/icon_192.svg',
+          src: '/icons/icon_192.png',
           sizes: '192x192',
           purpose: 'any',
         },
         {
-          src: '/icons/icon_384.svg',
+          src: '/icons/icon_384.png',
           sizes: '384x384',
           purpose: 'any',
         },
         {
-          src: '/icons/icon_512.svg',
+          src: '/icons/icon_512.png',
           sizes: '512x512',
           purpose: 'any',
         },
