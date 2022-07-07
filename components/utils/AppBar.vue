@@ -7,6 +7,7 @@
     </span>
 
     <div class="profile">
+      <InstallButton />
       <div class="avatar" @click="pushRoute('/setting')">
         <img
           :src="userProfile.photoURL"
@@ -25,16 +26,16 @@ import {
   ref,
   useRoute,
 } from '@nuxtjs/composition-api'
+import InstallButton from './InstallButton.vue'
 import auth from '~/composable/firebase/auth'
 import useUserProfile, { userProfileKey, userProfileType } from '~/composition/userProfile'
 import usePageTransition, { pageTransitionKey, pageTransitionType } from '~/composition/pageTransition'
 
 export default defineComponent({
+  components: { InstallButton },
   setup () {
     // const
-    const {
-      push,
-    } = inject(pageTransitionKey, usePageTransition()) as pageTransitionType
+    const { push } = inject(pageTransitionKey, usePageTransition()) as pageTransitionType
     const { trySignIn, trySignOut } = auth()
     const { userProfile } = inject(userProfileKey, useUserProfile()) as userProfileType
     const route = useRoute()
@@ -55,12 +56,10 @@ export default defineComponent({
     const nowPath = computed(() => {
       return route.value.path
     })
-
     // methods
     const pushRoute = (path: string) => {
       push(nowPath.value, path)
     }
-
     return {
       nowPage,
       items,
@@ -94,6 +93,9 @@ export default defineComponent({
       .avatar {
         width: 36px;
         height: 36px;
+
+        margin-left: 16px;
+
         border-radius: 50%;
         background-color: $gray-lighten-1;
         cursor: pointer;

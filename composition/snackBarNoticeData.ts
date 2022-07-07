@@ -10,9 +10,13 @@ import {
 
 /**
  * model: 表示フラグ
+ *
  * type: 表示タイプ
+ *
  * content: snackBarに表示するテキスト
+ *
  * timeout: 非表示になるまでのミリ秒時間
+ *
  * conditions: 表示する条件(未実装)
  */
 export interface snackBarNoticeDataInterface {

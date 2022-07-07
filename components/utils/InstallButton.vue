@@ -1,5 +1,6 @@
 <template>
   <Button
+    v-if="!isInstalled"
     icon="mdiOpenInApp"
     text-color="white"
     @click="openInstallationPrompt"
@@ -9,15 +10,49 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { computed, defineComponent, ref } from '@nuxtjs/composition-api'
 
 export default defineComponent({
   setup () {
-    const openInstallationPrompt = () => {
+    // cconst
+    const deferredPrompt = ref<any | null>(null)
 
+    // computed
+    const isInstalled = computed(() => {
+      if (window.matchMedia('(display-mode: standalone)').matches) {
+        return true
+      } else {
+        return false
+      }
+    })
+
+    // methods
+    const openInstallationPrompt = () => {
+      deferredPrompt.value?.prompt()
+      deferredPrompt.value?.userChoice
+        .then(function (choiceResult: { outcome: string }) {
+          if (choiceResult.outcome === 'dismissed') {
+            console.log('User cancelled home screen install')
+          } else {
+            console.log('User added to home screen')
+          }
+          deferredPrompt.value = null
+        })
     }
 
+    // lifeCycle
+    window.addEventListener('beforeinstallprompt', function (e) {
+      e.preventDefault()
+      console.log(e)
+
+      deferredPrompt.value = e
+
+      return false
+    })
+
     return {
+      isInstalled,
+
       openInstallationPrompt,
     }
   },
