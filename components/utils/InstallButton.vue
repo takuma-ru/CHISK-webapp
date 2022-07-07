@@ -5,7 +5,7 @@
     text-color="white"
     @click="openInstallationPrompt"
   >
-    インストール画面を開く
+    インストールする
   </Button>
 </template>
 
@@ -30,7 +30,7 @@ export default defineComponent({
     const openInstallationPrompt = () => {
       deferredPrompt.value?.prompt()
       deferredPrompt.value?.userChoice
-        .then(function (choiceResult: { outcome: string }) {
+        .then((choiceResult: { outcome: string }) => {
           if (choiceResult.outcome === 'dismissed') {
             console.log('User cancelled home screen install')
           } else {
@@ -41,13 +41,10 @@ export default defineComponent({
     }
 
     // lifeCycle
-    window.addEventListener('beforeinstallprompt', function (e) {
+    window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault()
-      console.log(e)
-
       deferredPrompt.value = e
-
-      return false
+      console.log(deferredPrompt.value)
     })
 
     return {
