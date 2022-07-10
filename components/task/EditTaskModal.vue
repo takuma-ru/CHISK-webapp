@@ -56,7 +56,7 @@
         <Button
           text
           color="lightblue"
-          icon="mdiPencilOutline"
+          icon="mdiPlaylistEdit"
           :disabled="isUpdateCurrently"
           @click="submit()"
         >
@@ -71,7 +71,6 @@
 import {
   defineComponent,
   inject,
-  onMounted,
   reactive,
   ref,
   SetupContext,
@@ -149,10 +148,16 @@ export default defineComponent({
     const v$ = useVuelidate(inputDataRules, inputData as inputDataInterface)
 
     /* -- methods -- */
+    /**
+     * EditModalを閉じる関数
+     */
     const closeEditModal = () => {
       ctx.emit('close')
     }
 
+    /**
+     * タスクデータを更新する関数
+     */
     const submit = async () => {
       const isFormCorrect = await v$.value.$validate()
 
@@ -169,10 +174,6 @@ export default defineComponent({
         console.log('修正が必要です')
       }
     }
-
-    // lifeCycle
-    onMounted(() => {
-    })
 
     return {
       isUpdateCurrently,
