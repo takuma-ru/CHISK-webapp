@@ -6,37 +6,41 @@
     <div class="task-modal-contents">
       <div class="task-modal-contents-title">
         <TextField
-        
+          v-model="v$.title.$model"
+          :v="v$.title"
+          label="タイトル"
+          icon="mdiFormatTitle"
         />
       </div>
       <div class="task-modal-edit-contents-date">
-        <Icon
-          text
-          icon="mdiCalendar"
-          color="gray-lighten-1"
+        <DateField
+          v-model="inputData.dateStart"
+          label="開始日"
+          icon="mdiCalendarStart"
         />
-        <h4 style="margin: 0px">
-              &nbsp;
-          {{ returnUnixToJp(taskData.dateStart) }} から
-          {{ returnUnixToJp(taskData.dateEnd) }} まで
+        <h4>
+          から
+        </h4>
+        <DateField
+          v-model="inputData.dateEnd"
+          label="終了日"
+          :date-start="inputData.dateStart"
+          icon="mdiCalendarEnd"
+        />
+        <h4>
+          まで
         </h4>
       </div>
       <Divider />
       <div
         class="task-modal-edit-contents-text"
       >
-        <span class="title">
-          <Icon
-            text
-            icon="mdiFormatListBulleted"
-            color="gray-lighten-1"
-            size="1rem"
-          />
-          &nbsp;詳細
-        </span>
-        <span class="text">
-          {{ taskData.text }}
-        </span>
+        <Textarea
+          v-model="v$.text.$model"
+          :v="v$.text"
+          label="詳細"
+          icon="mdiFormatListBulleted"
+        />
       </div>
     </div>
 
@@ -45,7 +49,7 @@
       <div class="button-group">
         <Button
           color="transparent"
-          @click=""
+          @click="closeEditModal()"
         >
           取り消す
         </Button>
@@ -65,45 +69,84 @@
 <script lang="ts">
 import {
   defineComponent,
-  inject,
   onMounted,
-  ref,
+  reactive,
+  SetupContext,
 } from '@nuxtjs/composition-api'
-import useUserTaskData, { userTaskDataKey, userTaskDataType } from '~/composition/userTaskData'
+import { maxLength, required } from '@vuelidate/validators'
+// eslint-disable-next-line import/no-named-as-default
+import useVuelidate from '@vuelidate/core'
+import TextField from '../field/textField.vue'
+import DateField from '../field/DateField.vue'
+import Textarea from '../field/Textarea.vue'
 import useUserProfile, { userProfileKey, userProfileType } from '~/composition/userProfile'
 import returnUnixToJp from '~/composable/utils/returnUnixToJp'
 import scssVar from '~/composable/scss/returnVariables'
 import deleteTaskData from '~/composable/firebase/deleteTaskData'
-import TextField from '../field/textField.vue'
+import { inputDataInterface } from '~/types/inputDataInterface'
+import { userTaskDataInterface } from '~/composition/userTaskData'
 
 export default defineComponent({
-    props: {
-        isEdit: {
-            type: Boolean,
-            default: false,
-        },
+  components: { TextField, DateField, Textarea },
+  props: {
+    isEdit: {
+      type: Boolean,
+      default: false,
     },
-    setup() {
-        // const
-        const { userProfile, } = inject(userProfileKey, useUserProfile()) as userProfileType;
-        const taskData = ref<any>({});
-        // let, computed
-        // watch
-        // methods
-        // lifeCycle
-        onMounted(() => {
-        });
-        // other
-        return {
-            taskData,
-            userProfile,
-            returnUnixToJp,
-            scssVar,
-            deleteTaskData,
-        };
+    taskData: {
+      type: Object as () => userTaskDataInterface,
+      required: true,
     },
-    head: {},
-    components: { TextField }
+  },
+  setup (props, ctx: SetupContext) {
+    // const
+    const inputData = reactive<inputDataInterface>({
+      title: props.taskData.title,
+      text: props.taskData.text,
+      dateStart: props.taskData.dateStart!,
+      dateEnd: props.taskData.dateEnd!,
+      tag: [1],
+    })
+    const inputDataRules = {
+      title: {
+        required,
+        maxLength: maxLength(30),
+        $lazy: true,
+      },
+      text: {
+        required,
+        maxLength: maxLength(300),
+        $lazy: true,
+      },
+      dateStart: { required },
+      dateEnd: { required },
+      tag: { required },
+    }
+    const v$ = useVuelidate(inputDataRules, inputData as inputDataInterface)
+
+    // let, computed
+    // watch
+    // methods
+    const closeEditModal = () => {
+      ctx.emit('close')
+    }
+
+    // lifeCycle
+    onMounted(() => {
+    })
+
+    // other
+    return {
+      inputData,
+      v$,
+
+      closeEditModal,
+      returnUnixToJp,
+      scssVar,
+      deleteTaskData,
+    }
+  },
+  head: {},
 })
 </script>
 
@@ -133,7 +176,11 @@ export default defineComponent({
     }
 
     &-date {
-      display: inline-flex;
+      display: grid;
+
+      h4 {
+        margin: 0px 40px;
+      }
     }
 
     &-text {

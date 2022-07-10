@@ -21,11 +21,11 @@ export interface userTaskDataInterface {
   id: string,
   title: string,
   text: string,
-  dateStart?: Timestamp | Date,
-  dateEnd?: Timestamp | Date,
+  dateStart?: Date,
+  dateEnd?: Date,
   group: string,
-  completed: Timestamp | Date | null,
-  tag: Array<string | number>,
+  completed: Date | null,
+  tag: ReadonlyArray<string | number>,
 }
 
 export default function useUserTaskData () {
@@ -90,15 +90,14 @@ export default function useUserTaskData () {
       onSnapshot(q, { includeMetadataChanges: true }, (snapshot) => {
         snapshot.docChanges().forEach((change) => {
           if (change.type === 'added') {
-            // console.log('data: ', change.doc.data().id)
             const taskData = {
               id: change.doc.data().id,
               title: change.doc.data().title,
               text: change.doc.data().text,
-              dateStart: change.doc.data().date_start || change.doc.data().dateStart,
-              dateEnd: change.doc.data().date_end || change.doc.data().dateEnd,
+              dateStart: (change.doc.data().date_start || change.doc.data().dateStart as Timestamp).toDate(),
+              dateEnd: (change.doc.data().date_end || change.doc.data().dateEnd as Timestamp).toDate(),
               group: change.doc.data().group,
-              completed: change.doc.data().completed,
+              completed: change.doc.data().completed ? (change.doc.data().completed as Timestamp).toDate() : null,
               tag: change.doc.data().tag,
             } as userTaskDataInterface
 
@@ -113,10 +112,10 @@ export default function useUserTaskData () {
               id: change.doc.data().id,
               title: change.doc.data().title,
               text: change.doc.data().text,
-              dateStart: change.doc.data().date_start || change.doc.data().dateStart,
-              dateEnd: change.doc.data().date_end || change.doc.data().dateEnd,
+              dateStart: (change.doc.data().date_start || change.doc.data().dateStart as Timestamp).toDate(),
+              dateEnd: (change.doc.data().date_end || change.doc.data().dateEnd as Timestamp).toDate(),
               group: change.doc.data().group,
-              completed: change.doc.data().completed,
+              completed: change.doc.data().completed ? (change.doc.data().completed as Timestamp).toDate() : null,
               tag: change.doc.data().tag,
             } as userTaskDataInterface
 

@@ -74,7 +74,7 @@ export default defineComponent({
     },
     dateStart: {
       type: Date,
-      default: new Date('1900/01/01'),
+      default: () => new Date('1900/01/01'),
     },
   },
 

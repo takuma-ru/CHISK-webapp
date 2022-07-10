@@ -96,6 +96,8 @@
       </div>
       <EditTaskModal
         :is-edit="isEdit"
+        :task-data="taskData"
+        @close="isEdit = false"
       />
     </swipe-modal>
 
@@ -142,7 +144,7 @@ import {
 } from '@nuxtjs/composition-api'
 import swipeModal from '../swipeModal.vue'
 import EditTaskModal from './EditTaskModal.vue'
-import useUserTaskData, { userTaskDataKey, userTaskDataType } from '~/composition/userTaskData'
+import useUserTaskData, { userTaskDataInterface, userTaskDataKey, userTaskDataType } from '~/composition/userTaskData'
 import useUserProfile, { userProfileKey, userProfileType } from '~/composition/userProfile'
 import returnUnixToJp from '~/composable/utils/returnUnixToJp'
 import scssVar from '~/composable/scss/returnVariables'
@@ -161,7 +163,16 @@ export default defineComponent({
     const {
       userProfile,
     } = inject(userProfileKey, useUserProfile()) as userProfileType
-    const taskData = ref<any>({})
+    const taskData = ref<userTaskDataInterface>({
+      id: '',
+      title: '',
+      text: '',
+      dateStart: new Date(),
+      dateEnd: new Date(),
+      group: '',
+      completed: new Date(),
+      tag: [],
+    })
     const { userTaskData } = inject(userTaskDataKey, useUserTaskData()) as userTaskDataType
     const modal = ref(false)
     const dialog = ref(false)
