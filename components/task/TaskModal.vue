@@ -320,7 +320,7 @@ export default defineComponent({
       opacity: 0;
     }
     &-active {
-      transition: all 0.15s ease-out;
+      transition: all 0.15s ease-in;
     }
     &-to {
       position: absolute;
@@ -337,7 +337,7 @@ export default defineComponent({
       opacity: 1;
     }
     &-active {
-      transition: all 0.15s ease-out;
+      transition: all 0.15s ease-in;
     }
     &-to {
       position: absolute;

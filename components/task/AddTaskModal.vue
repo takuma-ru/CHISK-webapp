@@ -125,7 +125,7 @@ export default defineComponent({
       dateEnd: { required },
       tag: { required },
     }
-    const v$ = useVuelidate(inputDataRules, inputData as inputDataInterface)
+    const v$ = useVuelidate(inputDataRules, inputData as any)
 
     const {
       userProfile,

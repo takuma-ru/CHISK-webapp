@@ -88,7 +88,6 @@ export default defineComponent({
     border-radius: 16px;
     background-color: $white;
 
-
     &-transition {
       &-enter {
         & {

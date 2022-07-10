@@ -145,7 +145,7 @@ export default defineComponent({
     /**
      * バリデート状態が含まれた入力データ
      */
-    const v$ = useVuelidate(inputDataRules, inputData as inputDataInterface)
+    const v$ = useVuelidate(inputDataRules, inputData as any)
 
     /* -- methods -- */
     /**
@@ -163,7 +163,7 @@ export default defineComponent({
 
       if (isFormCorrect) {
         isUpdateCurrently.value = true
-        await updateTaskData(userProfile.uid!, props.taskData.id, inputData).then((isUpdateSuccess) => {
+        await updateTaskData(userProfile.uid!, props.taskData.id!, inputData).then((isUpdateSuccess) => {
           if (isUpdateSuccess) {
             isUpdateCurrently.value = false
             ctx.emit('close')
