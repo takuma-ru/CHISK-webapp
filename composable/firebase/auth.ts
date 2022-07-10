@@ -1,7 +1,3 @@
-/**
-  Firebase Authentication周り
-**/
-
 import {
   reactive,
   shallowReadonly,
@@ -19,11 +15,18 @@ import {
 } from 'firebase/auth'
 import { userProfileDataInterface } from '~/composition/userProfile'
 
+/**
+  Firebase Authentication 関連関数群
+**/
 export default function auth () {
   const router = useRouter()
   const googleProvider = new GoogleAuthProvider()
   const githubProvider = new GithubAuthProvider()
   const auth = getAuth()
+
+  /**
+   * 現在ログイン中のユーザー情報
+   */
   const nowUser = reactive<userProfileDataInterface>({
     name: undefined,
     email: undefined,
@@ -31,7 +34,9 @@ export default function auth () {
     photoURL: undefined,
   })
 
-  // ログイン状態を識別
+  /**
+   * ログイン状態を識別
+   */
   onAuthStateChanged(auth, (user) => {
     if (user) {
       nowUser.name = user.displayName
@@ -46,7 +51,10 @@ export default function auth () {
     }
   })
 
-  // Googleアカウントログイン処理
+  /**
+   * ログイン処理
+   * @param type
+   */
   const trySignIn = (type?: 'google' | 'github') => {
     setPersistence(auth, browserLocalPersistence)
       .then(() => {
@@ -126,7 +134,9 @@ export default function auth () {
       })
   }
 
-  // ログアウト処理
+  /**
+   * ログアウト処理
+   */
   const trySignOut = () => {
     signOut(auth).then(() => {
       nowUser.name = null

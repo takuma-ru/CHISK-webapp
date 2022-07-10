@@ -1,7 +1,3 @@
-/**
-  Firestoreに新しいタスクデータを追加する
-**/
-
 import {
   collection,
   doc,
@@ -11,6 +7,12 @@ import {
 } from 'firebase/firestore'
 import { userTaskDataInterface } from '@/composition/userTaskData'
 
+/**
+ * Firestoreに新しいタスクデータを追加する関数
+ * @param uid ユーザーID
+ * @param data 追加したいタスクデータ
+ * @returns 追加成功フラグ
+ */
 export default async function addTaskData (uid: string | null, data: userTaskDataInterface) {
   let isAddSuccess = false
   const firestore = getFirestore()

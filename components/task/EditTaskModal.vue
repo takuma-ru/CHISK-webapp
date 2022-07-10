@@ -57,7 +57,8 @@
           text
           color="lightblue"
           icon="mdiPencilOutline"
-          @click=""
+          :disabled="isUpdateCurrently"
+          @click="submit()"
         >
           保存する
         </Button>
@@ -69,8 +70,10 @@
 <script lang="ts">
 import {
   defineComponent,
+  inject,
   onMounted,
   reactive,
+  ref,
   SetupContext,
 } from '@nuxtjs/composition-api'
 import { maxLength, required } from '@vuelidate/validators'
@@ -80,11 +83,12 @@ import TextField from '../field/textField.vue'
 import DateField from '../field/DateField.vue'
 import Textarea from '../field/Textarea.vue'
 import useUserProfile, { userProfileKey, userProfileType } from '~/composition/userProfile'
+import { userTaskDataInterface } from '~/composition/userTaskData'
+import updateTaskData from '~/composable/firebase/updateTaskData'
 import returnUnixToJp from '~/composable/utils/returnUnixToJp'
 import scssVar from '~/composable/scss/returnVariables'
 import deleteTaskData from '~/composable/firebase/deleteTaskData'
 import { inputDataInterface } from '~/types/inputDataInterface'
-import { userTaskDataInterface } from '~/composition/userTaskData'
 
 export default defineComponent({
   components: { TextField, DateField, Textarea },
@@ -99,7 +103,19 @@ export default defineComponent({
     },
   },
   setup (props, ctx: SetupContext) {
-    // const
+    /* -- variable -- */
+    const {
+      userProfile,
+    } = inject(userProfileKey, useUserProfile()) as userProfileType
+
+    /**
+     * 更新中フラグ
+     */
+    const isUpdateCurrently = ref(false)
+
+    /**
+     * 入力データ
+     */
     const inputData = reactive<inputDataInterface>({
       title: props.taskData.title,
       text: props.taskData.text,
@@ -107,6 +123,10 @@ export default defineComponent({
       dateEnd: props.taskData.dateEnd!,
       tag: [1],
     })
+
+    /**
+     * 入力データのバリデート用ルール
+     */
     const inputDataRules = {
       title: {
         required,
@@ -122,25 +142,45 @@ export default defineComponent({
       dateEnd: { required },
       tag: { required },
     }
+
+    /**
+     * バリデート状態が含まれた入力データ
+     */
     const v$ = useVuelidate(inputDataRules, inputData as inputDataInterface)
 
-    // let, computed
-    // watch
-    // methods
+    /* -- methods -- */
     const closeEditModal = () => {
       ctx.emit('close')
+    }
+
+    const submit = async () => {
+      const isFormCorrect = await v$.value.$validate()
+
+      if (isFormCorrect) {
+        isUpdateCurrently.value = true
+        await updateTaskData(userProfile.uid!, props.taskData.id, inputData).then((isUpdateSuccess) => {
+          if (isUpdateSuccess) {
+            isUpdateCurrently.value = false
+            ctx.emit('close')
+          }
+        })
+      } else {
+        isUpdateCurrently.value = false
+        console.log('修正が必要です')
+      }
     }
 
     // lifeCycle
     onMounted(() => {
     })
 
-    // other
     return {
+      isUpdateCurrently,
       inputData,
       v$,
 
       closeEditModal,
+      submit,
       returnUnixToJp,
       scssVar,
       deleteTaskData,
