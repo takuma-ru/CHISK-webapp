@@ -313,6 +313,7 @@ export default defineComponent({
 }
 
 .task-modal-transition, .edit-task-modal-transition {
+  will-change: transform,animation,position;
   &-enter {
     & {
       position: absolute;

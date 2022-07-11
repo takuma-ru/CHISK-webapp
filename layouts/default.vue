@@ -134,6 +134,9 @@ html {
   -ms-overflow-style: none;
   scrollbar-width: none;
 
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+
   &::-webkit-scrollbar {
     display: none;
   }
