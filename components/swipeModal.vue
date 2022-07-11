@@ -344,7 +344,7 @@ export default defineComponent({
 }
 
 .swipe-modal-contents {
-  will-change: transform,animation,position;
+  will-change: bottom;
   &-enter {
     & {
       bottom: calc(-1 * var(--contents-height)) !important;

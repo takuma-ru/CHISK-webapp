@@ -313,7 +313,7 @@ export default defineComponent({
 }
 
 .task-modal-transition, .edit-task-modal-transition {
-  will-change: transform,animation,position;
+  will-change: left right;
   &-enter {
     & {
       position: absolute;
@@ -322,7 +322,7 @@ export default defineComponent({
       opacity: 0;
     }
     &-active {
-      transition: all 0.15s cubic-bezier(0, 0.55, 0.45, 1);
+      transition: all 0.15s ease-out;
     }
     &-to {
       position: absolute;
@@ -339,7 +339,7 @@ export default defineComponent({
       opacity: 1;
     }
     &-active {
-      transition: all 0.15s cubic-bezier(0, 0.55, 0.45, 1);
+      transition: all 0.15s ease-out;
     }
     &-to {
       position: absolute;
