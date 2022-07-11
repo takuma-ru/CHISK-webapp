@@ -1,12 +1,16 @@
-/**
-  指定したタスクのflagを完了済みにする
-**/
-
 import { doc, getFirestore, increment, updateDoc } from 'firebase/firestore'
 
+/**
+  指定したタスクのフラグを変更する関数群
+**/
 export default function completedTaskData () {
   const firestore = getFirestore()
 
+  /**
+   * タスクの完了済みフラグを true にする
+   * @param uid ユーザーID
+   * @param completedId 完了済みにさせたいタスクのID
+   */
   const completed = async (uid: string | null | undefined, completedId: string) => {
     if (uid) {
       await updateDoc(doc(firestore, 'tasks', uid, 'Task', completedId), {
@@ -22,6 +26,11 @@ export default function completedTaskData () {
     }
   }
 
+  /**
+   * タスクの完了済みフラグを false にする
+   * @param uid ユーザーID
+   * @param completedId 未完了にさせたいタスクのID
+   */
   const inCompleted = async (uid: string | null | undefined, completedId: string) => {
     if (uid) {
       await updateDoc(doc(firestore, 'tasks', uid, 'Task', completedId), {

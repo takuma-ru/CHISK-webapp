@@ -48,6 +48,7 @@ export default defineComponent({
       default: null,
     },
     v: {
+      type: Object,
       default: null,
     },
     icon: {
@@ -114,7 +115,7 @@ export default defineComponent({
     font: 15px/24px sans-serif;
     box-sizing: border-box;
     border: 0px solid $gray-lighten-1;
-    border-radius: 16px;
+    border-radius: 8px;
     background-color: #bec6cf50;
 
     resize: vertical;

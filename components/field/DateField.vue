@@ -74,7 +74,7 @@ export default defineComponent({
     },
     dateStart: {
       type: Date,
-      default: new Date('1900/01/01'),
+      default: () => new Date('1900/01/01'),
     },
   },
 
@@ -133,7 +133,7 @@ export default defineComponent({
     font: 15px/24px sans-serif;
     box-sizing: border-box;
     border: 0px solid $gray-lighten-1;
-    border-radius: 16px;
+    border-radius: 8px;
     background-color: #bec6cf50;
 
     resize: none;

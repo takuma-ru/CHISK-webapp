@@ -43,6 +43,9 @@
     "sass": "^1.49.0",
     "sass-loader": "10"
   },
+  "resolutions": {
+    "typescript": "^4.7.4"
+  },
   "config": {
     "nuxt": {
       "host": "0.0.0.0",

@@ -7,93 +7,106 @@
       contents-width="min(100vw, 960px)"
       :contents-color="scssVar('white')"
       background-color="#00255077"
+      @close="isEdit = false"
     >
-      <div
-        v-if="taskId"
-        class="task-modal"
-      >
-        <div class="task-modal-contents">
-          <div class="task-modal-contents-title">
-            <h2>{{ taskData.title }}</h2>
-          </div>
-          <div class="task-modal-contents-date">
-            <Icon
-              text
-              icon="mdiCalendar"
-              color="gray-lighten-1"
-            />
-            <h4 style="margin: 0px">
-              &nbsp;
-              {{ returnUnixToJp(taskData.dateStart) }} から
-              {{ returnUnixToJp(taskData.dateEnd) }} まで
-            </h4>
-          </div>
-          <Divider />
-          <div
-            class="task-modal-contents-text"
-          >
-            <span class="title">
+      <transition name="task-modal-transition" appear>
+        <div
+          v-if="taskId && !isEdit"
+          class="task-modal"
+        >
+          <div class="task-modal-contents">
+            <div class="task-modal-contents-title">
+              <h2>{{ taskData.title }}</h2>
+            </div>
+            <div class="task-modal-contents-date">
               <Icon
                 text
-                icon="mdiFormatListBulleted"
+                icon="mdiCalendar"
                 color="gray-lighten-1"
-                size="1rem"
               />
-              &nbsp;詳細
-            </span>
-            <span class="text">
-              {{ taskData.text }}
-            </span>
-          </div>
-        </div>
-
-        <div class="task-modal-action">
-          <Divider />
-          <div class="button-group">
-            <div class="icon-group">
-              <Button
-                color="transparent"
-              >
+              <h4 style="margin: 0px">
+                &nbsp;
+                {{ returnUnixToJp(taskData.dateStart) }} から
+                {{ returnUnixToJp(taskData.dateEnd) }} まで
+              </h4>
+            </div>
+            <Divider />
+            <div
+              class="task-modal-contents-text"
+            >
+              <span class="title">
                 <Icon
                   text
-                  icon="mdiPencilOutline"
-                  color="black"
-                  size="1.5rem"
+                  icon="mdiFormatListBulleted"
+                  color="gray-lighten-1"
+                  size="1rem"
                 />
+                &nbsp;詳細
+              </span>
+              <span class="text">
+                {{ taskData.text }}
+              </span>
+            </div>
+          </div>
+
+          <div class="task-modal-action">
+            <Divider />
+            <div class="button-group">
+              <div class="icon-group">
+                <Button
+                  color="transparent"
+                  @click="isEdit = true"
+                >
+                  <Icon
+                    text
+                    icon="mdiPencilOutline"
+                    color="black"
+                    size="1.5rem"
+                  />
+                </Button>
+                <Button
+                  color="transparent"
+                  @click="dialog = true"
+                >
+                  <Icon
+                    text
+                    icon="mdiTrashCanOutline"
+                    color="black"
+                    size="1.5rem"
+                  />
+                </Button>
+              </div>
+              <Button
+                v-if="taskData.completed"
+                color="red-lighten-1"
+                icon="mdiClose"
+                @click="inCompleted(userProfile.uid, taskData.id)"
+              >
+                やっぱり完了じゃない
               </Button>
               <Button
-                color="transparent"
-                @click="dialog = true"
+                v-else
+                text
+                color="lightblue"
+                icon="mdiCheckAll"
+                @click="completed(userProfile.uid, taskData.id)"
               >
-                <Icon
-                  text
-                  icon="mdiTrashCanOutline"
-                  color="black"
-                  size="1.5rem"
-                />
+                完了とする！
               </Button>
             </div>
-            <Button
-              v-if="taskData.completed"
-              color="red-lighten-1"
-              icon="mdiClose"
-              @click="inCompleted(userProfile.uid, taskData.id)"
-            >
-              やっぱり完了じゃない
-            </Button>
-            <Button
-              v-else
-              text
-              color="lightblue"
-              icon="mdiCheckAll"
-              @click="completed(userProfile.uid, taskData.id)"
-            >
-              完了とする！
-            </Button>
           </div>
         </div>
-      </div>
+      </transition>
+      <transition name="edit-task-modal-transition" appear>
+        <EditTaskModal
+          v-if="isEdit"
+          :is-edit="isEdit"
+          :task-data="taskData"
+          @close="isEdit = false"
+        />
+      </transition>
     </swipe-modal>
+
     <Dialog
       v-model="dialog"
       width="320px"
@@ -136,7 +149,8 @@ import {
   watch,
 } from '@nuxtjs/composition-api'
 import swipeModal from '../swipeModal.vue'
-import useUserTaskData, { userTaskDataKey, userTaskDataType } from '~/composition/userTaskData'
+import EditTaskModal from './EditTaskModal.vue'
+import useUserTaskData, { userTaskDataInterface, userTaskDataKey, userTaskDataType } from '~/composition/userTaskData'
 import useUserProfile, { userProfileKey, userProfileType } from '~/composition/userProfile'
 import returnUnixToJp from '~/composable/utils/returnUnixToJp'
 import scssVar from '~/composable/scss/returnVariables'
@@ -146,6 +160,7 @@ import deleteTaskData from '~/composable/firebase/deleteTaskData'
 export default defineComponent({
   components: {
     swipeModal,
+    EditTaskModal,
   },
   setup () {
     // const
@@ -154,10 +169,20 @@ export default defineComponent({
     const {
       userProfile,
     } = inject(userProfileKey, useUserProfile()) as userProfileType
-    const taskData = ref<any>({})
+    const taskData = ref<userTaskDataInterface>({
+      id: '',
+      title: '',
+      text: '',
+      dateStart: new Date(),
+      dateEnd: new Date(),
+      group: '',
+      completed: new Date(),
+      tag: [],
+    })
     const { userTaskData } = inject(userTaskDataKey, useUserTaskData()) as userTaskDataType
     const modal = ref(false)
     const dialog = ref(false)
+    const isEdit = ref(false)
 
     // let, computed
     const taskId = computed(() => route.value.query.taskId)
@@ -203,6 +228,7 @@ export default defineComponent({
       taskData,
       userProfile,
       dialog,
+      isEdit,
 
       returnUnixToJp,
       scssVar,
@@ -278,7 +304,6 @@ export default defineComponent({
       }
     }
   }
-
 }
 
 .dialog-button-group {
@@ -286,4 +311,42 @@ export default defineComponent({
 
   justify-content: space-between;
 }
+
+.task-modal-transition, .edit-task-modal-transition {
+  &-enter {
+    & {
+      position: absolute;
+      width: 100%;
+      right: 100% !important;
+      opacity: 0;
+    }
+    &-active {
+      transition: all 0.15s cubic-bezier(0, 0.55, 0.45, 1);
+    }
+    &-to {
+      position: absolute;
+      width: 100%;
+      right: 0% !important;
+      opacity: 1;
+    }
+  }
+  &-leave {
+    & {
+      position: absolute;
+      width: 100%;
+      left: 0% !important;
+      opacity: 1;
+    }
+    &-active {
+      transition: all 0.15s cubic-bezier(0, 0.55, 0.45, 1);
+    }
+    &-to {
+      position: absolute;
+      width: 100%;
+      left: 100% !important;
+      opacity: 0;
+    }
+  }
+}
+
 </style>

@@ -3,11 +3,13 @@
  **/
 import { Timestamp } from 'firebase/firestore'
 
-export default function returnUnixToJp (unix: Timestamp | Date | null) {
+export default function returnUnixToJp (time?: Timestamp | Date) {
   let dateJp = null
-  if (unix instanceof Timestamp) {
-    const date = new Date(unix.seconds * 1000)
+  if (time instanceof Timestamp) {
+    const date = new Date(time.seconds * 1000)
     dateJp = date.getFullYear() + '年' + (date.getMonth() + 1) + '月' + date.getDate() + '日'
+  } else if (time instanceof Date) {
+    dateJp = time.getFullYear() + '年' + (time.getMonth() + 1) + '月' + time.getDate() + '日'
   }
 
   return dateJp

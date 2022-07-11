@@ -84,26 +84,18 @@ import {
   inject,
   watch,
 } from '@nuxtjs/composition-api'
-import useVuelidate from '@vuelidate/core'
+import { useVuelidate } from '@vuelidate/core'
 import {
   required,
   maxLength,
 } from '@vuelidate/validators'
-import { Timestamp } from 'firebase/firestore'
 import TextField from '../field/textField.vue'
 import Textarea from '../field/Textarea.vue'
 import DateField from '../field/DateField.vue'
 import useUserProfile, { userProfileKey, userProfileType } from '~/composition/userProfile'
 import scssVar from '~/composable/scss/returnVariables'
 import addTaskData from '~/composable/firebase/addTaskData'
-
-interface inputDataType {
-  title: string,
-  text: string,
-  dateStart: Date,
-  dateEnd: Date,
-  tag: Array<string | number>,
-}
+import { inputDataInterface } from '~/types/inputDataInterface'
 
 export default defineComponent({
   components: { TextField, Textarea, DateField },
@@ -111,7 +103,7 @@ export default defineComponent({
     // const
     const isModal = ref(false)
     const isAddCurrently = ref(false)
-    const inputData = reactive<inputDataType>({
+    const inputData = reactive<inputDataInterface>({
       title: '',
       text: '',
       dateStart: new Date(),
@@ -133,7 +125,7 @@ export default defineComponent({
       dateEnd: { required },
       tag: { required },
     }
-    const v$ = useVuelidate(inputDataRules, inputData as inputDataType)
+    const v$ = useVuelidate(inputDataRules, inputData as any)
 
     const {
       userProfile,
@@ -164,14 +156,14 @@ export default defineComponent({
       if (isFormCorrect) {
         isAddCurrently.value = true
         if (await addTaskData(userProfile.uid!, {
+          id: '',
           title: inputData.title!,
           text: inputData.text!,
-          dateStart: Timestamp.fromDate(inputData.dateStart as Date),
-          dateEnd: Timestamp.fromDate(inputData.dateEnd as Date),
+          dateStart: inputData.dateStart,
+          dateEnd: inputData.dateEnd,
           group: '進行中',
           completed: null,
           tag: inputData.tag!,
-          id: '',
         })) {
           isModal.value = false
         }
