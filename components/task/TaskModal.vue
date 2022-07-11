@@ -7,6 +7,7 @@
       contents-width="min(100vw, 960px)"
       :contents-color="scssVar('white')"
       background-color="#00255077"
+      @close="isEdit = false"
     >
       <transition name="task-modal-transition" appear>
         <div
@@ -320,7 +321,7 @@ export default defineComponent({
       opacity: 0;
     }
     &-active {
-      transition: all 0.15s ease-in;
+      transition: all 0.15s cubic-bezier(0, 0.55, 0.45, 1);
     }
     &-to {
       position: absolute;
@@ -337,7 +338,7 @@ export default defineComponent({
       opacity: 1;
     }
     &-active {
-      transition: all 0.15s ease-in;
+      transition: all 0.15s cubic-bezier(0, 0.55, 0.45, 1);
     }
     &-to {
       position: absolute;

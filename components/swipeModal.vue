@@ -178,6 +178,7 @@ export default defineComponent({
       document.documentElement.style.overflowY = 'auto'
       router.push('?')
       ctx.emit('update-modal', false)
+      ctx.emit('close')
     }
 
     const mouseDown = (payload: MouseEvent) => {
