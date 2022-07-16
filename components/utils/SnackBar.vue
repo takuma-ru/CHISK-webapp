@@ -12,11 +12,25 @@
         >
           <div class="icon">
             <Icon
-              :color="data.type === 'success' ? 'blue-lighten-2' : data.type === 'error' ? 'red-lighten-2' : 'yellow-lighten-2'"
-              :icon="data.type === 'success' ? 'mdiCheckCircle' : data.type === 'error' ? 'mdiAlertCircle' : 'mdiInformation'"
+              :color="data.type === 'success' ? 'green-lighten-2' : data.type === 'error' ? 'red-lighten-2' : data.type === 'help' ? 'yellow-lighten-2' : 'blue-lighten-2'"
+              :icon="data.type === 'success' ? 'mdiCheckCircle' : data.type === 'error' ? 'mdiAlertCircle' : data.type === 'help' ? 'mdiInformation' : 'mdiDownload'"
             />
           </div>
-          <div class="contents" v-text="data.content" />
+          <div
+            v-if="data.type === 'pwaInstall'"
+          >
+            <div class="contents">
+              <p>
+                インストールすると、すぐにアプリを起動できます。
+              </p>
+              <InstallButton />
+            </div>
+          </div>
+          <div
+            v-else
+          >
+            <div class="contents" v-text="data.content" />
+          </div>
           <div class="actions">
             <Button
               icon-mode
@@ -32,29 +46,24 @@
 
 <script lang="ts">
 import { defineComponent, inject, onMounted } from '@nuxtjs/composition-api'
+import InstallButton from './InstallButton.vue'
 import returnMdiIcon from '~/composable/utils/returnMdiIcon'
 import useSnackBarNoticeData, { snackBarNoticeDataKey, snackBarNoticeDataType } from '~/composition/snackBarNoticeData'
 
 export default defineComponent({
+  components: { InstallButton },
   setup () {
-    const {
-      snackBarNoticeData,
-      hiddenSnackBarNoticeData,
-    } = inject(snackBarNoticeDataKey, useSnackBarNoticeData()) as snackBarNoticeDataType
-
+    const { snackBarNoticeData, hiddenSnackBarNoticeData } = inject(snackBarNoticeDataKey, useSnackBarNoticeData()) as snackBarNoticeDataType
     const closeSnackBar = () => {
       for (const [key] of Object.entries(snackBarNoticeData)) {
         hiddenSnackBarNoticeData(Number(key))
       }
     }
-
     onMounted(() => {
       setTimeout(closeSnackBar, 15000)
     })
-
     return {
       snackBarNoticeData,
-
       returnMdiIcon,
       hiddenSnackBarNoticeData,
     }
@@ -103,6 +112,11 @@ export default defineComponent({
 
   .contents {
     padding: 8px;
+
+    p {
+      margin-top: 0px;
+      margin-bottom: 16px;
+    }
   }
 
   .actions {
@@ -112,9 +126,9 @@ export default defineComponent({
   }
 
   &[type = 'success'] {
-    background-color: $blue-lighten-2;
+    background-color: $green-lighten-2;
     .icon {
-      background-color: $blue;
+      background-color: $green;
     }
   }
 
@@ -129,6 +143,13 @@ export default defineComponent({
     background-color: $yellow-lighten-2;
     .icon {
       background-color: $yellow;
+    }
+  }
+
+  &[type = 'pwaInstall'] {
+    background-color: $blue-lighten-2;
+    .icon {
+      background-color: $blue;
     }
   }
 }

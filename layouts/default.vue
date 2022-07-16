@@ -53,7 +53,7 @@ import usePageTransition, { pageTransitionType, pageTransitionKey } from '~/comp
 import useUserProfile, { userProfileKey, userProfileType } from '~/composition/userProfile'
 import useUserTaskData, { userTaskDataKey, userTaskDataType } from '~/composition/userTaskData'
 import useUserPlanetData, { userPlanetDataKey, userPlanetDataType } from '~/composition/userPlanetData'
-import useSnackBarNoticeData, { snackBarNoticeDataKey } from '~/composition/snackBarNoticeData'
+import useSnackBarNoticeData, { snackBarNoticeDataKey, snackBarNoticeDataType } from '~/composition/snackBarNoticeData'
 
 export default defineComponent({
   components: { NavigationBar, BottomNavigationBar, TaskModal, AppBar, LogInPage, Loading, SnackBar },
@@ -80,6 +80,9 @@ export default defineComponent({
     const {
       getUserPlanetData,
     } = inject(userPlanetDataKey, useUserPlanetData()) as userPlanetDataType
+    const {
+      addSnackBarNoticeData,
+    } = inject(snackBarNoticeDataKey, useSnackBarNoticeData()) as snackBarNoticeDataType
 
     // let, computed
 
@@ -101,6 +104,14 @@ export default defineComponent({
     })
 
     onMounted(() => {
+      if (window.matchMedia('(display-mode: standalone)').matches) {
+        console.log('installed')
+      } else {
+        addSnackBarNoticeData({
+          model: true,
+          type: 'pwaInstall',
+        })
+      }
       window.addEventListener('resize', resizeEvent)
       resizeEvent()
       document.documentElement.style.setProperty('--transition-left', scssVariables.value.left)
