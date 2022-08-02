@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@nuxtjs/pwa": "^3.3.5",
+    "@takuma-ru/vue-swipe-modal": "^4.0.0",
     "@types/animejs": "^3.1.4",
     "@types/vue2-datepicker": "^3.3.1",
     "@vuelidate/core": "^2.0.0-alpha.40",
